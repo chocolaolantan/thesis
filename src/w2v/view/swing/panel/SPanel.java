@@ -9,15 +9,20 @@
 */
 package w2v.view.swing.panel;
 
+import java.io.File;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.JFileChooser;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
+
+import w2v.W2vSw;
+import w2v.view.swing.MFrame;
 
 public class SPanel {
   private JPanel[] jp;
@@ -26,14 +31,15 @@ public class SPanel {
   private JButton btn;
   private JButton btn1;
   private JTextField jt;
+  private File fl;
 
-  public SPanel(){
-    init();
+  public SPanel(W2vSw app, MFrame fr){
+    init(app, fr);
   }
   public JPanel getPanel() {
     return jp[0];
   }
-  private void init() {
+  private void init(W2vSw app, MFrame fr) {
     jp = new JPanel[2];
 
     msg = new JLabel("使用するファイルを選択してください。");
@@ -42,13 +48,23 @@ public class SPanel {
     btn = new JButton("決定");
     btn1 = new JButton("参照");
 
-    btn.addActionListener(
-      new ActionListener(){
-        public void actionPerformed(ActionEvent event){
-          System.out.println("Push! " + jt.getText());
+    btn1.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent event){
+        JFileChooser fc = new JFileChooser();
+        int sled = fc.showOpenDialog(fr);
+        if (sled == JFileChooser.APPROVE_OPTION){
+          fl = fc.getSelectedFile();
+          jt.setText(fl.getPath());
         }
       }
-    );
+    });
+
+    btn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent event) {
+        app.getW2vModel(fl);
+        fr.cPanel(app);
+      }
+    });
 
     jp[0] = new JPanel();
     jp[0].setLayout(new BorderLayout());

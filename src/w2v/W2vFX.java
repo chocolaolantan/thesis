@@ -16,6 +16,7 @@ public class W2vFX extends Application {
     launch(args);
   }
 
+  @Override
   public void start(Stage stage) throws Exception {
     this.stage = stage;
     stage.setTitle("W2vProject ~ for JavaFX ~");

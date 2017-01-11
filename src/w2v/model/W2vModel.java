@@ -9,7 +9,6 @@ public class W2vModel {
   private int size;
   private int words;
   private String[] vocab;
-  private float[][] M;
   public W2vModel(File fi) {
     BufferedReader br;
     StringTokenizer st;
@@ -22,8 +21,7 @@ public class W2vModel {
       st = new StringTokenizer(br.readLine());
       words = Integer.parseInt(st.nextToken());
       size = Integer.parseInt(st.nextToken());
-      
-      M = new float[words][size];
+
       vocab = new String[words];
       i = 0;
       while ((line = br.readLine()) != null) {
@@ -32,7 +30,6 @@ public class W2vModel {
 
         j = 0;
         while (st.hasMoreTokens() || j < size) {
-          M[i][j] = Float.parseFloat(st.nextToken());
           j++;
         }
         i++;
@@ -54,11 +51,5 @@ public class W2vModel {
   }
   public String[] getVlist() {
     return vocab;
-  }
-  public float[] getM(int i) {
-    return M[i];
-  }
-  public float[][] getMlist() {
-    return M;
   }
 }

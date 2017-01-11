@@ -12,6 +12,7 @@ public class W2vModel {
   private float[][] M;
   public W2vModel(File fi) {
     BufferedReader br;
+    StringTokenizer st;
     String line = "";
     int i, j;
 

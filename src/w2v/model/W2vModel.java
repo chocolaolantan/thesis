@@ -19,11 +19,12 @@ public class W2vModel {
     try {
       br = new BufferedReader(new FileReader(fi));
 
-      words = Integer.parseInt(br.readLine());
-      size = Integer.parseInt(br.readLine());
+      st = new StringTokenizer(br.readLine());
+      words = Integer.parseInt(st.nextToken());
+      size = Integer.parseInt(st.nextToken());
+      
       M = new float[words][size];
       vocab = new String[words];
-
       i = 0;
       while ((line = br.readLine()) != null) {
         st = new StringTokenizer(line, " ");

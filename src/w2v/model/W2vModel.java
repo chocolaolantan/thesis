@@ -49,7 +49,10 @@ public class W2vModel {
     while(i < this.words) {
       if(vocab[i].equals(tmp))
         break;
+      i++;
     }
+    if (i == this.words)
+      i = -1;
     return i;
   }
 }

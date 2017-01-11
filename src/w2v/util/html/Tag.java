@@ -7,9 +7,9 @@
   @version 0.1
   @author T.Hirata
 */
-package frynovels.util.html;
+package w2v.util.html;
 
-import frynovels.util.Node;
+import w2v.util.Node;
 
 import java.util.Vector;
 

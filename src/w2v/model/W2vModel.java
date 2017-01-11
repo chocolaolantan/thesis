@@ -27,11 +27,6 @@ public class W2vModel {
       while ((line = br.readLine()) != null) {
         st = new StringTokenizer(line, " ");
         vocab[i] = new String(st.nextToken().getBytes("UTF-8"));
-
-        j = 0;
-        while (st.hasMoreTokens() || j < size) {
-          j++;
-        }
         i++;
       }
     } catch (Exception e) {
@@ -49,7 +44,12 @@ public class W2vModel {
   public String getVocab(int i) {
     return vocab[i];
   }
-  public String[] getVlist() {
-    return vocab;
+  public int exist(String tmp) {
+    int i = 0;
+    while(i < this.words) {
+      if(vocab[i].equals(tmp))
+        break;
+    }
+    return i;
   }
 }

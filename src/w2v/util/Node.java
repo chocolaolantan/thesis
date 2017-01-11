@@ -7,7 +7,7 @@
   @version 0.1
   @author T.Hirata
 */
-package frynovels.util;
+package w2v.util;
 
 import java.util.Vector;
 

@@ -7,7 +7,7 @@
   @version 0.1
   @author T.Hirata
 */
-package frynovels.util.html;
+package w2v.util.html;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

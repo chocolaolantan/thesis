@@ -35,6 +35,10 @@ public class W2vCmd {
       cmd = stdIn.nextLine();
       if (cmd.equals("ex"))
         existWord();
+      else if (cmd.equals("vc"))
+        prvct();
+      else if (cmd.equals("hm"))
+        hangarian();
     }
   }
 
@@ -50,4 +54,30 @@ public class W2vCmd {
     else
       System.out.printf("%s は、インデックス %d にありました！！\n", cmd, i);
   }
+
+  private static void prvct() {
+    int i = 0, j;
+    float[] vec;
+
+    System.out.print("探したい単語を入力してください > ");
+    cmd = stdIn.nextLine();
+    i = w2vm.exist(cmd);
+
+    if (i < 0)
+      System.out.printf("%s はみつかりませんでした。\n", cmd);
+    else {
+      System.out.printf("%s : %d\n", cmd, i);
+      vec = w2vm.getWv(i);
+      for (j = 0; j < w2vm.getSize(); j++) {
+        if (j % 10 == 0) System.out.println();
+        System.out.printf("%f ", vec[j]);
+      }
+      System.out.println();
+    }
+  }
+
+  private static void hangarian() {
+
+  }
+
 }

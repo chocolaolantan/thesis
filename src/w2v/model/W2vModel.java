@@ -9,11 +9,14 @@ public class W2vModel {
   private int size;
   private int words;
   private String[] vocab;
+  private File fi;
+
   public W2vModel(File fi) {
     BufferedReader br;
     StringTokenizer st;
     String line = "";
     int i, j;
+    this.fi = fi;
 
     try {
       br = new BufferedReader(new FileReader(fi));
@@ -41,8 +44,34 @@ public class W2vModel {
   public int getSize() {
     return size;
   }
-  public String getVocab(int i) {
-    return vocab[i];
+  public float[] getWv(int n) {
+    float[] vec = new float[this.size];
+    int i, j;
+
+    BufferedReader br;
+    StringTokenizer st;
+    String line;
+
+    if (n > this.words || n < 0) {
+      System.out.println("存在しないインデックスです。");
+      return null;
+    }
+    try {
+      br = new BufferedReader(new FileReader(this.fi));
+      br.readLine();
+      for (i = 0; i < n; i++)
+        br.readLine();
+      st = new StringTokenizer(br.readLine(), " ");
+      if (!this.vocab[n].equals(new String(st.nextToken().getBytes("UTF-8")))) {
+        System.out.println("インデックスにあるはずの文字列が一致しません。");
+        return null;
+      }
+      for (i = 0; i < size; i++)
+        vec[i] = Float.parseFloat(new String(st.nextToken().getBytes("UTF-8")));
+    } catch (Exception e) {
+        e.printStackTrace();
+      }
+    return vec;
   }
   public int exist(String tmp) {
     int i = 0;
@@ -55,4 +84,5 @@ public class W2vModel {
       i = -1;
     return i;
   }
+  
 }

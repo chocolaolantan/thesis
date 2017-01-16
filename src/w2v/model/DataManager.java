@@ -16,7 +16,7 @@ public class DataManager {
   public DataManager(W2vModel w2vm) {
     this.w2vm = w2vm;
   }
-  public void setFile(String fs_path, String fa_path) {
+  public void setFilePath(String fs_path, String fa_path) {
     try {
       f_synonym = new File(fs_path);
       f_antonym = new File(fa_path);
@@ -26,5 +26,19 @@ public class DataManager {
       sF = false;
     }
   }
-  
+
+  public void createAslist() {
+    if (!sF) {
+      System.out.println("Error");
+      return;
+    }
+    try {
+      if (!f_synonym.exists())
+        new ASthread(w2vm, base_url, f_synonym).start();
+      if (!f_antonym.exists())
+        new ASthread(w2vm, base_antonym_url, f_antonym).start();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 }

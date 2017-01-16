@@ -1,12 +1,14 @@
 package w2v;
 
 import w2v.model.W2vModel;
+import w2v.model.DataManager;
 
 import java.io.File;
 import java.util.Scanner;
 
 public class W2vCmd {
   private static W2vModel w2vm;
+  private static DataManager dm;
   private static Scanner stdIn;
   private static String cmd;
 
@@ -19,7 +21,7 @@ public class W2vCmd {
     stdIn = new Scanner(System.in);
 
     while(!flag) {
-      System.out.print("Input file name is ... > ");
+      System.out.print("Input file name is ... >");
       try {
         file_path = stdIn.nextLine();
         fi = new File(file_path);
@@ -31,7 +33,7 @@ public class W2vCmd {
     w2vm = new W2vModel(fi);
 
     while(!cmd.equals("EXIT")) {
-      System.out.print("何をしますか？ > ");
+      System.out.print("何をしますか？ >");
       cmd = stdIn.nextLine();
       if (cmd.equals("ex"))
         existWord();
@@ -45,7 +47,7 @@ public class W2vCmd {
   private static void existWord() {
     int i = 0;
 
-    System.out.print("探したい単語を入力してください > ");
+    System.out.print("探したい単語を入力してください >");
     cmd = stdIn.nextLine();
     i = w2vm.exist(cmd);
 
@@ -59,7 +61,7 @@ public class W2vCmd {
     int i = 0, j;
     float[] vec;
 
-    System.out.print("探したい単語を入力してください > ");
+    System.out.print("探したい単語を入力してください >");
     cmd = stdIn.nextLine();
     i = w2vm.exist(cmd);
 
@@ -77,7 +79,17 @@ public class W2vCmd {
   }
 
   private static void hangarian() {
+    String syn;
+    String ant;
+    dm = new DataManager(w2vm);
 
+    System.out.println("ファイルパスの指定をしてください。");
+    System.out.print("Synonym >");
+    syn = stdIn.nextLine();
+    System.out.print("Antonym >");
+    ant = stdIn.nextLine();
+    dm.setFilePath(syn, ant);
+    dm.createAslist();
   }
 
 }

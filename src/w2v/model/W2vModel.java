@@ -84,5 +84,9 @@ public class W2vModel {
       i = -1;
     return i;
   }
-  
+  public String getW(int i) {
+    if (i > words) return "";
+    return vocab[i];
+  }
+
 }

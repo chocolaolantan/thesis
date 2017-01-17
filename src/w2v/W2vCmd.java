@@ -31,7 +31,7 @@ public class W2vCmd {
       }
     }
     w2vm = new W2vModel(fi);
-
+    System.out.println("Words : " + w2vm.getWords() + "\tSize : " + w2vm.getSize());
     while(!cmd.equals("EXIT")) {
       System.out.print("何をしますか？ >");
       cmd = stdIn.nextLine();

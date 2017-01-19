@@ -5,15 +5,16 @@ import w2v.model.DataManager;
 
 import java.io.File;
 import java.util.Scanner;
+import java.util.Set;
 
 public class W2vCmd {
   private static W2vModel w2vm;
   private static DataManager dm;
   private static Scanner stdIn;
   private static String cmd;
+  private static String file_path;
 
   public static void main(String[] args) {
-    String file_path;
     File fi = null;
     boolean flag = false;
 
@@ -22,15 +23,17 @@ public class W2vCmd {
 
     while(!flag) {
       System.out.print("Input file name is ... >");
+      file_path = stdIn.nextLine();
+      fi = new File(file_path);
       try {
-        file_path = stdIn.nextLine();
-        fi = new File(file_path);
-        flag = fi.exists();
+        w2vm = new W2vModel(fi);
+        dm = new DataManager(file_path);
+        flag = true;
       } catch (Exception e) {
-        System.out.println("Error.");
+        e.printStackTrace();
+        flag = false;
       }
     }
-    w2vm = new W2vModel(fi);
     System.out.println("Words : " + w2vm.getWords() + "\tSize : " + w2vm.getSize());
     while(!cmd.equals("EXIT")) {
       System.out.print("何をしますか？ >");
@@ -41,7 +44,48 @@ public class W2vCmd {
         prvct();
       else if (cmd.equals("hm"))
         hangarian();
+      else if (cmd.equals("syn"))
+        synonym();
+      else if (cmd.equals("ant"))
+        antonym();
+      else if (cmd.equals("wmc"))
+        getW_mc();
     }
+  }
+
+  private static void getW_mc() {
+    System.out.println("形態素解析したい文字列を入力してください >");
+    cmd = stdIn.nextLine();
+    dm.getWMC(cmd);
+  }
+
+  private static void synonym() {
+    String target;
+    System.out.print("同意語を探したい単語を入力してください >");
+    target = stdIn.nextLine();
+    System.out.print("Positionを入力してください。(a/r/n/v/) >");
+    cmd = stdIn.nextLine();
+    Set<String> syn = DataManager.getWnSynonyms(target, cmd);
+    if (syn == null) {
+      System.out.println("同意語か、Positionが存在しません。");
+      return ;
+    }
+    System.out.println(syn);
+    return ;
+  }
+  private static void antonym() {
+    String target;
+    System.out.print("反意語を探したい単語を入力してください >");
+    target = stdIn.nextLine();
+    System.out.print("Positionを入力してください。(a/r/n/v/) >");
+    cmd = stdIn.nextLine();
+    Set<String> ant = DataManager.getWnAntonyms(target, cmd);
+    if (ant == null) {
+      System.out.println("不正な入力値です。");
+      return ;
+    }
+    System.out.println(ant);
+    return ;
   }
 
   private static void existWord() {
@@ -81,14 +125,11 @@ public class W2vCmd {
   private static void hangarian() {
     String syn;
     String ant;
-    dm = new DataManager(w2vm);
 
     System.out.println("ファイルパスの指定をしてください。");
-    System.out.print("Synonym >");
-    syn = stdIn.nextLine();
     System.out.print("Antonym >");
     ant = stdIn.nextLine();
-    dm.setFilePath(syn, ant);
+    dm.setFilePath(ant);
     dm.createAslist();
   }
 

@@ -63,11 +63,9 @@ public class W2vCmd {
     String target;
     System.out.print("同意語を探したい単語を入力してください >");
     target = stdIn.nextLine();
-    System.out.print("Positionを入力してください。(a/r/n/v/) >");
-    cmd = stdIn.nextLine();
-    Set<String> syn = DataManager.getWnSynonyms(target, cmd);
+    Set<String> syn = dm.getWnSynonyms(target);
     if (syn == null) {
-      System.out.println("同意語か、Positionが存在しません。");
+      System.out.println("不正な入力値です。");
       return ;
     }
     System.out.println(syn);
@@ -77,9 +75,7 @@ public class W2vCmd {
     String target;
     System.out.print("反意語を探したい単語を入力してください >");
     target = stdIn.nextLine();
-    System.out.print("Positionを入力してください。(a/r/n/v/) >");
-    cmd = stdIn.nextLine();
-    Set<String> ant = DataManager.getWnAntonyms(target, cmd);
+    Set<String> ant = dm.getWnAntonyms(target);
     if (ant == null) {
       System.out.println("不正な入力値です。");
       return ;

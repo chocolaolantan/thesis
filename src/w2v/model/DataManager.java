@@ -3,6 +3,7 @@ package w2v.model;
 import java.io.File;
 import java.util.Set;
 import java.util.StringTokenizer;
+import java.util.LinkedList;
 
 import org.chasen.mecab.MeCab;
 import org.chasen.mecab.Tagger;
@@ -46,17 +47,30 @@ public class DataManager {
      }
   }
 
-  public static Set<String> getWnSynonyms(String word, String p) {
+  public String getWmcFeature(String str) {
+    Tagger tagger = new Tagger();
+    tagger.parse(str);
+    Node node = tagger.parseToNode(str);
+    node = node.getNext();
+    StringTokenizer st = new StringTokenizer(node.getFeature(), ",");
+    try {
+      return st.nextToken();
+    } catch (Exception e) {
+      e.printStackTrace();
+      return "";
+    }
+  }
+
+  public Set<String> getWnSynonyms(String word) {
     POS pos = null;
-    if (p.equals("形容詞") || p.equals("a")) pos =POS.a;
-    else if (p.equals("名詞") || p.equals("n")) pos =POS.n;
-    else if (p.equals("副詞") || p.equals("r")) pos =POS.r;
-    else if (p.equals("動詞") || p.equals("v")) pos =POS.v;
+    String p = this.getWmcFeature(word);
+    if sse if (p.equals("動詞") || p.equals("v")) pos =POS.v;
     else return null;
     return JAWJAW.findSynonyms(word, pos);
   }
-  public static Set<String> getWnAntonyms(String word, String p) {
+  public Set<String> getWnAntonyms(String word) {
     POS pos = null;
+    String p = this.getWmcFeature(word);
     if (p.equals("形容詞")) pos =POS.a;
     else if (p.equals("名詞")) pos =POS.n;
     else if (p.equals("副詞")) pos =POS.r;

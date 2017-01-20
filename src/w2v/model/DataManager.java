@@ -64,7 +64,10 @@ public class DataManager {
   public Set<String> getWnSynonyms(String word) {
     POS pos = null;
     String p = this.getWmcFeature(word);
-    if sse if (p.equals("動詞") || p.equals("v")) pos =POS.v;
+    if (p.equals("形容詞")) pos =POS.a;
+    else if (p.equals("名詞")) pos =POS.n;
+    else if (p.equals("副詞")) pos =POS.r;
+    else if (p.equals("動詞")) pos =POS.v;
     else return null;
     return JAWJAW.findSynonyms(word, pos);
   }

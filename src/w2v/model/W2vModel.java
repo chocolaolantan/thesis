@@ -89,4 +89,37 @@ public class W2vModel {
     return vocab[i];
   }
 
+  public int[] getNwl(int i, int n) {
+    int j, k, l;
+    int[] ans = new int[n];
+    Arrays.fill(ans, -1);
+    float[] base = getWv(i);
+    float[] target;
+    float[] best = new float[n];
+    Arrays.fill(best, 0.0);
+    float sig;
+    float[] sum = new float[n];
+    Arrays.fill(sum, 0.0);
+
+    for (j = 0; j < words; j++) {
+      sig = 0.0;
+      float[] target = getWv(j);
+      for (k = 0; k < size; k++) {
+        sig += base[k] * target[k];
+      }
+      for (k = 0; k < n; k++) {
+        if (sig > best[k]) {
+          for (l = n - 1; l > k; l--) {
+            best[l] = best[l - 1];
+            ans[l] = ans[l-1];
+          }
+          best[k] = dist;
+          ans[k] = j;
+          break;
+        }
+      }
+    }
+  }
+
+  
 }

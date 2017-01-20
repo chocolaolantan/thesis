@@ -3,6 +3,7 @@ package w2v.model;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class W2vModel {
@@ -10,6 +11,7 @@ public class W2vModel {
   private int words;
   private String[] vocab;
   private File fi;
+  private DataManager dm;
 
   public W2vModel(File fi) {
     BufferedReader br;
@@ -36,6 +38,10 @@ public class W2vModel {
       System.out.println(line);
       e.printStackTrace();
     }
+  }
+
+  public void setDm(DataManager d) {
+    this.dm = d;
   }
 
   public int getWords() {
@@ -92,34 +98,106 @@ public class W2vModel {
   public int[] getNwl(int i, int n) {
     int j, k, l;
     int[] ans = new int[n];
-    Arrays.fill(ans, -1);
     float[] base = getWv(i);
-    float[] target;
+    float[] target = new float[size];
     float[] best = new float[n];
-    Arrays.fill(best, 0.0);
     float sig;
     float[] sum = new float[n];
-    Arrays.fill(sum, 0.0);
 
-    for (j = 0; j < words; j++) {
-      sig = 0.0;
-      float[] target = getWv(j);
-      for (k = 0; k < size; k++) {
-        sig += base[k] * target[k];
-      }
-      for (k = 0; k < n; k++) {
-        if (sig > best[k]) {
-          for (l = n - 1; l > k; l--) {
-            best[l] = best[l - 1];
-            ans[l] = ans[l-1];
+    Arrays.fill(ans, -1);
+    Arrays.fill(best, 0.0f);
+    Arrays.fill(target, 0.0f);
+    Arrays.fill(sum, 0.0f);
+
+    BufferedReader br;
+    StringTokenizer st;
+    String line = "";
+
+    try {
+      br = new BufferedReader(new FileReader(fi));
+      st = new StringTokenizer(br.readLine());
+      j = 0;
+      while ((line = br.readLine()) != null) {
+        if (j == i) continue;
+        j++;
+        sig = 0.0f;
+        st = new StringTokenizer(line, " ");
+        st.nextToken();
+
+        for (k = 0; k < size; k++) {
+          target[k] = Float.parseFloat(new String(st.nextToken().getBytes("UTF-8")));
+          sig += base[k] * target[k];
+        }
+        for (k = 0; k < n; k++) {
+          if (sig > best[k]) {
+            for (l = n - 1; l > k; l--) {
+              best[l] = best[l - 1];
+              ans[l] = ans[l-1];
+            }
+            best[k] = sig;
+            ans[k] = j;
+            break;
           }
-          best[k] = dist;
-          ans[k] = j;
-          break;
         }
       }
+    } catch (Exception e) {
+      System.out.println(line);
+      e.printStackTrace();
     }
+    return ans;
+  }
+  public int[] getNwls(int i, int n) {
+    int j, k, l;
+    int[] ans = new int[n];
+    int[] syn = dm.getWnSi(i);
+    float[] base = getWv(i);
+    float[] target = new float[size];
+    float[] best = new float[n];
+    float sig;
+    float[] sum = new float[n];
+
+    Arrays.fill(ans, -1);
+    Arrays.fill(best, 0.0f);
+    Arrays.fill(target, 0.0f);
+    Arrays.fill(sum, 0.0f);
+
+    BufferedReader br;
+    StringTokenizer st;
+    String line = "";
+
+    try {
+      br = new BufferedReader(new FileReader(fi));
+      st = new StringTokenizer(br.readLine());
+      j = 0;
+      while ((line = br.readLine()) != null) {
+        if (j == i || Arrays.asList(syn).contains(j)) continue;
+
+        j++;
+        sig = 0.0f;
+        st = new StringTokenizer(line, " ");
+        st.nextToken();
+
+        for (k = 0; k < size; k++) {
+          target[k] = Float.parseFloat(new String(st.nextToken().getBytes("UTF-8")));
+          sig += base[k] * target[k];
+        }
+        for (k = 0; k < n; k++) {
+          if (sig > best[k]) {
+            for (l = n - 1; l > k; l--) {
+              best[l] = best[l - 1];
+              ans[l] = ans[l-1];
+            }
+            best[k] = sig;
+            ans[k] = j;
+            break;
+          }
+        }
+      }
+    } catch (Exception e) {
+      System.out.println(line);
+      e.printStackTrace();
+    }
+    return ans;
   }
 
-  
 }

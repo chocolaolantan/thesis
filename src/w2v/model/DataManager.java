@@ -61,7 +61,9 @@ public class DataManager {
     }
   }
 
-  public Set<String> getWnSynonyms(String word) {
+  public String[] getWnSynonyms(String word) {
+    Set<String> st;
+    String[] res;
     POS pos = null;
     String p = this.getWmcFeature(word);
     if (p.equals("形容詞")) pos =POS.a;
@@ -69,9 +71,14 @@ public class DataManager {
     else if (p.equals("副詞")) pos =POS.r;
     else if (p.equals("動詞")) pos =POS.v;
     else return null;
-    return JAWJAW.findSynonyms(word, pos);
+    st = JAWJAW.findSynonyms(word, pos);
+    res = new String[st.size()];
+    st.toArray(res);
+    return res;
   }
-  public Set<String> getWnAntonyms(String word) {
+  public String[] getWnAntonyms(String word) {
+    Set<String> st;
+    String[] res;
     POS pos = null;
     String p = this.getWmcFeature(word);
     if (p.equals("形容詞")) pos =POS.a;
@@ -79,7 +86,26 @@ public class DataManager {
     else if (p.equals("副詞")) pos =POS.r;
     else if (p.equals("動詞")) pos =POS.v;
     else return null;
-    return JAWJAW.findAntonyms(word, pos);
+    st = JAWJAW.findAntonyms(word, pos);
+    res = new String[st.size()];
+    st.toArray(res);
+    return res;
+  }
+  public int[] getWnSi(int i) {
+    String[] list = getWnSynonyms(w2vm.getW(i));
+    int[] res = new int[list.length];
+    for (int j = 0; j < list.length; j++) {
+      res[j] = w2vm.exist(list[j]);
+    }
+    return res;
+  }
+  public int[] getWnAi(int i) {
+    String[] list = getWnAntonyms(w2vm.getW(i));
+    int[] res = new int[list.length];
+    for (int j = 0; j < list.length; j++) {
+      res[j] = w2vm.exist(list[j]);
+    }
+    return res;
   }
 
   public void setFilePath(String fa_path) {

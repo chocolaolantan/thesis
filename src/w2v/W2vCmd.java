@@ -28,6 +28,7 @@ public class W2vCmd {
       try {
         w2vm = new W2vModel(fi);
         dm = new DataManager(file_path);
+        w2vm.setDm(dm);
         flag = true;
       } catch (Exception e) {
         e.printStackTrace();
@@ -50,7 +51,38 @@ public class W2vCmd {
         antonym();
       else if (cmd.equals("wmc"))
         getW_mc();
+      else if (cmd.equals("nwn"))
+        getnwn();
+      else if (cmd.equals("nwns"))
+        getnwns();
     }
+  }
+
+  private static void getnwn() {
+    String trg;
+    int n;
+    int[] ner;
+
+    System.out.print("近傍を調べたい単語を入力してください >");
+    trg = stdIn.nextLine();
+    System.out.print("近傍何個を調べますか？ >");
+    n = Integer.parseInt(stdIn.nextLine());
+    ner = w2vm.getNwl(w2vm.exist(trg), n);
+    for (int i: ner)
+      System.out.println(w2vm.getW(i));
+  }
+  private static void getnwns() {
+    String trg;
+    int n;
+    int[] ner;
+
+    System.out.print("類似語を除いた近傍を調べたい単語を入力してください >");
+    trg = stdIn.nextLine();
+    System.out.print("近傍何個を調べますか？ >");
+    n = Integer.parseInt(stdIn.nextLine());
+    ner = w2vm.getNwls(w2vm.exist(trg), n);
+    for (int i: ner)
+      System.out.println(w2vm.getW(i));
   }
 
   private static void getW_mc() {
@@ -63,24 +95,24 @@ public class W2vCmd {
     String target;
     System.out.print("同意語を探したい単語を入力してください >");
     target = stdIn.nextLine();
-    Set<String> syn = dm.getWnSynonyms(target);
+    String[] syn = dm.getWnSynonyms(target);
     if (syn == null) {
       System.out.println("不正な入力値です。");
       return ;
     }
-    System.out.println(syn);
+    System.out.println(syn.toString());
     return ;
   }
   private static void antonym() {
     String target;
     System.out.print("反意語を探したい単語を入力してください >");
     target = stdIn.nextLine();
-    Set<String> ant = dm.getWnAntonyms(target);
+    String[] ant = dm.getWnAntonyms(target);
     if (ant == null) {
       System.out.println("不正な入力値です。");
       return ;
     }
-    System.out.println(ant);
+    System.out.println(ant.toString());
     return ;
   }
 

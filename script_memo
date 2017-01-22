@@ -14,3 +14,4 @@ sudo alternatives --config java
 
 export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 
+jar cvfm W2vCmd.jar MANIFEST.MF *

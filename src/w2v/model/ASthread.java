@@ -41,8 +41,8 @@ public class ASthread extends Thread {
     for(int i = 0; i < w2vm.getWords(); i++) {
       try {
         // アクセスするURLの確認
-        System.out.println(base_url + w2vm.getW(i));
-        URL url = new URL(base_url + w2vm.getW(i));
+        System.out.println(base_url + w2vm.getWord(i));
+        URL url = new URL(base_url + w2vm.getWord(i));
         URLConnection uc = url.openConnection();
 
         String cs = Arrays.asList(uc.getContentType().split(";")).get(1);
@@ -69,8 +69,8 @@ public class ASthread extends Thread {
         if (mat.find()) {
           bw = new BufferedWriter(new FileWriter(f, true));
           String tmp = mat.group(1);
-          bw.write(w2vm.getW(i) + " " + tmp);
-          System.out.println(w2vm.getW(i) + " " + tmp);
+          bw.write(w2vm.getWord(i) + " " + tmp);
+          System.out.println(w2vm.getWord(i) + " " + tmp);
           while(mat.find()) {
             tmp = mat.group(1);
             bw.write(" " + tmp);

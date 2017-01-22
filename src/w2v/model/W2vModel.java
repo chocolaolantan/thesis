@@ -145,12 +145,6 @@ public class W2vModel {
     Arrays.fill(ans, -1);
     Arrays.fill(best, 0.0f);
 
-    sig = 0.0f;
-    for (j = 0; j < size; j++)
-      sig += base[j] * base[j];
-    sig = (float)Math.sqrt(sig);
-    for (j = 0; j < size; j++)
-      base[j] /= sig;
     for (j = 0; j < words; j++) {
       sig = 0.0f;
       for (k = 0; k < size; k++)
@@ -179,12 +173,6 @@ public class W2vModel {
     Arrays.fill(ans, -1);
     Arrays.fill(best, 0.0f);
 
-    sig = 0.0f;
-    for (j = 0; j < size; j++)
-      sig += base[j] * base[j];
-    sig = (float)Math.sqrt(sig);
-    for (j = 0; j < size; j++)
-      base[j] /= sig;
     for (j = 0; j < words; j++) {
       sig = 0.0f;
       for (k = 0; k < size; k++)
@@ -231,8 +219,14 @@ public class W2vModel {
 
         for (k = 0; k < size; k++) {
           target[k] = Float.parseFloat(new String(st.nextToken().getBytes("UTF-8")));
-          sig += base[k] * target[k];
+          sig += target[k] * target[k];
         }
+        sig = (float)Math.sqrt(sig);
+        for (k = 0; k < size; k++)
+          target[k] /= sig;
+        sig = 0.0f;
+        for (k = 0; k < size; k++)
+          sig += base[k] * target[k];
         for (k = 0; k < n; k++) {
           if (sig > best[k]) {
             for (l = n - 1; l > k; l--) {
@@ -279,8 +273,14 @@ public class W2vModel {
 
         for (k = 0; k < size; k++) {
           target[k] = Float.parseFloat(new String(st.nextToken().getBytes("UTF-8")));
-          sig += base[k] * target[k];
+          sig += target[k] * target[k];
         }
+        sig = (float)Math.sqrt(sig);
+        for (k = 0; k < size; k++)
+          target[k] /= sig;
+        sig = 0.0f;
+        for (k = 0; k < size; k++)
+          sig += base[k] * target[k];
         for (k = 0; k < n; k++) {
           if (sig > best[k]) {
             for (l = n - 1; l > k; l--) {
@@ -445,12 +445,6 @@ public class W2vModel {
     Arrays.fill(ans, -1);
     Arrays.fill(best, 0.0f);
 
-    sig = 0.0f;
-    for (j = 0; j < size; j++)
-      sig += base[j] * base[j];
-    sig = (float)Math.sqrt(sig);
-    for (j = 0; j < size; j++)
-      base[j] /= sig;
     for (j = 0; j < words; j++) {
       if (j == i) continue;
       sig = 0.0f;
@@ -480,12 +474,6 @@ public class W2vModel {
     Arrays.fill(ans, -1);
     Arrays.fill(best, 0.0f);
 
-    sig = 0.0f;
-    for (j = 0; j < size; j++)
-      sig += base[j] * base[j];
-    sig = (float)Math.sqrt(sig);
-    for (j = 0; j < size; j++)
-      base[j] /= sig;
     for (j = 0; j < words; j++) {
       if (j == i || contain(j, d)) {}
       else {
@@ -536,8 +524,14 @@ public class W2vModel {
 
         for (k = 0; k < size; k++) {
           target[k] = Float.parseFloat(new String(st.nextToken().getBytes("UTF-8")));
-          sig += base[k] * target[k];
+          sig += target[k] * target[k];
         }
+        sig = (float)Math.sqrt(sig);
+        for (k = 0; k < size; k++)
+          target[k] /= sig;
+        sig = 0.0f;
+        for (k = 0; k < size; k++)
+          sig += base[k] * target[k];
         for (k = 0; k < n; k++) {
           if (sig > best[k]) {
             for (l = n - 1; l > k; l--) {
@@ -586,8 +580,14 @@ public class W2vModel {
 
           for (k = 0; k < size; k++) {
             target[k] = Float.parseFloat(new String(st.nextToken().getBytes("UTF-8")));
-            sig += base[k] * target[k];
+            sig += target[k] * target[k];
           }
+          sig = (float)Math.sqrt(sig);
+          for (k = 0; k < size; k++)
+            target[k] /= sig;
+          sig = 0.0f;
+          for (k = 0; k < size; k++)
+            sig += base[k] * target[k];
           for (k = 0; k < n; k++) {
             if (sig > best[k]) {
               for (l = n - 1; l > k; l--) {
@@ -617,12 +617,6 @@ public class W2vModel {
     Arrays.fill(ans, -1);
     Arrays.fill(best, 0.0f);
 
-    sig = 0.0f;
-    for (j = 0; j < size; j++)
-      sig += base[j] * base[j];
-    sig = (float)Math.sqrt(sig);
-    for (j = 0; j < size; j++)
-      base[j] /= sig;
     for (j = 0; j < words; j++) {
       if (j == i) continue;
       sig = 0.0f;
@@ -671,8 +665,14 @@ public class W2vModel {
 
         for (k = 0; k < size; k++) {
           target[k] = Float.parseFloat(new String(st.nextToken().getBytes("UTF-8")));
-          sig += base[k] * target[k];
+          sig += target[k] * target[k];
         }
+        sig = (float)Math.sqrt(sig);
+        for (k = 0; k < size; k++)
+          target[k] /= sig;
+        sig = 0.0f;
+        for (k = 0; k < size; k++)
+          sig += base[k] * target[k];
         for (k = 0; k < n; k++) {
           if (sig > best[k]) {
             for (l = n - 1; l > k; l--) {

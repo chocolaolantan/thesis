@@ -1,6 +1,8 @@
 package w2v.model;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 
 import w2v.calc.Calc;
 
@@ -9,11 +11,13 @@ public class DataManager {
   private W2vModel w2vm;
   private MCModel mcm;
   private WNModel wnm;
+  private Kmeans km;
 
   public DataManager(File f) throws Exception{
     try {
       this.w2vm = new W2vModel(f);
       this.mcm = new MCModel();
+      this.km = new Kmeans();
     } catch (UnsatisfiedLinkError e) {
       e.printStackTrace();
     }
@@ -72,5 +76,33 @@ public class DataManager {
   public int[] hgln(float[][] mrx, int n) {
     Calc clc = new Calc(mrx, n);
     return clc.hangarian();
+  }
+
+  public boolean saveC(String file_path) {
+    if (!km.ld()) return false;
+    try {
+      File f = new File(file_path);
+      if (checkBeforeWritefile(f)) {
+        BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+        bw.write(gWords() + ' ' + km.allClust());
+        for (int i = 0; i < km.allClust(); i++)
+          bw.write(gWord(i) + ' ' + km.wordClust(i) + '\n');
+        bw.close();
+      } else { return false; }
+      return true;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
+    }
+  }
+  public boolean loadC(String file_path) { return km.loadClust(file_path); }
+
+  private boolean checkBeforeWritefile(File file){
+    if (file.exists()){
+      if (file.isFile() && file.canWrite()){
+        return true;
+      }
+    }
+    return false;
   }
 }

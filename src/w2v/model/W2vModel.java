@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Arrays;
-import java.util.StringTokenizer;
 
 public class W2vModel {
   private int size;
@@ -17,7 +16,7 @@ public class W2vModel {
 
   protected W2vModel(File fi) {
     BufferedReader br;
-    StringTokenizer st;
+    String[] st;
     String line = "";
     int i, j;
     float len;
@@ -27,9 +26,9 @@ public class W2vModel {
     try {
       br = new BufferedReader(new FileReader(fi));
 
-      st = new StringTokenizer(br.readLine());
-      words = Integer.parseInt(st.nextToken());
-      size = Integer.parseInt(st.nextToken());
+      st = br.readLine().split(" ");
+      words = Integer.parseInt(st[0]);
+      size = Integer.parseInt(st[1]);
 
       vocab = new String[words];
 
@@ -43,12 +42,12 @@ public class W2vModel {
 
       i = 0;
       while ((line = br.readLine()) != null) {
-        st = new StringTokenizer(line, " ");
-        vocab[i] = new String(st.nextToken().getBytes("UTF-8"));
+        st = line.split(" ");
+        vocab[i] = st[0];
         if (exm) {
           len = 0.0f;
           for (j = 0; j < size; j++) {
-            m[i][j] = Float.parseFloat(new String(st.nextToken().getBytes("UTF-8")));
+            m[i][j] = Float.parseFloat(st[j+1]);
             len += m[i][j] * m[i][j];
           }
           len = (float)Math.sqrt(len);
@@ -204,21 +203,20 @@ public class W2vModel {
     Arrays.fill(target, 0.0f);
 
     BufferedReader br;
-    StringTokenizer st;
+    String[] st;
     String line = "";
 
     try {
       br = new BufferedReader(new FileReader(fi));
-      st = new StringTokenizer(br.readLine());
+      st = br.readLine().split(" ");
       j = 0;
       while ((line = br.readLine()) != null) {
         j++;
         sig = 0.0f;
-        st = new StringTokenizer(line, " ");
-        st.nextToken();
+        st = line.split(" ");
 
         for (k = 0; k < size; k++) {
-          target[k] = Float.parseFloat(new String(st.nextToken().getBytes("UTF-8")));
+          target[k] = Float.parseFloat(st[k+1]);
           sig += target[k] * target[k];
         }
         sig = (float)Math.sqrt(sig);
@@ -258,21 +256,20 @@ public class W2vModel {
     Arrays.fill(target, 0.0f);
 
     BufferedReader br;
-    StringTokenizer st;
+    String[] st;
     String line = "";
 
     try {
       br = new BufferedReader(new FileReader(fi));
-      st = new StringTokenizer(br.readLine());
+      st = br.readLine().split(" ");
       j = 0;
       while ((line = br.readLine()) != null) {
         j++;
         sig = 0.0f;
-        st = new StringTokenizer(line, " ");
-        st.nextToken();
+        st = line.split(" ");
 
         for (k = 0; k < size; k++) {
-          target[k] = Float.parseFloat(new String(st.nextToken().getBytes("UTF-8")));
+          target[k] = Float.parseFloat(st[k+1]);
           sig += target[k] * target[k];
         }
         sig = (float)Math.sqrt(sig);
@@ -355,7 +352,7 @@ public class W2vModel {
   }
   private float distnm(int i1, int i2) {
     BufferedReader br;
-    StringTokenizer st;
+    String[] st;
     int i, j;
     float[] v1 = new float[size];
     float[] v2 = new float[size];
@@ -366,28 +363,28 @@ public class W2vModel {
       for (i = 0; i < words; i++) {
         br.readLine();
         if (i == i1) {
-          st = new StringTokenizer(br.readLine(), " ");
-          if (!this.vocab[i1].equals(new String(st.nextToken().getBytes("UTF-8")))) {
+          st = br.readLine().split(" ");
+          if (!this.vocab[i1].equals(st[0])) {
             System.out.println("インデックスにあるはずの文字列が一致しません。");
             return -1.0f;
           }
           len = 0.0f;
           for (j = 0; j < size; j++) {
-            v1[j] = Float.parseFloat(new String(st.nextToken().getBytes("UTF-8")));
+            v1[j] = Float.parseFloat(st[j+1]);
             len += v1[j] * v1[j];
           }
           len = (float)Math.sqrt(len);
           for (float item: v1)
             item /= len;
         } else if (i == i2) {
-          st = new StringTokenizer(br.readLine(), " ");
-          if (!this.vocab[i2].equals(new String(st.nextToken().getBytes("UTF-8")))) {
+          st = br.readLine().split(" ");
+          if (!this.vocab[i2].equals(st[0])) {
             System.out.println("インデックスにあるはずの文字列が一致しません。");
             return -1.0f;
           }
           len = 0.0f;
           for (j = 0; j < size; j++) {
-            v2[j] = Float.parseFloat(new String(st.nextToken().getBytes("UTF-8")));
+            v2[j] = Float.parseFloat(st[j+1]);
             len += v2[j] * v2[j];
           }
           len = (float)Math.sqrt(len);
@@ -409,7 +406,7 @@ public class W2vModel {
     int i, j;
 
     BufferedReader br;
-    StringTokenizer st;
+    String[] st;
     String line;
 
     try {
@@ -417,13 +414,13 @@ public class W2vModel {
       br.readLine();
       for (i = 0; i < n; i++)
         br.readLine();
-      st = new StringTokenizer(br.readLine(), " ");
-      if (!this.vocab[n].equals(new String(st.nextToken().getBytes("UTF-8")))) {
+      st = br.readLine().split(" ");
+      if (!this.vocab[n].equals(st[0])) {
         System.out.println("インデックスにあるはずの文字列が一致しません。");
         return null;
       }
       for (i = 0; i < size; i++) {
-        vec[i] = Float.parseFloat(new String(st.nextToken().getBytes("UTF-8")));
+        vec[i] = Float.parseFloat(st[i+1]);
         len += vec[i] * vec[i];
       }
     } catch (Exception e) {
@@ -508,22 +505,21 @@ public class W2vModel {
     Arrays.fill(target, 0.0f);
 
     BufferedReader br;
-    StringTokenizer st;
+    String[] st;
     String line = "";
 
     try {
       br = new BufferedReader(new FileReader(fi));
-      st = new StringTokenizer(br.readLine());
+      st = br.readLine().split(" ");
       j = 0;
       while ((line = br.readLine()) != null) {
         if (j == i) continue;
         j++;
         sig = 0.0f;
-        st = new StringTokenizer(line, " ");
-        st.nextToken();
+        st = line.split(" ");
 
         for (k = 0; k < size; k++) {
-          target[k] = Float.parseFloat(new String(st.nextToken().getBytes("UTF-8")));
+          target[k] = Float.parseFloat(st[k+1]);
           sig += target[k] * target[k];
         }
         sig = (float)Math.sqrt(sig);
@@ -563,23 +559,22 @@ public class W2vModel {
     Arrays.fill(target, 0.0f);
 
     BufferedReader br;
-    StringTokenizer st;
+    String[] st;
     String line = "";
 
     try {
       br = new BufferedReader(new FileReader(fi));
-      st = new StringTokenizer(br.readLine());
+      st = br.readLine().split(" ");
       j = 0;
       while ((line = br.readLine()) != null) {
         if (j == i || contain(j, d)) {}
         else {
           j++;
           sig = 0.0f;
-          st = new StringTokenizer(line, " ");
-          st.nextToken();
+          st = line.split(" ");
 
           for (k = 0; k < size; k++) {
-            target[k] = Float.parseFloat(new String(st.nextToken().getBytes("UTF-8")));
+            target[k] = Float.parseFloat(st[k+1]);
             sig += target[k] * target[k];
           }
           sig = (float)Math.sqrt(sig);
@@ -649,22 +644,21 @@ public class W2vModel {
     Arrays.fill(target, 0.0f);
 
     BufferedReader br;
-    StringTokenizer st;
+    String[] st;
     String line = "";
 
     try {
       br = new BufferedReader(new FileReader(fi));
-      st = new StringTokenizer(br.readLine());
+      st = br.readLine().split(" ");
       j = 0;
       while ((line = br.readLine()) != null) {
         if (j == i) continue;
         j++;
         sig = 0.0f;
-        st = new StringTokenizer(line, " ");
-        st.nextToken();
+        st = line.split(" ");
 
         for (k = 0; k < size; k++) {
-          target[k] = Float.parseFloat(new String(st.nextToken().getBytes("UTF-8")));
+          target[k] = Float.parseFloat(st[k+1]);
           sig += target[k] * target[k];
         }
         sig = (float)Math.sqrt(sig);

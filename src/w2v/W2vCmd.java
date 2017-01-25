@@ -66,7 +66,7 @@ public class W2vCmd {
       else if (cmd.equals("sc"))
         sc();
       else if (cmd.equals("kmc"))
-	km();
+	kmc();
       else if (cmd.equals("kml"))
 	kml();
     }

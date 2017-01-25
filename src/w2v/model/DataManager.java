@@ -2,7 +2,9 @@ package w2v.model;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -101,9 +103,15 @@ public class DataManager {
     if (km.ld()) return true;
     return km.loadClust(file_path);
   }
-  public boolean createC(String file_path) {
+  public boolean createC(String s_path, String file_path) {
     if (km.ld()) return true;
-    km.learn(grvS(), w2vm.getAllVector());
+    km.learn(grvS(sSWf(s_path)), w2vm.getAllVector());
+    saveC(file_path);
+    return true;
+  }
+  public boolean createCl(String l_path, String file_path) {
+    if (km.ld()) return true;
+    km.learn(grvS(lSWf(l_path)), w2vm.getAllVector());
     saveC(file_path);
     return true;
   }
@@ -115,12 +123,9 @@ public class DataManager {
     return w2vm.getNearWordsInList(idx, l, n);
   }
 
-  private float[][] grvS() {
+  public int[] sSWf(String path) {
     int i, j, l = 0;
     int[] label = new int[gWords()];
-    int[] lNum;
-    LinkedList<Integer> list = new LinkedList<Integer>();
-    float[][] grv;
 
     Arrays.fill(label, -1);
     for (i = 0; i < gWords(); i++) {
@@ -137,12 +142,54 @@ public class DataManager {
           e.printStackTrace();
         }
       }
-      list.offer(syn.length);
       l++;
     }
-    lNum = new int[list.size()];
-    for (i = 0; i < list.size(); i++)
-      lNum[i] = list.peek();
+    try {
+      File f = new File(path);
+        BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+        bw.write(gWords() + ' ' + l);
+        for (i = 0; i < gWords(); i++)
+          bw.write(gWord(i) + ' ' + label[i] + '\n');
+        bw.close();
+      } else { return null; }
+      return label;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+  public int[] lSWf(String path) {
+    int[] label;
+    try {
+      File fi = new File(path);
+      BufferedReader br =  new BufferedReader(new FileReader(fi));
+      String[] st = br.readLine().split(" ");
+      label = new int[Integer.parseInt(st[0])];
+
+      for (int i = 0; i < label.length; i++) {
+        st = br.readLine().split(" ");
+        label[i] = Integer.parseInt(st[1]);
+      }
+      br.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
+    return label;
+  }
+  private float[][] grvS(int[] label) {
+    int i, j, l = 0;
+    int mx = 0;
+    int[] lNum;
+    float[][] grv;
+
+    for (i = 0; i < label.length; i++)
+      mx = Math.max(mx, label[i]);
+    lNum = new int[mx];
+    Arrays.fill(lNum, 0);
+
+    for (i = 0; i < label.length; i++)
+      lNum[label[i]]++;
 
     grv = new float[l][gSize()];
     Arrays.fill(grv, 0.0f);

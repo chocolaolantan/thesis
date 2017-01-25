@@ -66,19 +66,40 @@ public class W2vCmd {
       else if (cmd.equals("sc"))
         sc();
       else if (cmd.equals("kmc"))
-	kmc();
+	      kmc();
       else if (cmd.equals("kml"))
-	kml();
+	      kml();
+      else if (cmd.equals("sswf"))
+        sswf();
+      else if (cmd.equals("sswf"))
+        swkm();
     }
   }
 
-  private static void kmc() {
-    System.out.print("クラスタデータを保存するパスを入力してください >");
+  private static void sswf() {
+    System.out.print("類似語関係を保存するパスを入力してください >");
     cmd = stdIn.nextLine();
-    dm.createC(cmd);
+    dm.sSWf(cmd);
+  }
+  private static void swkm() {
+    String file_path;
+    System.out.print("クラスタデータを保存するパスを入力してください >");
+    file_path = stdIn.nextLine();
+    System.out.print("類似語クラスタデータを読み込むパスを入力してください >");
+    cmd = stdIn.nextLine();
+    dm.createCl(cmd, file_path);
+
+  }
+  private static void kmc() {
+    String file_path;
+    System.out.print("クラスタデータを保存するパスを入力してください >");
+    file_path = stdIn.nextLine();
+    System.out.print("類似語クラスタデータを保存するパスを入力してください >");
+    cmd = stdIn.nextLine();
+    dm.createC(cmd, file_path);
   }
   private static void kml() {
-    System.out.print("クラスタデータを保存するパスを入力してください >");
+    System.out.print("クラスタデータを読み込むパスを入力してください >");
     cmd = stdIn.nextLine();
     dm.loadC(cmd);
   }

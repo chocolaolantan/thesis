@@ -3,6 +3,8 @@ package w2v.model;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
+import java.util.Arrays;
+import java.util.LinkedList;
 
 import w2v.calc.Calc;
 
@@ -95,8 +97,59 @@ public class DataManager {
       return false;
     }
   }
-  public boolean loadC(String file_path) { return km.loadClust(file_path); }
+  public boolean loadC(String file_path) {
+    if (km.ld()) return true;
+    return km.loadClust(file_path);
+  }
+  public boolean createC(String file_path) {
+    if (km.ld()) return true;
+    km.learn(grvS(), w2vm.getAllVector());
+    saveC(file_path);
+    return true;
+  }
+  public int wsInc(int i) { return km.clustSize(i); }
+  public int wc(int i) { return km.wordClust(i); }
+  public int[] wIc(int i) { return km.wordsInClust(i); }
+  public int[] gCw(int idx, int n) {
+    int[] l = km.wordsInClust(km.wordClust(idx));
+    return w2vm.getNearWordsInList(idx, l, n);
+  }
 
+  private float[][] grvS() {
+    int i, j, l = 0;
+    int[] label = new int[gWords()];
+    int[] lNum;
+    LinkedList<Integer> list = new LinkedList<Integer>();
+    float[][] grv;
+
+    Arrays.fill(label, -1);
+    for (i = 0; i < gWords(); i++) {
+      if(label[i] >= 0) continue;
+
+      int[] syn = gWSi(i);
+      if (syn == null) continue;
+      for (j = 0; j < syn.length; j++)
+        label[syn[j]] = l;
+      list.offer(syn.length);
+      l++;
+    }
+    lNum = new int[list.size()];
+    for (i = 0; i < list.size(); i++)
+      lNum[i] = list.peek();
+
+    grv = new float[l][gSize()];
+    Arrays.fill(grv, 0.0f);
+    for (i = 0; i < gWords(); i++) {
+      if (i < 0) continue;
+      float[] v = gWV(i);
+      for (j = 0; j < gSize(); j++)
+        grv[label[i]][j] += v[j];
+    }
+    for (i = 0; i < l; i++)
+      for (j = 0; j < gSize(); j++)
+        grv[i][j] /= lNum[i];
+    return grv;
+  }
   private boolean checkBeforeWritefile(File file){
     if (file.exists()){
       if (file.isFile() && file.canWrite()){

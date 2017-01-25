@@ -88,7 +88,32 @@ public class W2vModel {
     if (exm) return m[n];
     else return getWv(n);
   }
+  protected float[][] getAllVector() { return m; }
 
+  protected int[] getNearWordsInList(int idx, int[] list, int n) {
+    if (!exm) return null;
+    int i, j, k;
+    int[] res = new int[n];
+    float[] len = new float[n];
+
+    for (i = 0; i < list.length; i++) {
+      float d = 0.0f;
+      for (j = 0; j < size; j++)
+        d += m[idx][j] * m[list[i]][j];
+      for (j = 0; j < n; j ++) {
+        if (d > len[j]) {
+          for (k = n - 1; k > j; k--) {
+            len[k] = len[k - 1];
+            res[k] = res[k-1];
+          }
+          len[j] = d;
+          res[j] = i;
+          break;
+        }
+      }
+    }
+    return res;
+  }
   protected int[] getNearWords(int i, int n) {
     if (n > words || n < 0) return null;
     if (exm) return getNwlm(i, n);

@@ -25,6 +25,7 @@ public class Kmeans {
           len += vec[j] * vec[j];
         }
       }
+      len = (float)Math.sqrt(len);
     } while(len == 0.0f);
     f = true;
     return f;
@@ -79,7 +80,7 @@ public class Kmeans {
   private float[][] l(float[][] grv, float[][] m) {
     float[][] ng;
     float[] vec;
-    float mxd, tmp;
+    float mid, tmp;
     int i, j, k, vSize;
     boolean flag = false;
 
@@ -91,15 +92,15 @@ public class Kmeans {
 
     for (i = 0; i < m.length; i++) {
       vec = new float[m[i].length];
-      mxd = 0.0f;
+      mid = 0.0f;
       for (j = 0; j < cNum.length; j++) {
         tmp = 0.0f;
         for (k = 0; k < vSize; k++) {
           vec[k] = m[i][k] - grv[j][k];
           tmp += vec[k] * vec[k];
         }
-        if (mxd < tmp) {
-          mxd = tmp;
+        if (mid > tmp) {
+          mid = tmp;
           clust[i] = j;
         }
       }

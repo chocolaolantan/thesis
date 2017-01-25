@@ -128,8 +128,15 @@ public class DataManager {
 
       int[] syn = gWSi(i);
       if (syn == null) continue;
-      for (j = 0; j < syn.length; j++)
-        label[syn[j]] = l;
+      for (j = 0; j < syn.length; j++) {
+        if (syn[j] < 0 || syn[j] > label.length) continue;
+        try {
+          label[syn[j]] = l;
+        } catch (Exception e) {
+          System.out.println("Error : " + j + ":" + syn[j]);
+          e.printStackTrace();
+        }
+      }
       list.offer(syn.length);
       l++;
     }

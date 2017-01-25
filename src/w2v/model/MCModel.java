@@ -1,6 +1,5 @@
 package w2v.model;
 
-import java.util.StringTokenizer;
 import java.util.LinkedList;
 
 import org.chasen.mecab.MeCab;
@@ -39,62 +38,53 @@ public class MCModel {
     return (String[])tmp.toArray(new String[0]);
   }
   protected String[] getWmcFeature(String str) {
-    Tagger tagger = new Tagger();
-    tagger.parse(str);
-    Node node = tagger.parseToNode(str);
-    node = node.getNext();
-    StringTokenizer st = new StringTokenizer(node.getFeature(), ",");
-    String[] res = new String[st.countTokens()];
+    String[] st;
     try {
-      int i = 0;
-      while(st.hasMoreTokens()) {
-        res[i] = st.nextToken();
-        i++;
-      }
+      Tagger tagger = new Tagger();
+      tagger.parse(str);
+      Node node = tagger.parseToNode(str);
+      node = node.getNext();
+      st = node.getFeature().split(",");
     } catch (Exception e) {
       e.printStackTrace();
       return null;
     }
-    return res;
+    return st;
   }
   protected String getPspeech(String str) {
-    Tagger tagger = new Tagger();
-    tagger.parse(str);
-    Node node = tagger.parseToNode(str);
-    node = node.getNext();
-    StringTokenizer st = new StringTokenizer(node.getFeature(), ",");
     try {
-      return st.nextToken();
+      Tagger tagger = new Tagger();
+      tagger.parse(str);
+      Node node = tagger.parseToNode(str);
+      node = node.getNext();
+      String[] st = node.getFeature().split(",");
+      return st[0];
     } catch (Exception e) {
       e.printStackTrace();
       return "";
     }
   }
   protected String getBform(String str) {
-    Tagger tagger = new Tagger();
-    tagger.parse(str);
-    Node node = tagger.parseToNode(str);
-    node = node.getNext();
-    StringTokenizer st = new StringTokenizer(node.getFeature(), ",");
     try {
-      for(int i = 0; i < 6; i++)
-        st.nextToken();
-      return st.nextToken();
+      Tagger tagger = new Tagger();
+      tagger.parse(str);
+      Node node = tagger.parseToNode(str);
+      node = node.getNext();
+      String[] st = node.getFeature().split(",");
+      return st[6];
     } catch (Exception e) {
       e.printStackTrace();
       return "";
     }
   }
   protected String getPhonetic(String str) {
-    Tagger tagger = new Tagger();
-    tagger.parse(str);
-    Node node = tagger.parseToNode(str);
-    node = node.getNext();
-    StringTokenizer st = new StringTokenizer(node.getFeature(), ",");
     try {
-      for(int i = 0; i < 8; i++)
-        st.nextToken();
-      return st.nextToken();
+      Tagger tagger = new Tagger();
+      tagger.parse(str);
+      Node node = tagger.parseToNode(str);
+      node = node.getNext();
+      String[] st = node.getFeature().split(",");
+      return st[8];
     } catch (Exception e) {
       e.printStackTrace();
       return "";

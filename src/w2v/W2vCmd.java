@@ -65,9 +65,23 @@ public class W2vCmd {
         kmhgl();
       else if (cmd.equals("sc"))
         sc();
+      else if (cmd.equals("kmc"))
+	km();
+      else if (cmd.equals("kml"))
+	kml();
     }
   }
 
+  private static void kmc() {
+    System.out.print("クラスタデータを保存するパスを入力してください >");
+    cmd = stdIn.nextLine();
+    dm.createC(cmd);
+  }
+  private static void kml() {
+    System.out.print("クラスタデータを保存するパスを入力してください >");
+    cmd = stdIn.nextLine();
+    dm.loadC(cmd);
+  }
   private static void gsg() {
     int i, n;
     int[] res;

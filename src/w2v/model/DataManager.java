@@ -32,13 +32,36 @@ public class DataManager {
   public int exw(String tmp) { return w2vm.exist(tmp); }
   public String gWord(int i) { return w2vm.getWord(i); }
   public float[] gWV(int i) { return w2vm.getWordVector(i); }
+  public float d(int i1, int i2) {
+    float[] v1 = gWV(i1);
+    float[] v2 = gWV(i2);
+    float[] v = new float[v1.length];
+    float len = 0.0f;
+
+    for (int i = 0; i < v.length; i++) {
+      v[i] = v1[i] - v2[i];
+      len += v[i] * v[i];
+    }
+    len = (float)Math.sqrt(len);
+    return len;
+  }
+  public float cos(int i1, int i2) {
+    float[] v1 = gWV(i1);
+    float[] v2 = gWV(i2);
+    float[] v = new float[v1.length];
+    float len = 0.0f;
+
+    for (int i = 0; i < v.length; i++)
+      len += v1[i] * v2[i];
+
+    return len;
+  }
   public int[] gNW(int i, int n) { return w2vm.getNearWords(i, n); }
   public int[] gNWnS(int i, int n) {
     if(i < 0 || i > w2vm.getWords()) return null;
     int[] d = gWSi(i);
     return w2vm.getNearWordsnS(i, n, d);
   }
-  public float d(int i1, int i2) { return w2vm.dist(i1, i2); }
   public float[][] gCM(int[] x, int[] y) { return w2vm.getCostMatrix(x, y); }
   public float[][] gNCM(int[] x, int[] y) { return w2vm.getNmCostMatrix(x, y); }
 
@@ -84,18 +107,21 @@ public class DataManager {
 
   public boolean saveC(String file_path) {
     if (!km.ld()) return false;
+    System.out.println("書込み開始");
     try {
       File f = new File(file_path);
-      if (checkBeforeWritefile(f)) {
+
         BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-        bw.write(gWords() + ' ' + km.allClust());
-        for (int i = 0; i < km.allClust(); i++)
+        bw.write(gWords());
+        bw.write(" " + km.allClust() + "\n");
+        for (int i = 0; i < gWords(); i++)
           bw.write(gWord(i) + ' ' + km.wordClust(i) + '\n');
         bw.close();
-      } else { return false; }
+        System.out.println("書込み成功");
       return true;
     } catch (Exception e) {
       e.printStackTrace();
+      System.out.println("書込み失敗");
       return false;
     }
   }
@@ -116,10 +142,16 @@ public class DataManager {
     return flag;
   }
   public boolean createC(String s_path, String file_path) {
+    boolean flag = false;
     if (km.ld()) return true;
-    km.learn(grvS(sSWf(s_path)), w2vm.getAllVector());
-    saveC(file_path);
-    return true;
+    try {
+      flag = km.learn(grvS(sSWf(s_path)), w2vm.getAllVector());
+      if (flag) flag = saveC(file_path);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
+    }
+    return flag;
   }
   public boolean createCl(String l_path, String file_path) {
     if (km.ld()) return true;
@@ -144,13 +176,14 @@ public class DataManager {
       if(label[i] >= 0) continue;
 
       int[] syn = gWSi(i);
-      if (syn == null) continue;
+      if (syn == null || syn.length == 0) continue;
+      //System.out.println(l + " " + syn.length);
       for (j = 0; j < syn.length; j++) {
         if (syn[j] < 0 || syn[j] > label.length) continue;
         try {
           label[syn[j]] = l;
         } catch (Exception e) {
-          System.out.println("Error : " + j + ":" + syn[j]);
+          System.out.println("Errjava -cp ./:/lib/java/jawjaw-1.0.2.jar:/lib/java/MeCab.jar w2v/W2vCmdor : " + j + ":" + syn[j]);
           e.printStackTrace();
         }
       }
@@ -163,11 +196,10 @@ public class DataManager {
         for (i = 0; i < gWords(); i++)
           bw.write(gWord(i) + ' ' + label[i] + '\n');
         bw.close();
-      return label;
     } catch (Exception e) {
       e.printStackTrace();
-      return null;
     }
+    return label;
   }
   public int[] lSWf(String path) {
     int[] label;
@@ -188,29 +220,49 @@ public class DataManager {
     }
     return label;
   }
+
+  private int max(int[] l) {
+    if (l == null) return 0;
+    int res = 0;
+    for(int i = 0; i < l.length; i++)
+      res = (res > l[i])? res : l[i];
+    if (res < 0) return 0;
+    return res;
+  }
   private float[][] grvS(int[] label) {
     int i, j, l = 0;
     int mx = 0;
     int[] lNum;
     float[][] grv;
 
-    for (i = 0; i < label.length; i++)
-      mx = Math.max(mx, label[i]);
-    lNum = new int[mx];
+    if (label == null) return null;
+    mx = max(label);
+    System.out.println("mx : " + mx);
+    if (mx <= 0) return null;
+    lNum = new int[mx + 1];
     Arrays.fill(lNum, 0);
 
-    for (i = 0; i < label.length; i++)
-      lNum[label[i]]++;
+    for (i = 0; i < label.length; i++) {
+      int t = label[i];
+      if (t <= 0) continue;
+      try {
+        lNum[t]++;
+      } catch (Exception e) {
+        e.printStackTrace();
+        System.out.println("t = " + t);
+      }
+    }
 
-    grv = new float[l][gSize()];
-    Arrays.fill(grv, 0.0f);
-    for (i = 0; i < gWords(); i++) {
-      if (i < 0) continue;
+    grv = new float[mx+1][gSize()];
+    for (i = 0; i < mx+1; i++)
+      Arrays.fill(grv[i], 0.0f);
+    for (i = 0; i < mx+1; i++) {
+      if (i < 0 || label[i] < 0) continue;
       float[] v = gWV(i);
       for (j = 0; j < gSize(); j++)
         grv[label[i]][j] += v[j];
     }
-    for (i = 0; i < l; i++)
+    for (i = 0; i < mx+1; i++)
       for (j = 0; j < gSize(); j++)
         grv[i][j] /= lNum[i];
     return grv;

@@ -16,6 +16,11 @@ public class Kmeans {
     float[][] g;
     float[] vec = new float[grv[0].length];
     float len;
+    System.out.println("学習開始。");
+    if (grv == null) {
+      System.out.println("grv null");
+      return false;
+    }
     do {
       g = l(grv, m);
       len = 0.0f;
@@ -28,6 +33,8 @@ public class Kmeans {
       len = (float)Math.sqrt(len);
     } while(len == 0.0f);
     f = true;
+    if(f) System.out.println("学習完了。");
+    else System.out.println("学習失敗。");
     return f;
   }
   protected boolean loadClust(String file_path) {
@@ -92,7 +99,7 @@ public class Kmeans {
 
     for (i = 0; i < m.length; i++) {
       vec = new float[m[i].length];
-      mid = 0.0f;
+      mid = Float.POSITIVE_INFINITY;
       for (j = 0; j < cNum.length; j++) {
         tmp = 0.0f;
         for (k = 0; k < vSize; k++) {
@@ -106,7 +113,6 @@ public class Kmeans {
       }
       cNum[clust[i]]++;
     }
-
     for (i = 0; i < ng.length; i++)
       Arrays.fill(ng[i], 0.0f);
 

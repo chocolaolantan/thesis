@@ -75,6 +75,8 @@ public class W2vCmd {
         swkm();
       else if (cmd.equals("km"))
         km();
+      else if (cmd.equals("cn"))
+        cn();
     }
   }
 
@@ -304,9 +306,9 @@ public class W2vCmd {
     System.out.print("近傍何個を調べますか？");
     n = Integer.parseInt(stdIn.nextLine());
 
-    if (n > dm.wsInc(i1) || n > dm.wsInc(i2) || n < 0) {
+    if (n > dm.wsInc(dm.wc(i1)) || n > dm.wsInc(dm.wc(i2)) || n < 0) {
       System.out.println("nのサイズが適切ではありません。");
-      System.out.println("i1 : " + dm.wsInc(i1) + "\ti2 : " + dm.wsInc(i2));
+      System.out.println("i1 : " + dm.wsInc(dm.wc(i1)) + "\ti2 : " + dm.wsInc(dm.wc(i2)));
       return ;
     }
     l1 = dm.gCw(i1, n);
@@ -329,9 +331,9 @@ public class W2vCmd {
     System.out.print("近傍何個を調べますか？");
     n = Integer.parseInt(stdIn.nextLine());
 
-    if (n > dm.wsInc(i1) || n > dm.wsInc(i2) || n < 0) {
+    if (n > dm.wsInc(dm.wc(i1)) || n > dm.wsInc(dm.wc(i2)) || n < 0) {
       System.out.println("nのサイズが適切ではありません。");
-      System.out.println("i1 : " + dm.wsInc(i1) + "\ti2 : " + dm.wsInc(i2));
+      System.out.println("i1 : " + dm.wsInc(dm.wc(i1)) + "\ti2 : " + dm.wsInc(dm.wc(i2)));
       return ;
     }
     l1 = dm.gCw(i1, n);
@@ -340,5 +342,14 @@ public class W2vCmd {
     for (int i = 0; i < n; i++)
       System.out.println(dm.gWord(l1[i]) + "\t-\t" + dm.gWord(l2[res[i]]));
   }
-
+  private static void cn() {
+    int idx;
+    System.out.print("所属クラスタを調べたい単語を入力してください。 >");
+    idx = dm.exw(stdIn.nextLine());
+    System.out.println("No. " + dm.wc(idx) + "\tVolume : " + dm.wsInc(dm.wc(idx)));
+    int[] list = dm.gCw(idx, dm.wsInc(dm.wc(idx)));
+    for (int i = 0; i < list.length; i++)
+      System.out.print(dm.gWord(list[i]) + " ");
+    System.out.println();
+  }
 }

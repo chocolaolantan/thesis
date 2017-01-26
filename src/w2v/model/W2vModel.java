@@ -104,6 +104,20 @@ public class W2vModel {
     }
     return a;
   }
+  protected int[] getRandomWordsInList(int n, int[] list) {
+    int[] a = new int[n];
+    Random rnd = new Random();
+
+    for(int i = 0; i < n; i++){
+      a[i] = list[rnd.nextInt(list.length)];
+
+      int x = a[i];
+      for( i = 0; i < n ; i++)
+        if(a[i] ==x)
+          break;
+    }
+    return a;
+  }
   protected float[][] getRandomVectors(int n) {
     int[] a = getRandomWords(n);
     float[][] res = new float[n][];
@@ -145,19 +159,6 @@ public class W2vModel {
     if (i > words || i < 0) return null;
     if (exm) return getNwlmnS(i, n, d);
     else return getNwlnS(i, n, d);
-  }
-  protected float dist(int i1, int i2) {
-    int tmp;
-    if (i1 > words || i2 > words || i1 < 0 || i2 < 0) return -1.0f;
-    if (exm) return distm(i1, i2);
-    else {
-      if (i1 > i2) {
-        tmp = i1;
-        i1 = i2;
-        i2 = tmp;
-      }
-      return distnm(i1, i2);
-    }
   }
   protected float[][] getCostMatrix(int[] x, int[] y) {
     if (exm) return gcmx(x, y);
@@ -387,65 +388,6 @@ public class W2vModel {
     for(int i = 0; i < d.length; i++)
       if(idx == d[i]) return true;
     return false;
-  }
-  private float distm(int i1, int i2) {
-    int i;
-    float len = 0.0f;
-    float[] v = new float[size];
-
-    for (i = 0; i < size; i++)
-      len += m[i1][i] * m[i2][i];
-    return len;
-  }
-  private float distnm(int i1, int i2) {
-    BufferedReader br;
-    String[] st;
-    int i, j;
-    float[] v1 = new float[size];
-    float[] v2 = new float[size];
-    float len;
-    try {
-      br = new BufferedReader(new FileReader(fi));
-      br.readLine();
-      for (i = 0; i < words; i++) {
-        br.readLine();
-        if (i == i1) {
-          st = br.readLine().split(" ");
-          if (!this.vocab[i1].equals(st[0])) {
-            System.out.println("インデックスにあるはずの文字列が一致しません。");
-            return -1.0f;
-          }
-          len = 0.0f;
-          for (j = 0; j < size; j++) {
-            v1[j] = Float.parseFloat(st[j+1]);
-            len += v1[j] * v1[j];
-          }
-          len = (float)Math.sqrt(len);
-          for (float item: v1)
-            item /= len;
-        } else if (i == i2) {
-          st = br.readLine().split(" ");
-          if (!this.vocab[i2].equals(st[0])) {
-            System.out.println("インデックスにあるはずの文字列が一致しません。");
-            return -1.0f;
-          }
-          len = 0.0f;
-          for (j = 0; j < size; j++) {
-            v2[j] = Float.parseFloat(st[j+1]);
-            len += v2[j] * v2[j];
-          }
-          len = (float)Math.sqrt(len);
-          for (float item: v2)
-            item /= len;
-        }
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    len = 0.0f;
-    for (i = 0; i < size; i++)
-      len += v1[i] * v2[i];
-    return len;
   }
   private float[] getWv(int n) {
     float[] vec = new float[this.size];

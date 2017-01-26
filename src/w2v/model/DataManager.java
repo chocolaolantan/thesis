@@ -104,15 +104,16 @@ public class DataManager {
     return km.loadClust(file_path);
   }
   public boolean kMeans(int n, String save_file) {
+    boolean flag = false;
     if (km.ld()) return true;
     try {
-      km.learn(w2vm.getRandomVectors(n), w2vm.getAllVector());
-      saveC(save_file);
+      flag = km.learn(w2vm.getRandomVectors(n), w2vm.getAllVector());
+      if (flag) flag = saveC(save_file);
     } catch (Exception e) {
       e.printStackTrace();
       return false;
     }
-    return true;
+    return flag;
   }
   public boolean createC(String s_path, String file_path) {
     if (km.ld()) return true;

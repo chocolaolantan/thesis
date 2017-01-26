@@ -192,7 +192,8 @@ public class DataManager {
     try {
       File f = new File(path);
         BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-        bw.write(gWords() + ' ' + l);
+        bw.write(gWords());
+        bw.write(' ' + l);
         for (i = 0; i < gWords(); i++)
           bw.write(gWord(i) + ' ' + label[i] + '\n');
         bw.close();

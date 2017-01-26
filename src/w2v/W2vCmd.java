@@ -73,9 +73,22 @@ public class W2vCmd {
         sswf();
       else if (cmd.equals("sswf"))
         swkm();
+      else if (cmd.equals("km"))
+        km();
     }
   }
 
+  private static void km() {
+    int n;
+    String save_path;
+    boolean fl;
+    System.out.print("いくつのクラスターに分けますか？ >");
+    n = Integer.parseInt(stdIn.nextLine());
+    System.out.print("クラスタデータを保存するパスを入力してください >");
+    save_path = stdIn.nextLine();
+    fl = dm.kMeans(n, save_path);
+    if(!fl) System.out.println("失敗しました。");
+  }
   private static void sswf() {
     System.out.print("類似語関係を保存するパスを入力してください >");
     cmd = stdIn.nextLine();

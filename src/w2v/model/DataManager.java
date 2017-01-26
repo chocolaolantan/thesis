@@ -103,6 +103,17 @@ public class DataManager {
     if (km.ld()) return true;
     return km.loadClust(file_path);
   }
+  public boolean kMeans(int n, String save_file) {
+    if (km.ld()) return true;
+    try {
+      km.learn(w2vm.getRandomVectors(n), w2vm.getAllVector());
+      saveC(save_file);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
+    }
+    return true;
+  }
   public boolean createC(String s_path, String file_path) {
     if (km.ld()) return true;
     km.learn(grvS(sSWf(s_path)), w2vm.getAllVector());
@@ -151,7 +162,6 @@ public class DataManager {
         for (i = 0; i < gWords(); i++)
           bw.write(gWord(i) + ' ' + label[i] + '\n');
         bw.close();
-      } else { return null; }
       return label;
     } catch (Exception e) {
       e.printStackTrace();

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Arrays;
+import java.util.Random;
 
 public class W2vModel {
   private int size;
@@ -89,6 +90,27 @@ public class W2vModel {
     else return getWv(n);
   }
   protected float[][] getAllVector() { return m; }
+  protected int[] getRandomWords(int n) {
+    int a[] = new int[n];
+    Random rnd = new Random();
+
+    for(int i = 0; i < n; i++){
+      a[i] = rnd.nextInt(words)+1;
+
+      int x = a[i];
+      for( i = 0; i < n ; i++)
+        if(a[i] ==x)
+          break;
+    }
+    return a;
+  }
+  protected float[][] getRandomVectors(int n) {
+    int[] a = getRandomWords(n);
+    float[][] res = new float[n][];
+    for (int i = 0; i < n; i ++)
+      res[i] = m[a[i]];
+    return res;
+  }
 
   protected int[] getNearWordsInList(int idx, int[] list, int n) {
     if (!exm) return null;

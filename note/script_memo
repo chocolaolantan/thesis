@@ -16,7 +16,7 @@ export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 
 jar cvfm W2vCmd.jar MANIFEST.MF *
 
-export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/usr/local/lib/mecab/dic:/usr/local/lib:$LD_LIBRARY_PATH
 
 wget http://pkgs.fedoraproject.org/repo/pkgs/mecab-java/mecab-java-0.996.tar.gz
 tar vzxf mecab-java-0.996.tar.gz

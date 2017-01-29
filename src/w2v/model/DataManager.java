@@ -32,38 +32,19 @@ public class DataManager {
   public int exw(String tmp) { return w2vm.exist(tmp); }
   public String gWord(int i) { return w2vm.getWord(i); }
   public float[] gWV(int i) { return w2vm.getWordVector(i); }
-  public float d(int i1, int i2) {
-    float[] v1 = gWV(i1);
-    float[] v2 = gWV(i2);
-    float[] v = new float[v1.length];
-    float len = 0.0f;
-
-    for (int i = 0; i < v.length; i++) {
-      v[i] = v1[i] - v2[i];
-      len += v[i] * v[i];
-    }
-    len = (float)Math.sqrt(len);
-    return len;
-  }
-  public float cos(int i1, int i2) {
-    float[] v1 = gWV(i1);
-    float[] v2 = gWV(i2);
-    float[] v = new float[v1.length];
-    float len = 0.0f;
-
-    for (int i = 0; i < v.length; i++)
-      len += v1[i] * v2[i];
-
-    return len;
-  }
-  public int[] gNW(int i, int n) { return w2vm.getNearWords(i, n); }
+  public int[] gNW(int i, int n) { return w2vm.getNearWords(i, n, null); }
   public int[] gNWnS(int i, int n) {
     if(i < 0 || i > w2vm.getWords()) return null;
     int[] d = gWSi(i);
-    return w2vm.getNearWordsnS(i, n, d);
+    return w2vm.getNearWords(i, n, d);
   }
-  public float[][] gCM(int[] x, int[] y) { return w2vm.getCostMatrix(x, y); }
-  public float[][] gNCM(int[] x, int[] y) { return w2vm.getNmCostMatrix(x, y); }
+
+  public float[][] gSM(int[] x, int[] y) { return Calc.sminpMatrix(w2vm.getVectors(x), w2vm.getVectors(y)); }
+  public float[][] gNSM(int[] x, int[] y) { return Calc.sminpMatrix(Calc.centNormaliz(w2vm.getVectors(x)), Calc.centNormaliz(w2vm.getVectors(y))); }
+  public float[][] gCM(int[] x, int[] y) { return Calc.cosrMatrix(w2vm.getVectors(x), w2vm.getVectors(y)); }
+  public float[][] gNCM(int[] x, int[] y) { return Calc.cosrMatrix(Calc.centNormaliz(w2vm.getVectors(x)), Calc.centNormaliz(w2vm.getVectors(y))); }
+  public float[][] gDM(int[] x, int[] y) { return Calc.distMatrix(w2vm.getVectors(x), w2vm.getVectors(y)); }
+  public float[][] gNDM(int[] x, int[] y) { return Calc.distMatrix(Calc.centNormaliz(w2vm.getVectors(x)), Calc.centNormaliz(w2vm.getVectors(y))); }
 
   public String[] gWF(String str) { return mcm.getWmcFeature(str); }
   public String gPs(String str) { return mcm.getPspeech(str); }
@@ -98,12 +79,9 @@ public class DataManager {
     return res;
   }
 
-  public int[] gSg(int i, int n) { return w2vm.grvNm(w2vm.grv(gWSi(i)), n); }
+  public int[] gSg(int i, int n) { return w2vm.getVectorNearWords(Calc.centroid(w2vm.getVectors(gWSi(i))), n, null); }
 
-  public int[] hgln(float[][] mrx, int n) {
-    Calc clc = new Calc(mrx, n);
-    return clc.hangarian();
-  }
+  public int[] hgln(float[][] mrx, int n) { return Calc.hangarian(mrx, n); }
 
   public boolean saveC(String file_path) {
     if (!km.ld()) return false;
@@ -126,14 +104,13 @@ public class DataManager {
     }
   }
   public boolean loadC(String file_path) {
-    if (km.ld()) return true;
     return km.loadClust(file_path);
   }
   public boolean kMeans(int n, String save_file) {
     boolean flag = false;
     if (km.ld()) return true;
     try {
-      flag = km.learn(w2vm.getRandomVectors(n), w2vm.getAllVector());
+      flag = km.learn(w2vm.getVectors(w2vm.getRandomWords(n, null)), w2vm.getAllVector());
       if (flag) flag = saveC(save_file);
     } catch (Exception e) {
       e.printStackTrace();
@@ -164,7 +141,7 @@ public class DataManager {
   public int[] wIc(int i) { return km.wordsInClust(i); }
   public int[] gCw(int idx, int n) {
     int[] l = km.wordsInClust(km.wordClust(idx));
-    return w2vm.getNearWordsInList(idx, l, n);
+    return w2vm.getNearWordsInList(idx, n, l);
   }
 
   public int[] sSWf(String path) {

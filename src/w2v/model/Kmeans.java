@@ -55,6 +55,7 @@ public class Kmeans {
       f = true;
     } catch (Exception e) {
       e.printStackTrace();
+      f = false;
       return f;
     }
     return f;

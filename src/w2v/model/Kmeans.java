@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.Arrays;
 
+import w2v.calc.Calc;
+
 public class Kmeans {
   private int[] cNum;
   private int[] clust;
@@ -23,14 +25,11 @@ public class Kmeans {
     }
     do {
       g = l(grv, m);
-      len = 0.0f;
       for (int i = 0; i < grv.length; i++) {
-        for (int j = 0; j < grv[i].length; j++) {
+        for (int j = 0; j < grv[i].length; j++)
           vec[j] = grv[i][j] - g[i][j];
-          len += vec[j] * vec[j];
-        }
       }
-      len = (float)Math.sqrt(len);
+      len = Calc.len(vec);
     } while(len == 0.0f);
     f = true;
     if(f) System.out.println("学習完了。");
@@ -83,6 +82,8 @@ public class Kmeans {
     return cNum[i];
   }
   protected int allClust() { return cNum.length; }
+  protected int[] getClust() { return clust; }
+  protected int[] getCNum() { return cNum; }
   protected boolean ld() { return f; }
 
   private float[][] l(float[][] grv, float[][] m) {
@@ -102,11 +103,9 @@ public class Kmeans {
       vec = new float[m[i].length];
       mid = Float.POSITIVE_INFINITY;
       for (j = 0; j < cNum.length; j++) {
-        tmp = 0.0f;
-        for (k = 0; k < vSize; k++) {
+        for (k = 0; k < vSize; k++)
           vec[k] = m[i][k] - grv[j][k];
-          tmp += vec[k] * vec[k];
-        }
+        tmp = Calc.dist(vec, vec);
         if (mid > tmp) {
           mid = tmp;
           clust[i] = j;

@@ -160,6 +160,24 @@ public class W2vModel {
     return res;
   }
 
+  protected float[][] getCentroidVectors(int[] label, int[] cnum) {
+    if (label == null || cnum == null || label.length <= 0 || cnum.length <= 0)
+      return null;
+    int i, j;
+    float[][] res = new float[cnum.length][size];
+    for (i = 0; i < res.length; i++)
+      Arrays.fill(res[i], 0.0f);
+    for (i = 0; i < label.length; i++) {
+      if (label[i] < 0 || label[i] > res.length) continue;
+      for (j = 0; j < size; j++)
+        res[label[i]][j] += m[i][j];
+    }
+    for (i = 0; i < res.length; i++)
+      for (j = 0; j < res[i].length; j++)
+        res[i][j] /= cnum[i];
+    return res;
+  }
+
   private boolean contain(int idx, int[] d) {
     if (d == null) return false;
     for(int i = 0; i < d.length; i++)

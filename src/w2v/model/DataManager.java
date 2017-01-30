@@ -33,6 +33,7 @@ public class DataManager {
       return true;
     } catch (Exception e) {
       e.printStackTrace();
+      return false;
     }
   }
   public int gSize() { return w2vm.getSize(); }
@@ -89,8 +90,6 @@ public class DataManager {
 
   public int[] gSg(int i, int n) { return w2vm.getVectorNearWords(Calc.centroid(w2vm.getVectors(gWSi(i))), n, null); }
 
-  public int[] hgln(float[][] mrx, int n) { return Calc.hangarian(mrx, n); }
-
   public boolean saveC(String file_path) {
     if (!km.ld()) return false;
     System.out.println("書込み開始");
@@ -99,7 +98,8 @@ public class DataManager {
 
         BufferedWriter bw = new BufferedWriter(new FileWriter(f));
         bw.write(gWords());
-        bw.write(" " + km.allClust() + "\n");
+        bw.write(" ");
+        bw.write(km.allClust() + "\n");
         for (int i = 0; i < gWords(); i++)
           bw.write(gWord(i) + ' ' + km.wordClust(i) + '\n');
         bw.close();
@@ -113,6 +113,15 @@ public class DataManager {
   }
   public boolean loadC(String file_path) {
     return km.loadClust(file_path);
+  }
+  public boolean learnC() {
+    boolean flag = false;
+    try {
+      flag = km.learn(w2vm.getCentroidVectors(km.getClust(), km.getCNum()), w2vm.getAllVector());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return flag;
   }
   public boolean kMeans(int n, String save_file) {
     boolean flag = false;
@@ -130,7 +139,7 @@ public class DataManager {
     boolean flag = false;
     if (km.ld()) return true;
     try {
-      flag = km.learn(grvS(sSWf(s_path)), w2vm.getAllVector());
+      flag = km.learn(grvS(synListCreate(s_path)), w2vm.getAllVector());
       if (flag) flag = saveC(file_path);
     } catch (Exception e) {
       e.printStackTrace();
@@ -152,7 +161,7 @@ public class DataManager {
     return w2vm.getNearWordsInList(idx, n, l);
   }
 
-  public int[] sSWf(String path) {
+  public int[] synListCreate(String path) {
     int i, j, l = 0;
     int[] label = new int[gWords()];
 
@@ -162,14 +171,14 @@ public class DataManager {
 
       int[] syn = gWSi(i);
       if (syn == null || syn.length == 0) continue;
-      //System.out.println(l + " " + syn.length);
       for (j = 0; j < syn.length; j++) {
         if (syn[j] < 0 || syn[j] > label.length) continue;
         try {
           label[syn[j]] = l;
         } catch (Exception e) {
-          System.out.println("Errjava -cp ./:/lib/java/jawjaw-1.0.2.jar:/lib/java/MeCab.jar w2v/W2vCmdor : " + j + ":" + syn[j]);
+          System.out.println("Error : " + j + ":" + syn[j]);
           e.printStackTrace();
+          return null;
         }
       }
       l++;
@@ -178,12 +187,14 @@ public class DataManager {
       File f = new File(path);
         BufferedWriter bw = new BufferedWriter(new FileWriter(f));
         bw.write(gWords());
-        bw.write(' ' + l);
+        bw.write(' ');
+        bw.write(l);
         for (i = 0; i < gWords(); i++)
           bw.write(gWord(i) + ' ' + label[i] + '\n');
         bw.close();
     } catch (Exception e) {
       e.printStackTrace();
+      return null;
     }
     return label;
   }

@@ -33,99 +33,202 @@ public class W2vCmd {
       }
     }
     System.out.println("Words : " + dm.gWords() + "\tSize : " + dm.gSize());
-    while(!cmd.equals("EXIT")) {
+    while(!cmd.equals("EXIT") && !cmd.equals("exit")) {
       System.out.print("何をしますか？ >");
       cmd = stdIn.nextLine();
-      if (cmd.equals("ex"))
-        existWord();
-      else if (cmd.equals("vc"))
-        prvct();
+      if (cmd.equals("help"))
+        help();
+
       else if (cmd.equals("syn"))
         synonym();
       else if (cmd.equals("ant"))
         antonym();
-      else if (cmd.equals("wmc"))
-        getW_mc();
-      else if (cmd.equals("nwn"))
-        getnwn();
+
+      else if (cmd.equals("nw"))
+        getNW();
       else if (cmd.equals("nwns"))
-        getnwns();
+        getNWns();
+      else if (cmd.equals("cosr"))
+        cosr();
       else if (cmd.equals("dist"))
         dist();
-      else if (cmd.equals("synl"))
-        synli();
-      else if (cmd.equals("hgl"))
-        hgl();
-      else if (cmd.equals("hgln"))
-        hgln();
-      else if (cmd.equals("hglc"))
-        hglc();
-      else if (cmd.equals("hglcn"))
-        hglcn();
-      else if (cmd.equals("hgld"))
-        hgld();
-      else if (cmd.equals("hgldn"))
-        hgldn();
+      else if (cmd.equals("sminp"))
+        sminp();
+
+      else if (cmd.equals("wmc"))
+        wmc();
+      else if (cmd.equals("vc"))
+        vc();
       else if (cmd.equals("gsg"))
         gsg();
-      else if (cmd.equals("kmhgln"))
-        kmhgln();
-      else if (cmd.equals("kmhgl"))
-        kmhgl();
-      else if (cmd.equals("sc"))
-        sc();
-      else if (cmd.equals("kmc"))
-	      kmc();
-      else if (cmd.equals("kml"))
-	      kml();
-      else if (cmd.equals("sswf"))
-        sswf();
-      else if (cmd.equals("sswf"))
-        swkm();
+
       else if (cmd.equals("km"))
         km();
+      else if (cmd.equals("clsl"))
+        clsl();
+      else if (cmd.equals("slc"))
+        slc();
       else if (cmd.equals("cn"))
         cn();
+
+      else if (cmd.equals("hgl"))
+        hgl();
+      else if (cmd.equals("kmhgl"))
+        kmhgl();
     }
   }
 
-  private static void km() {
-    int n;
-    String save_path;
-    boolean fl;
-    System.out.print("いくつのクラスターに分けますか？ >");
-    n = Integer.parseInt(stdIn.nextLine());
-    System.out.print("クラスタデータを保存するパスを入力してください >");
-    save_path = stdIn.nextLine();
-    fl = dm.kMeans(n, save_path);
-    if(!fl) System.out.println("失敗しました。");
+  private static void help() {
+    System.out.println("help\t: コマンドリストを表示します。");
+    System.out.println();
+    System.out.println("syn\t: 類似語を表示します。");
+    System.out.println("ant\t: 対義語を表示します。");
+    System.out.println();
+    System.out.println("nw\t: 近傍単語を表示します。");
+    System.out.println("nwns\t: 類似語を除いた、近傍単語を表示します。");
+    System.out.println("cosr\t: 二単語のcos類似度を表示します。");
+    System.out.println("dist\t: 二単語のユークリッド距離を表示します。");
+    System.out.println("sminp\t: 二単語の内積総和を表示します。");
+    System.out.println();
+    System.out.println("wmc\t: 入力した文字列を分かち書きします。");
+    System.out.println("vc\t: 単語のベクトルを表示します。");
+    System.out.println("gsg\t: 入力単語の近傍単語グループの中心に近いものを表示します。");
+    System.out.println();
+    System.out.println("km\t: k-meansクラスタリングを行います。");
+    System.out.println("clsl\t: クラスタデータを読み込みます。");
+    System.out.println("slc\t: 類似語関係データを作成します。");
+    System.out.println("cn\t: 単語のクラスタ情報を表示します。");
+    System.out.println();
+    System.out.println("hgl\t: 近傍単語でハンガリアン法を適用する。");
+    System.out.println("kmhgl\t: クラスタ内の近傍単語でハンガリアン法を適用する。");
   }
-  private static void sswf() {
-    System.out.print("類似語関係を保存するパスを入力してください >");
-    cmd = stdIn.nextLine();
-    dm.sSWf(cmd);
-  }
-  private static void swkm() {
-    String file_path;
-    System.out.print("クラスタデータを保存するパスを入力してください >");
-    file_path = stdIn.nextLine();
-    System.out.print("類似語クラスタデータを読み込むパスを入力してください >");
-    cmd = stdIn.nextLine();
-    dm.createCl(cmd, file_path);
 
-  }
-  private static void kmc() {
-    String file_path;
-    System.out.print("クラスタデータを保存するパスを入力してください >");
-    file_path = stdIn.nextLine();
-    System.out.print("類似語クラスタデータを保存するパスを入力してください >");
+  private static void synonym() {
+    System.out.print("類似語を調べたい単語を入力してください >");
     cmd = stdIn.nextLine();
-    dm.createC(cmd, file_path);
+    int[] d = dm.gWSi(dm.exw(cmd));
+    if (d == null) {
+      System.out.println("不正な入力値です。");
+      return ;
+    }
+    for(int i: d)
+      System.out.println(i + " : " + dm.gWord(i));
   }
-  private static void kml() {
-    System.out.print("クラスタデータを読み込むパスを入力してください >");
+  private static void antonym() {
+    System.out.print("対義語を調べたい単語を入力してください >");
     cmd = stdIn.nextLine();
-    dm.loadC(cmd);
+    int[] d = dm.gWAi(dm.exw(cmd));
+    if (d == null) {
+      System.out.println("不正な入力値です。");
+      return ;
+    }
+    for(int i: d)
+      System.out.println(i + " : " + dm.gWord(i));
+  }
+
+  private static void getNW() {
+    String trg;
+    int n;
+    int[] ner;
+
+    System.out.print("近傍を調べたい単語を入力してください >");
+    trg = stdIn.nextLine();
+    System.out.print("近傍何個を調べますか？ >");
+    n = Integer.parseInt(stdIn.nextLine());
+    ner = dm.gNW(dm.exw(trg), n);
+    if (ner == null) {
+      System.out.println("不正な入力値です。");
+      return ;
+    }
+    for (int i: ner)
+      System.out.println(dm.gWord(i));
+  }
+  private static void getNWns() {
+    String trg;
+    int n;
+    int[] ner;
+
+    System.out.print("類似語を除いた近傍を調べたい単語を入力してください >");
+    trg = stdIn.nextLine();
+    System.out.print("近傍何個を調べますか？ >");
+    n = Integer.parseInt(stdIn.nextLine());
+    ner = dm.gNWnS(dm.exw(trg), n);
+    if (ner == null) {
+      System.out.println("不正な入力値です。");
+      return ;
+    }
+    for (int i: ner)
+      System.out.println(dm.gWord(i));
+  }
+  private static void cosr() {
+    int i1, i2;
+    System.out.println("調べたい単語を２つ入力してください。");
+    System.out.print("単語１　：");
+    i1 = dm.exw(stdIn.nextLine());
+    System.out.print("単語２　：");
+    i2 = dm.exw(stdIn.nextLine());
+    if (i1 < 0 || i2 < 0) {
+      System.out.println("学習データにない単語があります。");
+      return ;
+    }
+    System.out.println("Distance : " + Calc.cosr(dm.gWV(i1), dm.gWV(i2)));
+    return ;
+  }
+  private static void dist() {
+    int i1, i2;
+    System.out.println("調べたい単語を２つ入力してください。");
+    System.out.print("単語１　：");
+    i1 = dm.exw(stdIn.nextLine());
+    System.out.print("単語２　：");
+    i2 = dm.exw(stdIn.nextLine());
+    if (i1 < 0 || i2 < 0) {
+      System.out.println("学習データにない単語があります。");
+      return ;
+    }
+    System.out.println("Distance : " + Calc.dist(dm.gWV(i1), dm.gWV(i2)));
+    return ;
+  }
+  private static void sminp() {
+    int i1, i2;
+    System.out.println("調べたい単語を２つ入力してください。");
+    System.out.print("単語１　：");
+    i1 = dm.exw(stdIn.nextLine());
+    System.out.print("単語２　：");
+    i2 = dm.exw(stdIn.nextLine());
+    if (i1 < 0 || i2 < 0) {
+      System.out.println("学習データにない単語があります。");
+      return ;
+    }
+    System.out.println("Distance : " + Calc.sminp(dm.gWV(i1), dm.gWV(i2)));
+    return ;
+  }
+
+  private static void wmc() {
+    System.out.println("分かち書きしたい文字列を入力してください >");
+    cmd = stdIn.nextLine();
+    String[] res = dm.gSS(cmd);
+    System.out.println(Arrays.asList(res));
+  }
+  private static void vc() {
+    int i = 0, j;
+    float[] vec;
+
+    System.out.print("探したい単語を入力してください >");
+    cmd = stdIn.nextLine();
+    i = dm.exw(cmd);
+
+    if (i < 0)
+      System.out.printf("%s はみつかりませんでした。\n", cmd);
+    else {
+      System.out.printf("%s : %d\n", cmd, i);
+      vec = dm.gWV(i);
+      for (j = 0; j < dm.gSize(); j++) {
+        if (j % 10 == 0)
+          System.out.println();
+        System.out.printf("%f ", vec[j]);
+      }
+      System.out.println();
+    }
   }
   private static void gsg() {
     int i, n;
@@ -142,17 +245,74 @@ public class W2vCmd {
     for (int j: res)
       System.out.println(dm.gWord(j));
   }
-  private static void sc() {
-    int idx;
-    int[] res;
-    System.out.print("同一クラスタを調べたい単語を入力してください >");
+
+  private static void km() {
+    int n;
+    String save_path;
+
+    System.out.print("いくつのクラスターに分けますか？ >");
+    n = Integer.parseInt(stdIn.nextLine());
+    System.out.print("クラスタデータを保存するパスを入力してください >");
+    save_path = stdIn.nextLine();
+    if (!dm.kMeans(n, save_path))
+      System.out.println("失敗しました。");
+  }
+  private static void clsl() {
+    System.out.print("クラスタデータを読み込むパスを入力してください >");
+    cmd = stdIn.nextLine();
+    if(dm.loadC(cmd)) {
+      System.out.println("読み込みに失敗しました。");
+      return ;
+    }
+
+    System.out.println("学習を開始しますか？(y/n) >");
+    if (stdIn.nextLine().equals("y"))
+      if (dm.learnC()) {
+        System.out.print("学習データをセーブしますか？(y/n) >");
+        if (stdIn.nextLine().equals("y")) {
+          System.out.print("保存パスを入力してください >");
+          if (dm.saveC(stdIn.nextLine())) {
+            System.out.println("保存完了しました。");
+            return ;
+          } else {
+            System.out.println("保存に失敗しました。");
+            return ;
+          }
+        } else
+          return ;
+      } else {
+        System.out.println("学習に失敗しました。");
+        return;
+      }
+    return ;
+  }
+  private static void slc() {
+    int[] list;
+    System.out.print("類似語関係を保存するパスを入力してください >");
+    cmd = stdIn.nextLine();
+    list = dm.synListCreate(cmd);
+    if (list == null || list.length <= 0) {
+      System.out.println("リストの作成に失敗しました。");
+      return ;
+    }
+  }
+  private static void cn() {
+    int idx, cno, vol;
+    System.out.print("クラスタを調べたい単語を入力してください。 >");
     idx = dm.exw(stdIn.nextLine());
-    res = dm.wIc(idx);
-    System.out.println(dm.gWord(idx) + " Cluster No. " + dm.wc(idx));
-    for (int i = 0; i < res.length; i++)
-      System.out.print(dm.gWord(res[i]) + " ");
+    if (idx < 0) {
+      System.out.println("入力された単語は辞書に存在しません。");
+      return ;
+    }
+    cno = dm.wc(idx);
+    vol = dm.wsInc(cno);
+    System.out.println("No. "+ idx + "\tCluster No. " + cno + "\tVolume : " + vol);
+    int[] list = dm.gCw(idx, vol);
+    for (int i: list)
+      System.out.print(dm.gWord(i) + " ");
     System.out.println();
   }
+
   private static void hgl() {
     int i1, i2, n;
     int[] res;
@@ -167,266 +327,40 @@ public class W2vCmd {
     System.out.print("近傍何個を調べますか？");
     n = Integer.parseInt(stdIn.nextLine());
 
-    l1 = dm.gNWnS(i1, n);
-    l2 = dm.gNWnS(i2, n);
+    System.out.print("類似語は除外しますか？(y/n) >");
+    if (cmd.equals("y")) {
+      l1 = dm.gNWnS(i1, n);
+      l2 = dm.gNWnS(i2, n);
+    } else {
+      l1 = dm.gNW(i1, n);
+      l2 = dm.gNW(i2, n);
+    }
     if (l1 == null || l2 == null) {
       System.out.println("コスト行列を作成できません。");
       return ;
     }
-    res = dm.hgln(dm.gSM(l1, l2), n);
-    for (int i = 0; i < n; i++)
-      System.out.println(dm.gWord(l1[i]) + "\t-\t" + dm.gWord(l2[res[i]]));
-  }
-  private static void hgln() {
-    int i1, i2, n;
-    int[] res;
-    int[] l1;
-    int[] l2;
 
-    System.out.println("調べたい単語を２つ入力してください。");
-    System.out.print("単語１　：");
-    i1 = dm.exw(stdIn.nextLine());
-    System.out.print("単語２　：");
-    i2 = dm.exw(stdIn.nextLine());
-    System.out.print("近傍何個を調べますか？");
-    n = Integer.parseInt(stdIn.nextLine());
-
-    l1 = dm.gNWnS(i1, n);
-    l2 = dm.gNWnS(i2, n);
-    if (l1 == null || l2 == null) {
-      System.out.println("コスト行列を作成できません。");
-      return ;
+    System.out.print("コスト行列の作成にはどの指標を使いますか？(c/d/s) >");
+    if (cmd.equals("c")) {
+      System.out.print("各グループを、その中心で正規化しますか？(y/n) >");
+      if (cmd.equals("y"))
+        res = Calc.hangarian(dm.gNCM(l1, l2), n);
+      else
+        res = Calc.hangarian(dm.gCM(l1, l2), n);
+    } else if (cmd.equals("d")) {
+      System.out.print("各グループを、その中心で正規化しますか？(y/n) >");
+      if (cmd.equals("y"))
+        res = Calc.hangarian(dm.gNDM(l1, l2), n);
+      else
+        res = Calc.hangarian(dm.gDM(l1, l2), n);
+    } else {
+      System.out.print("各グループを、その中心で正規化しますか？(y/n) >");
+      if (cmd.equals("y"))
+        res = Calc.hangarian(dm.gNSM(l1, l2), n);
+      else
+        res = Calc.hangarian(dm.gSM(l1, l2), n);
     }
-    res = dm.hgln(dm.gNSM(l1, l2), n);
-    for (int i = 0; i < n; i++)
-      System.out.println(dm.gWord(l1[i]) + "\t-\t" + dm.gWord(l2[res[i]]));
-  }
-  private static void hglc() {
-    int i1, i2, n;
-    int[] res;
-    int[] l1;
-    int[] l2;
 
-    System.out.println("調べたい単語を２つ入力してください。");
-    System.out.print("単語１　：");
-    i1 = dm.exw(stdIn.nextLine());
-    System.out.print("単語２　：");
-    i2 = dm.exw(stdIn.nextLine());
-    System.out.print("近傍何個を調べますか？");
-    n = Integer.parseInt(stdIn.nextLine());
-
-    l1 = dm.gNWnS(i1, n);
-    l2 = dm.gNWnS(i2, n);
-    if (l1 == null || l2 == null) {
-      System.out.println("コスト行列を作成できません。");
-      return ;
-    }
-    res = dm.hgln(dm.gCM(l1, l2), n);
-    for (int i = 0; i < n; i++)
-      System.out.println(dm.gWord(l1[i]) + "\t-\t" + dm.gWord(l2[res[i]]));
-  }
-  private static void hglcn() {
-    int i1, i2, n;
-    int[] res;
-    int[] l1;
-    int[] l2;
-
-    System.out.println("調べたい単語を２つ入力してください。");
-    System.out.print("単語１　：");
-    i1 = dm.exw(stdIn.nextLine());
-    System.out.print("単語２　：");
-    i2 = dm.exw(stdIn.nextLine());
-    System.out.print("近傍何個を調べますか？");
-    n = Integer.parseInt(stdIn.nextLine());
-
-    l1 = dm.gNWnS(i1, n);
-    l2 = dm.gNWnS(i2, n);
-    if (l1 == null || l2 == null) {
-      System.out.println("コスト行列を作成できません。");
-      return ;
-    }
-    res = dm.hgln(dm.gNCM(l1, l2), n);
-    for (int i = 0; i < n; i++)
-      System.out.println(dm.gWord(l1[i]) + "\t-\t" + dm.gWord(l2[res[i]]));
-  }
-  private static void hgld() {
-    int i1, i2, n;
-    int[] res;
-    int[] l1;
-    int[] l2;
-
-    System.out.println("調べたい単語を２つ入力してください。");
-    System.out.print("単語１　：");
-    i1 = dm.exw(stdIn.nextLine());
-    System.out.print("単語２　：");
-    i2 = dm.exw(stdIn.nextLine());
-    System.out.print("近傍何個を調べますか？");
-    n = Integer.parseInt(stdIn.nextLine());
-
-    l1 = dm.gNWnS(i1, n);
-    l2 = dm.gNWnS(i2, n);
-    if (l1 == null || l2 == null) {
-      System.out.println("コスト行列を作成できません。");
-      return ;
-    }
-    res = dm.hgln(Calc.reverseMatrix(dm.gDM(l1, l2)), n);
-    for (int i = 0; i < n; i++)
-      System.out.println(dm.gWord(l1[i]) + "\t-\t" + dm.gWord(l2[res[i]]));
-  }
-  private static void hgldn() {
-    int i1, i2, n;
-    int[] res;
-    int[] l1;
-    int[] l2;
-
-    System.out.println("調べたい単語を２つ入力してください。");
-    System.out.print("単語１　：");
-    i1 = dm.exw(stdIn.nextLine());
-    System.out.print("単語２　：");
-    i2 = dm.exw(stdIn.nextLine());
-    System.out.print("近傍何個を調べますか？");
-    n = Integer.parseInt(stdIn.nextLine());
-
-    l1 = dm.gNWnS(i1, n);
-    l2 = dm.gNWnS(i2, n);
-    if (l1 == null || l2 == null) {
-      System.out.println("コスト行列を作成できません。");
-      return ;
-    }
-    res = dm.hgln(Calc.reverseMatrix(dm.gNDM(l1, l2)), n);
-    for (int i = 0; i < n; i++)
-      System.out.println(dm.gWord(l1[i]) + "\t-\t" + dm.gWord(l2[res[i]]));
-  }
-  private static void dist() {
-    int i;
-    System.out.println("調べたい単語を２つ入力してください。");
-    System.out.print("単語１　：");
-    i = dm.exw(stdIn.nextLine());
-    System.out.print("単語２　：");
-    System.out.println("Distance : " + Calc.dist(dm.gWV(i), dm.gWV(dm.exw(stdIn.nextLine()))));
-  }
-  private static void getnwn() {
-    String trg;
-    int n;
-    int[] ner;
-
-    System.out.print("近傍を調べたい単語を入力してください >");
-    trg = stdIn.nextLine();
-    System.out.print("近傍何個を調べますか？ >");
-    n = Integer.parseInt(stdIn.nextLine());
-    ner = dm.gNW(dm.exw(trg), n);
-    for (int i: ner)
-      System.out.println(dm.gWord(i));
-  }
-  private static void getnwns() {
-    String trg;
-    int n;
-    int[] ner;
-
-    System.out.print("類似語を除いた近傍を調べたい単語を入力してください >");
-    trg = stdIn.nextLine();
-    System.out.print("近傍何個を調べますか？ >");
-    n = Integer.parseInt(stdIn.nextLine());
-    ner = dm.gNWnS(dm.exw(trg), n);
-    for (int i: ner)
-      System.out.println(dm.gWord(i));
-  }
-
-  private static void getW_mc() {
-    System.out.println("分かち書きしたい文字列を入力してください >");
-    cmd = stdIn.nextLine();
-    String[] res = dm.gSS(cmd);
-    System.out.println(Arrays.asList(res));
-  }
-
-  private static void synonym() {
-    String target;
-    System.out.print("同意語を探したい単語を入力してください >");
-    target = stdIn.nextLine();
-    String[] syn = dm.gWS(target);
-    if (syn == null) {
-      System.out.println("不正な入力値です。");
-      return ;
-    }
-    System.out.println(Arrays.asList(syn));
-    return ;
-  }
-  private static void synli() {
-    System.out.print("類似語を調べたい単語を入力してください >");
-    cmd = stdIn.nextLine();
-    int[] d = dm.gWSi(dm.exw(cmd));
-    for(int i: d)
-      System.out.println(i + " : " + dm.gWord(i));
-  }
-  private static void antonym() {
-    String target;
-    System.out.print("反意語を探したい単語を入力してください >");
-    target = stdIn.nextLine();
-    String[] ant = dm.gWA(target);
-    if (ant == null) {
-      System.out.println("不正な入力値です。");
-      return ;
-    }
-    System.out.println(Arrays.asList(ant));
-    return ;
-  }
-
-  private static void existWord() {
-    int i = 0;
-
-    System.out.print("探したい単語を入力してください >");
-    cmd = stdIn.nextLine();
-    i = dm.exw(cmd);
-
-    if (i < 0)
-      System.out.printf("%s はみつかりませんでした。\n", cmd);
-    else
-      System.out.printf("%s は、インデックス %d にありました！！\n", cmd, i);
-  }
-
-  private static void prvct() {
-    int i = 0, j;
-    float[] vec;
-
-    System.out.print("探したい単語を入力してください >");
-    cmd = stdIn.nextLine();
-    i = dm.exw(cmd);
-
-    if (i < 0)
-      System.out.printf("%s はみつかりませんでした。\n", cmd);
-    else {
-      System.out.printf("%s : %d\n", cmd, i);
-      vec = dm.gWV(i);
-      for (j = 0; j < dm.gSize(); j++) {
-        if (j % 10 == 0) System.out.println();
-        System.out.printf("%f ", vec[j]);
-      }
-      System.out.println();
-    }
-  }
-
-  private static void kmhgln() {
-    int i1, i2, n;
-    int[] res;
-    int[] l1;
-    int[] l2;
-
-    System.out.println("調べたい単語を２つ入力してください。");
-    System.out.print("単語１　：");
-    i1 = dm.exw(stdIn.nextLine());
-    System.out.print("単語２　：");
-    i2 = dm.exw(stdIn.nextLine());
-    System.out.print("近傍何個を調べますか？");
-    n = Integer.parseInt(stdIn.nextLine());
-
-    if (n > dm.wsInc(dm.wc(i1)) || n > dm.wsInc(dm.wc(i2)) || n < 0) {
-      System.out.println("nのサイズが適切ではありません。");
-      System.out.println("i1 : " + dm.wsInc(dm.wc(i1)) + "\ti2 : " + dm.wsInc(dm.wc(i2)));
-      return ;
-    }
-    l1 = dm.gCw(i1, n);
-    l2 = dm.gCw(i2, n);
-    res = dm.hgln(dm.gNCM(l1, l2), n);
     for (int i = 0; i < n; i++)
       System.out.println(dm.gWord(l1[i]) + "\t-\t" + dm.gWord(l2[res[i]]));
   }
@@ -441,7 +375,7 @@ public class W2vCmd {
     i1 = dm.exw(stdIn.nextLine());
     System.out.print("単語２　：");
     i2 = dm.exw(stdIn.nextLine());
-    System.out.print("近傍何個を調べますか？");
+    System.out.print("それぞれのクラスタの近傍何個を調べますか？");
     n = Integer.parseInt(stdIn.nextLine());
 
     if (n > dm.wsInc(dm.wc(i1)) || n > dm.wsInc(dm.wc(i2)) || n < 0) {
@@ -451,18 +385,33 @@ public class W2vCmd {
     }
     l1 = dm.gCw(i1, n);
     l2 = dm.gCw(i2, n);
-    res = dm.hgln(dm.gCM(l1, l2), n);
+    if (l1 == null || l2 == null) {
+      System.out.println("コスト行列を作成できません。");
+      return ;
+    }
+
+    System.out.print("コスト行列の作成にはどの指標を使いますか？(c/d/s) >");
+    if (cmd.equals("c")) {
+      System.out.print("各グループを、その中心で正規化しますか？(y/n) >");
+      if (cmd.equals("y"))
+        res = Calc.hangarian(dm.gNCM(l1, l2), n);
+      else
+        res = Calc.hangarian(dm.gCM(l1, l2), n);
+    } else if (cmd.equals("d")) {
+      System.out.print("各グループを、その中心で正規化しますか？(y/n) >");
+      if (cmd.equals("y"))
+        res = Calc.hangarian(dm.gNDM(l1, l2), n);
+      else
+        res = Calc.hangarian(dm.gDM(l1, l2), n);
+    } else {
+      System.out.print("各グループを、その中心で正規化しますか？(y/n) >");
+      if (cmd.equals("y"))
+        res = Calc.hangarian(dm.gNSM(l1, l2), n);
+      else
+        res = Calc.hangarian(dm.gSM(l1, l2), n);
+    }
+
     for (int i = 0; i < n; i++)
       System.out.println(dm.gWord(l1[i]) + "\t-\t" + dm.gWord(l2[res[i]]));
-  }
-  private static void cn() {
-    int idx;
-    System.out.print("所属クラスタを調べたい単語を入力してください。 >");
-    idx = dm.exw(stdIn.nextLine());
-    System.out.println("No. " + dm.wc(idx) + "\tVolume : " + dm.wsInc(dm.wc(idx)));
-    int[] list = dm.gCw(idx, dm.wsInc(dm.wc(idx)));
-    for (int i = 0; i < list.length; i++)
-      System.out.print(dm.gWord(list[i]) + " ");
-    System.out.println();
   }
 }

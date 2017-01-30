@@ -27,11 +27,18 @@ public class Calc {
   public static float min(float a, float b) {
     return (a < b) ? a: b;
   }
+  public static float sminp(float[] v1, float[] v2) {
+    if (v1 == null || v2 == null || v1.length <= 0 || v2.length <= 0) return 0.0f;
+    float[] v = new float[v1.length];
+    float len = 0.0f;
+
+    for (int i = 0; i < v.length; i++)
+      len += v1[i] * v2[i];
+    return len;
+  }
   public static float len(float[] v) {
     if (v == null || v.length <= 0) return 0.0f;
-    float len = 0.0f;
-    for (int i = 0; i < v.length; i++)
-      len += v[i] * v[i];
+    float len = sminp(v, v);
     return (float)Math.sqrt(len);
   }
   public static float[] toOne(float[] v) {
@@ -42,16 +49,6 @@ public class Calc {
     return v;
   }
 
-  public static float sminp(float[] v1, float[] v2) {
-    if (v1 == null || v2 == null || v1.length <= 0 || v2.length <= 0) return 0.0f;
-    float[] v = new float[v1.length];
-    float len = 0.0f;
-
-    for (int i = 0; i < v.length; i++)
-      len += v1[i] * v2[i];
-    return len;
-
-  }
   public static float dist(float[] v1, float[] v2) {
     if (v1 == null || v2 == null || v1.length <= 0 || v2.length <= 0) return 0.0f;
     float[] v = new float[v1.length];

@@ -1,6 +1,7 @@
 package w2v;
 
 import w2v.model.DataManager;
+import w2v.calc.Calc;
 
 import java.io.File;
 import java.util.Arrays;
@@ -57,6 +58,14 @@ public class W2vCmd {
         hgl();
       else if (cmd.equals("hgln"))
         hgln();
+      else if (cmd.equals("hglc"))
+        hglc();
+      else if (cmd.equals("hglcn"))
+        hglcn();
+      else if (cmd.equals("hgld"))
+        hgld();
+      else if (cmd.equals("hgldn"))
+        hgldn();
       else if (cmd.equals("gsg"))
         gsg();
       else if (cmd.equals("kmhgln"))
@@ -160,7 +169,11 @@ public class W2vCmd {
 
     l1 = dm.gNWnS(i1, n);
     l2 = dm.gNWnS(i2, n);
-    res = dm.hgln(dm.gCM(l1, l2), n);
+    if (l1 == null || l2 == null) {
+      System.out.println("コスト行列を作成できません。");
+      return ;
+    }
+    res = dm.hgln(dm.gSM(l1, l2), n);
     for (int i = 0; i < n; i++)
       System.out.println(dm.gWord(l1[i]) + "\t-\t" + dm.gWord(l2[res[i]]));
   }
@@ -180,7 +193,107 @@ public class W2vCmd {
 
     l1 = dm.gNWnS(i1, n);
     l2 = dm.gNWnS(i2, n);
+    if (l1 == null || l2 == null) {
+      System.out.println("コスト行列を作成できません。");
+      return ;
+    }
+    res = dm.hgln(dm.gNSM(l1, l2), n);
+    for (int i = 0; i < n; i++)
+      System.out.println(dm.gWord(l1[i]) + "\t-\t" + dm.gWord(l2[res[i]]));
+  }
+  private static void hglc() {
+    int i1, i2, n;
+    int[] res;
+    int[] l1;
+    int[] l2;
+
+    System.out.println("調べたい単語を２つ入力してください。");
+    System.out.print("単語１　：");
+    i1 = dm.exw(stdIn.nextLine());
+    System.out.print("単語２　：");
+    i2 = dm.exw(stdIn.nextLine());
+    System.out.print("近傍何個を調べますか？");
+    n = Integer.parseInt(stdIn.nextLine());
+
+    l1 = dm.gNWnS(i1, n);
+    l2 = dm.gNWnS(i2, n);
+    if (l1 == null || l2 == null) {
+      System.out.println("コスト行列を作成できません。");
+      return ;
+    }
+    res = dm.hgln(dm.gCM(l1, l2), n);
+    for (int i = 0; i < n; i++)
+      System.out.println(dm.gWord(l1[i]) + "\t-\t" + dm.gWord(l2[res[i]]));
+  }
+  private static void hglcn() {
+    int i1, i2, n;
+    int[] res;
+    int[] l1;
+    int[] l2;
+
+    System.out.println("調べたい単語を２つ入力してください。");
+    System.out.print("単語１　：");
+    i1 = dm.exw(stdIn.nextLine());
+    System.out.print("単語２　：");
+    i2 = dm.exw(stdIn.nextLine());
+    System.out.print("近傍何個を調べますか？");
+    n = Integer.parseInt(stdIn.nextLine());
+
+    l1 = dm.gNWnS(i1, n);
+    l2 = dm.gNWnS(i2, n);
+    if (l1 == null || l2 == null) {
+      System.out.println("コスト行列を作成できません。");
+      return ;
+    }
     res = dm.hgln(dm.gNCM(l1, l2), n);
+    for (int i = 0; i < n; i++)
+      System.out.println(dm.gWord(l1[i]) + "\t-\t" + dm.gWord(l2[res[i]]));
+  }
+  private static void hgld() {
+    int i1, i2, n;
+    int[] res;
+    int[] l1;
+    int[] l2;
+
+    System.out.println("調べたい単語を２つ入力してください。");
+    System.out.print("単語１　：");
+    i1 = dm.exw(stdIn.nextLine());
+    System.out.print("単語２　：");
+    i2 = dm.exw(stdIn.nextLine());
+    System.out.print("近傍何個を調べますか？");
+    n = Integer.parseInt(stdIn.nextLine());
+
+    l1 = dm.gNWnS(i1, n);
+    l2 = dm.gNWnS(i2, n);
+    if (l1 == null || l2 == null) {
+      System.out.println("コスト行列を作成できません。");
+      return ;
+    }
+    res = dm.hgln(Calc.reverseMatrix(dm.gDM(l1, l2)), n);
+    for (int i = 0; i < n; i++)
+      System.out.println(dm.gWord(l1[i]) + "\t-\t" + dm.gWord(l2[res[i]]));
+  }
+  private static void hgldn() {
+    int i1, i2, n;
+    int[] res;
+    int[] l1;
+    int[] l2;
+
+    System.out.println("調べたい単語を２つ入力してください。");
+    System.out.print("単語１　：");
+    i1 = dm.exw(stdIn.nextLine());
+    System.out.print("単語２　：");
+    i2 = dm.exw(stdIn.nextLine());
+    System.out.print("近傍何個を調べますか？");
+    n = Integer.parseInt(stdIn.nextLine());
+
+    l1 = dm.gNWnS(i1, n);
+    l2 = dm.gNWnS(i2, n);
+    if (l1 == null || l2 == null) {
+      System.out.println("コスト行列を作成できません。");
+      return ;
+    }
+    res = dm.hgln(Calc.reverseMatrix(dm.gNDM(l1, l2)), n);
     for (int i = 0; i < n; i++)
       System.out.println(dm.gWord(l1[i]) + "\t-\t" + dm.gWord(l2[res[i]]));
   }
@@ -190,7 +303,7 @@ public class W2vCmd {
     System.out.print("単語１　：");
     i = dm.exw(stdIn.nextLine());
     System.out.print("単語２　：");
-    System.out.println("Distance : " + dm.d(i, dm.exw(stdIn.nextLine())));
+    System.out.println("Distance : " + Calc.dist(dm.gWV(i), dm.gWV(dm.exw(stdIn.nextLine()))));
   }
   private static void getnwn() {
     String trg;

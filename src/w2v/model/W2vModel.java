@@ -22,7 +22,6 @@ public class W2vModel {
     String[] st;
     String line = "";
     int i, j;
-    float len;
     float[] vec;
     this.f = f;
 
@@ -46,14 +45,8 @@ public class W2vModel {
         st = line.split(" ");
         vocab[i] = st[0];
         if (exm) {
-          len = 0.0f;
-          for (j = 0; j < size; j++) {
-            m[i][j] = Float.parseFloat(st[j+1]);
-            len += m[i][j] * m[i][j];
-          }
-          len = (float)Math.sqrt(len);
           for (j = 0; j < size; j++)
-            m[i][j] /= len;
+            m[i][j] = Float.parseFloat(st[j+1]);
         }
         i++;
       }
@@ -175,7 +168,6 @@ public class W2vModel {
   }
   private float[] getWv(int n) {
     float[] vec = new float[this.size];
-    float len = 0.0f;
     int i, j;
 
     BufferedReader br;
@@ -197,9 +189,6 @@ public class W2vModel {
     } catch (Exception e) {
         e.printStackTrace();
     }
-    len = Calc.len(vec);
-    for (float item: vec)
-      item /= len;
     return vec;
   }
 
@@ -215,7 +204,7 @@ public class W2vModel {
 
     for (j = 0; j < words; j++) {
       if (j == i || contain(j, d)) continue;
-      sig = Calc.sminp(base, m[j]);
+      sig = Calc.cosr(base, Calc.toOne(m[j]));
       for (k = 0; k < n; k++) {
         if (sig > best[k]) {
           for (l = n - 1; l > k; l--) {
@@ -241,7 +230,7 @@ public class W2vModel {
     Arrays.fill(best, 0.0f);
 
     for (j = 0; j < words; j++) {
-      sig = Calc.sminp(base, m[j]);
+      sig = Calc.cosr(base, m[j]);
       for (k = 0; k < n; k++) {
         if (sig > best[k]) {
           for (l = n - 1; l > k; l--) {
@@ -285,11 +274,7 @@ public class W2vModel {
         for (k = 0; k < size; k++)
           target[k] = Float.parseFloat(st[k+1]);
 
-        sig = Calc.len(target);
-        for (k = 0; k < size; k++)
-          target[k] /= sig;
-
-        sig = Calc.sminp(base, target);
+        sig = Calc.cosr(base, target);
         for (k = 0; k < n; k++) {
           if (sig > best[k]) {
             for (l = n - 1; l > k; l--) {
@@ -338,10 +323,7 @@ public class W2vModel {
 
         for (k = 0; k < size; k++)
           target[k] = Float.parseFloat(st[k+1]);
-        sig = Calc.len(target);
-        for (k = 0; k < size; k++)
-          target[k] /= sig;
-        sig = Calc.sminp(base, target);
+        sig = Calc.cosr(base, target);
         for (k = 0; k < n; k++) {
           if (sig > best[k]) {
             for (l = n - 1; l > k; l--) {

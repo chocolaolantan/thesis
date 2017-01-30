@@ -34,6 +34,13 @@ public class Calc {
       len += v[i] * v[i];
     return (float)Math.sqrt(len);
   }
+  public static float[] toOne(float[] v) {
+    if (v == null || v.length <= 0) return null;
+    float len = len(v);
+    for (int i = 0; i < v.length; i++)
+      v[i] /= len;
+    return v;
+  }
 
   public static float sminp(float[] v1, float[] v2) {
     if (v1 == null || v2 == null || v1.length <= 0 || v2.length <= 0) return 0.0f;
@@ -88,9 +95,11 @@ public class Calc {
 
   public static float[][] reverseMatrix(float[][] v) {
     float[][] res = new float[v.length][];
-    for (int i = 0; i < v.length; i++)
+    for (int i = 0; i < v.length; i++) {
+      res[i] = new float[v[i].length];
       for (int j = 0; j < v[i].length; j++)
         res[i][j] = -v[i][j];
+    }
     return res;
   }
 

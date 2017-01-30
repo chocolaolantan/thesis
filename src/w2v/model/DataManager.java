@@ -27,6 +27,14 @@ public class DataManager {
     }
   }
 
+  public boolean setW2vm(File f) {
+    try {
+      this.w2vm = new W2vModel(f);
+      return true;
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
   public int gSize() { return w2vm.getSize(); }
   public int gWords() { return w2vm.getWords(); }
   public int exw(String tmp) { return w2vm.exist(tmp); }

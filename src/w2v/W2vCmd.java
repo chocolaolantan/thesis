@@ -75,6 +75,10 @@ public class W2vCmd {
         hgl();
       else if (cmd.equals("kmhgl"))
         kmhgl();
+      else if (cmd.equals("hglt"))
+        hglt();
+      else if (cmd.equals("kmhglt"))
+        kmhglt();
     }
   }
 
@@ -101,6 +105,9 @@ public class W2vCmd {
     System.out.println();
     System.out.println("hgl\t: 近傍単語でハンガリアン法を適用する。");
     System.out.println("kmhgl\t: クラスタ内の近傍単語でハンガリアン法を適用する。");
+    System.out.println("hglt\t: 近傍単語でハンガリアン法を適用する。(テストモード)");
+    System.out.println("kmhglt\t: クラスタ内の近傍単語でハンガリアン法を適用する。(テストモード)");
+
   }
 
   private static void synonym() {
@@ -220,8 +227,8 @@ public class W2vCmd {
     if (i < 0)
       System.out.printf("%s はみつかりませんでした。\n", cmd);
     else {
-      System.out.printf("%s : %d\n", cmd, i);
       vec = dm.gWV(i);
+      System.out.printf("%s : %d\tLength : %f\n", cmd, i, Calc.len(vec));
       for (j = 0; j < dm.gSize(); j++) {
         if (j % 10 == 0)
           System.out.println();
@@ -328,7 +335,7 @@ public class W2vCmd {
     n = Integer.parseInt(stdIn.nextLine());
 
     System.out.print("類似語は除外しますか？(y/n) >");
-    if (cmd.equals("y")) {
+    if (stdIn.nextLine().equals("y")) {
       l1 = dm.gNWnS(i1, n);
       l2 = dm.gNWnS(i2, n);
     } else {
@@ -341,24 +348,52 @@ public class W2vCmd {
     }
 
     System.out.print("コスト行列の作成にはどの指標を使いますか？(c/d/s) >");
+    cmd = stdIn.nextLine();
     if (cmd.equals("c")) {
       System.out.print("各グループを、その中心で正規化しますか？(y/n) >");
-      if (cmd.equals("y"))
-        res = Calc.hangarian(dm.gNCM(l1, l2), n);
-      else
-        res = Calc.hangarian(dm.gCM(l1, l2), n);
+      if (stdIn.nextLine().equals("y")) {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gNRCM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gNCM(l1, l2), n);
+      } else {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gRCM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gCM(l1, l2), n);
+      }
     } else if (cmd.equals("d")) {
       System.out.print("各グループを、その中心で正規化しますか？(y/n) >");
-      if (cmd.equals("y"))
-        res = Calc.hangarian(dm.gNDM(l1, l2), n);
-      else
-        res = Calc.hangarian(dm.gDM(l1, l2), n);
+      if (stdIn.nextLine().equals("y")) {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gNRDM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gNDM(l1, l2), n);
+      } else {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gRDM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gDM(l1, l2), n);
+      }
     } else {
       System.out.print("各グループを、その中心で正規化しますか？(y/n) >");
-      if (cmd.equals("y"))
-        res = Calc.hangarian(dm.gNSM(l1, l2), n);
-      else
-        res = Calc.hangarian(dm.gSM(l1, l2), n);
+      if (stdIn.nextLine().equals("y")) {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gNRSM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gNSM(l1, l2), n);
+      } else {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gRSM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gSM(l1, l2), n);
+      }
     }
 
     for (int i = 0; i < n; i++)
@@ -391,27 +426,212 @@ public class W2vCmd {
     }
 
     System.out.print("コスト行列の作成にはどの指標を使いますか？(c/d/s) >");
+    cmd = stdIn.nextLine();
     if (cmd.equals("c")) {
       System.out.print("各グループを、その中心で正規化しますか？(y/n) >");
-      if (cmd.equals("y"))
-        res = Calc.hangarian(dm.gNCM(l1, l2), n);
-      else
-        res = Calc.hangarian(dm.gCM(l1, l2), n);
+      if (stdIn.nextLine().equals("y")) {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gNRCM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gNCM(l1, l2), n);
+      } else {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gRCM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gCM(l1, l2), n);
+      }
     } else if (cmd.equals("d")) {
       System.out.print("各グループを、その中心で正規化しますか？(y/n) >");
-      if (cmd.equals("y"))
-        res = Calc.hangarian(dm.gNDM(l1, l2), n);
-      else
-        res = Calc.hangarian(dm.gDM(l1, l2), n);
+      if (stdIn.nextLine().equals("y")) {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gNRDM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gNDM(l1, l2), n);
+      } else {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gRDM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gDM(l1, l2), n);
+      }
     } else {
       System.out.print("各グループを、その中心で正規化しますか？(y/n) >");
-      if (cmd.equals("y"))
-        res = Calc.hangarian(dm.gNSM(l1, l2), n);
-      else
-        res = Calc.hangarian(dm.gSM(l1, l2), n);
+      if (stdIn.nextLine().equals("y")) {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gNRSM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gNSM(l1, l2), n);
+      } else {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gRSM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gSM(l1, l2), n);
+      }
     }
 
     for (int i = 0; i < n; i++)
       System.out.println(dm.gWord(l1[i]) + "\t-\t" + dm.gWord(l2[res[i]]));
+  }
+  private static void hglt() {
+    int i1, i2, n;
+    int[] res;
+    int[] l1;
+    int[] l2;
+
+    System.out.println("調べたい単語を２つ入力してください。");
+    System.out.print("単語１　：");
+    i1 = dm.exw(stdIn.nextLine());
+    System.out.print("単語２　：");
+    i2 = dm.exw(stdIn.nextLine());
+    System.out.print("近傍何個を調べますか？");
+    n = Integer.parseInt(stdIn.nextLine());
+
+    System.out.print("類似語は除外しますか？(y/n) >");
+    if (stdIn.nextLine().equals("y")) {
+      l1 = dm.gNWnS(i1, n);
+      l2 = dm.gNWnS(i2, n);
+    } else {
+      l1 = dm.gNW(i1, n);
+      l2 = dm.gNW(i2, n);
+    }
+    if (l1 == null || l2 == null) {
+      System.out.println("コスト行列を作成できません。");
+      return ;
+    }
+
+    System.out.print("コスト行列の作成にはどの指標を使いますか？(c/d/s) >");
+    cmd = stdIn.nextLine();
+    if (cmd.equals("c")) {
+      System.out.print("各グループを、その中心で正規化しますか？(y/n) >");
+      if (stdIn.nextLine().equals("y")) {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gNRCM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gNCM(l1, l2), n);
+      } else {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gRCM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gCM(l1, l2), n);
+      }
+    } else if (cmd.equals("d")) {
+      System.out.print("各グループを、その中心で正規化しますか？(y/n) >");
+      if (stdIn.nextLine().equals("y")) {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gNRDM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gNDM(l1, l2), n);
+      } else {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gRDM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gDM(l1, l2), n);
+      }
+    } else {
+      System.out.print("各グループを、その中心で正規化しますか？(y/n) >");
+      if (stdIn.nextLine().equals("y")) {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gNRSM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gNSM(l1, l2), n);
+      } else {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gRSM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gSM(l1, l2), n);
+      }
+    }
+
+    for (int i = 0; i < n; i++)
+      System.out.println(dm.gWord(l2[res[i]]));
+  }
+  private static void kmhglt() {
+    int i1, i2, n;
+    int[] res;
+    int[] l1;
+    int[] l2;
+
+    System.out.println("調べたい単語を２つ入力してください。");
+    System.out.print("単語１　：");
+    i1 = dm.exw(stdIn.nextLine());
+    System.out.print("単語２　：");
+    i2 = dm.exw(stdIn.nextLine());
+    System.out.print("それぞれのクラスタの近傍何個を調べますか？");
+    n = Integer.parseInt(stdIn.nextLine());
+
+    if (n > dm.wsInc(dm.wc(i1)) || n > dm.wsInc(dm.wc(i2)) || n < 0) {
+      System.out.println("nのサイズが適切ではありません。");
+      System.out.println("i1 : " + dm.wsInc(dm.wc(i1)) + "\ti2 : " + dm.wsInc(dm.wc(i2)));
+      return ;
+    }
+    l1 = dm.gCw(i1, n);
+    l2 = dm.gCw(i2, n);
+    if (l1 == null || l2 == null) {
+      System.out.println("コスト行列を作成できません。");
+      return ;
+    }
+
+    System.out.print("コスト行列の作成にはどの指標を使いますか？(c/d/s) >");
+    cmd = stdIn.nextLine();
+    if (cmd.equals("c")) {
+      System.out.print("各グループを、その中心で正規化しますか？(y/n) >");
+      if (stdIn.nextLine().equals("y")) {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gNRCM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gNCM(l1, l2), n);
+      } else {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gRCM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gCM(l1, l2), n);
+      }
+    } else if (cmd.equals("d")) {
+      System.out.print("各グループを、その中心で正規化しますか？(y/n) >");
+      if (stdIn.nextLine().equals("y")) {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gNRDM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gNDM(l1, l2), n);
+      } else {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gRDM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gDM(l1, l2), n);
+      }
+    } else {
+      System.out.print("各グループを、その中心で正規化しますか？(y/n) >");
+      if (stdIn.nextLine().equals("y")) {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gNRSM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gNSM(l1, l2), n);
+      } else {
+        System.out.print("最小の組み合わせを求めますか？(y/n) >");
+        if (stdIn.nextLine().equals("y"))
+          res = Calc.hangarian(dm.gRSM(l1, l2), n);
+        else
+          res = Calc.hangarian(dm.gSM(l1, l2), n);
+      }
+    }
+
+    for (int i = 0; i < n; i++)
+      System.out.println(dm.gWord(l2[res[i]]));
   }
 }

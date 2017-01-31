@@ -211,6 +211,7 @@ public class W2vModel {
   }
 
   private int[] gNWm(int i, int n, int[] d) {
+    if (i < 0 || i > words) return null;
     int j, k, l;
     int[] ans = new int[n];
     float[] base = m[i];
@@ -264,6 +265,7 @@ public class W2vModel {
     return ans;
   }
   private int[] gNWnm(int i, int n, int[] d) {
+    if (i < 0 || i > words) return null;
     int j, k, l;
     int[] ans = new int[n];
     float[] base = getWv(i);

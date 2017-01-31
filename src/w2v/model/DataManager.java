@@ -55,6 +55,13 @@ public class DataManager {
   public float[][] gDM(int[] x, int[] y) { return Calc.distMatrix(w2vm.getVectors(x), w2vm.getVectors(y)); }
   public float[][] gNDM(int[] x, int[] y) { return Calc.distMatrix(Calc.centNormaliz(w2vm.getVectors(x)), Calc.centNormaliz(w2vm.getVectors(y))); }
 
+  public float[][] gRSM(int[] x, int[] y) { return Calc.reverseMatrix(gSM(x, y)); }
+  public float[][] gNRSM(int[] x, int[] y) { return Calc.reverseMatrix(gNSM(x, y)); }
+  public float[][] gRCM(int[] x, int[] y) { return Calc.reverseMatrix(gCM(x, y)); }
+  public float[][] gNRCM(int[] x, int[] y) { return Calc.reverseMatrix(gNCM(x, y)); }
+  public float[][] gRDM(int[] x, int[] y) { return Calc.reverseMatrix(gDM(x, y)); }
+  public float[][] gNRDM(int[] x, int[] y) { return Calc.reverseMatrix(gNDM(x, y)); }
+
   public String[] gWF(String str) { return mcm.getWmcFeature(str); }
   public String gPs(String str) { return mcm.getPspeech(str); }
   public String gB(String str) { return mcm.getBform(str); }

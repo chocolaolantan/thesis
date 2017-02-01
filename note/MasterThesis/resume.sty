@@ -1,0 +1,60 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% base.sty 2006
+% updated by Shunpei Tatebaayshi at 06/02/14
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 機能
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% resume用のスタイルファイル
+% Figure・Table の caption を変更
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 余白
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textwidth = 18cm
+\textheight = 25.5cm
+\oddsidemargin = -10mm
+\evensidemargin = 25mm
+\topmargin = -1.5cm
+\columnsep = 1cm
+\headheight = 0mm
+\topskip = 0mm
+\evensidemargin = 0mm
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 表題枠
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\narrowitemizebegin}{\begin{itemize}\itemsep 0pt}
+\newcommand{\narrowenumeratebegin}{\begin{enumerate}\itemsep 0pt\parskip 0pt}
+\newtheorem{prof}{証明}
+\newtheorem{lemma}{補題}
+
+\newcommand{\MC}[1]{\multicolumn{1}{|l}{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% タイトル
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\makeftitle}[2]{
+\title{\large
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lll}\hline
+ \MC{修士論文提出者}&\MC{#1}
+  &\multicolumn{1}{|l|}
+   {コンピュータサイエンス専攻 知識ベース研究室}\\\hline
+ \MC{修士論文題名}&
+\multicolumn{2}{|l|}{#2}\\
+% \MC{}&
+%\multicolumn{2}{|l|}{#3}\\
+\hline
+\end{tabular*}}
+\author{}
+\date{}
+\maketitle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% captionの表記の変更
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \def\figurename{Fig.}
+% \def\tablename{Table.}

@@ -1,0 +1,99 @@
+This is JBibTeX, Version 0.99c-j0.33 (Web2C 7.5.2)
+The top-level auxiliary file: master_thesis.aux
+The style file: jplain.bst
+Reallocated wiz_functions (elt_size=4) to 3400 items from 0.
+Database file #1: skb.bib
+You're missing a field name---line 11 of file skb.bib
+ : 
+ : %%%%% ŽQl‘  HP?pdf %%%%%%%%%%%%
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 62 of file skb.bib
+ :  
+ :  author = "Inderjeet Mani",
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 72 of file skb.bib
+ :  
+ :  year = "1999",
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 145 of file skb.bib
+ :  
+ :  pages = "2388-2396",
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 155 of file skb.bib
+ :  
+ :  pages = "1834-1842",
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 165 of file skb.bib
+ :  
+ :  pages = "2597-2610",
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 175 of file skb.bib
+ :  
+ :  pages = "71-76",
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 185 of file skb.bib
+ :  
+ :  pages = "53-60",
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "posum_1502"
+Warning--to sort, need author or key in NTCIRhp
+Warning--to sort, need author or key in TSChp
+Warning--there's a number but no volume in cohen
+Warning--empty institution in juman
+Warning--empty institution in chasen
+Warning--there's a number but no volume in nishizawa
+Warning--there's a number but no volume in mochiduki
+Warning--there's a number but no volume in honda
+Warning--there's a number but no volume in nomoto
+Warning--there's a number but no volume in suzuki
+You've used 39 entries,
+            2620 wiz_defined-function locations,
+            794 strings with 8588 characters,
+and the built_in function-call counts, 14454 in all, are:
+= -- 1231
+> -- 451
+< -- 48
++ -- 189
+- -- 150
+* -- 720
+:= -- 2019
+add.period$ -- 115
+call.type$ -- 39
+change.case$ -- 192
+chr.to.int$ -- 0
+cite$ -- 49
+duplicate$ -- 817
+empty$ -- 1245
+format.name$ -- 225
+if$ -- 3348
+int.to.chr$ -- 0
+int.to.str$ -- 39
+missing$ -- 35
+newline$ -- 196
+num.names$ -- 74
+pop$ -- 354
+preamble$ -- 1
+purify$ -- 153
+quote$ -- 0
+skip$ -- 752
+stack$ -- 0
+substring$ -- 654
+swap$ -- 190
+text.length$ -- 48
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 146
+warning$ -- 10
+while$ -- 115
+width$ -- 41
+write$ -- 416
+is.kanji.str$ -- 392
+(There were 8 error messages)

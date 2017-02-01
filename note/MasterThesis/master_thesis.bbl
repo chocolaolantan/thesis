@@ -1,0 +1,207 @@
+\begin{thebibliography}{10}
+
+\bibitem{NTCIRhp}
+{{NTCIR} 情報検索システム評価用テストコレクション構築プロジェクト}.
+\newblock \\http://research.nii.ac.jp/ntcir/index-ja.html.
+
+\bibitem{TSChp}
+{テキスト自動要約タスク {TSC}({T}ext {S}ummarization {C}hallenge)}.
+\newblock \\http://www.lr.pi.titech.ac.jp/tsc/.
+
+\bibitem{info_extra}
+D.E. Appelt.
+\newblock {I}ntroduction to {I}nfomation {E}xtrantion {T}echnology.
+\newblock Technical report, IJCAI'99., 1999.
+
+\bibitem{text_comp}
+T.C Bell.
+\newblock {T}ext {C}ompression.
+\newblock Mcgraw-hill, New York, 1990.
+
+\bibitem{church}
+K.W. Church and P.~Hanks.
+\newblock Word association norms, mutual information, and lexicography.
+\newblock {\em Computational Linguistics}, Vol.~17, No.~1, pp. 21--48, 1997.
+
+\bibitem{mining_data}
+R.~Feldman.
+\newblock {M}ining {U}nsrtructured {D}ata.
+\newblock {\em In Tutorial for ACM SIGKDD 1999 International Conference on
+  Knowledge Discovery and Data Mining}, pp. 182--236, 1999.
+
+\bibitem{hearst}
+M~Hearst.
+\newblock Multi-paragraph segmentation of expasitory text.
+\newblock {\em Proc. Annual Meeting of the Association for Computational
+  Linguistics}, pp. 9--16, 1994.
+
+\bibitem{tt}
+M~Hearst.
+\newblock Texttiling:segmenting text into multi-paragraph subtopic passages.
+\newblock {\em Association for Conceputational Linguistics}, Vol.~23, No.~1,
+  pp. 111--112, 1997.
+
+\bibitem{cohen}
+J.Cohen.
+\newblock Highlights:languages and domain independent automatic indexing terms
+  for abstracting.
+\newblock {\em American Society for Information Science}, No.~46, pp. 162--174,
+  1995.
+
+\bibitem{info_ret}
+G.~Salton and M.J. McGill.
+\newblock {I}ntroduction to {M}odern {I}nfomation {R}etrival.
+\newblock Prentice hall, Upper Saddle River, N.J., 1983.
+
+\bibitem{vec_space}
+G.~Salton, A.~Wong, and C.~S. Yang.
+\newblock {A} vector space model for automatic indexing.
+\newblock {\em Communications of the ACM}, Vol.~18, No.~11, pp. 613--620, 1975.
+
+\bibitem{trec_8}
+E.M. Voorhees and D.~Tice.
+\newblock {T}he {TREC}-8 {Q}uestion {A}nsering {T}rack {E}valuation.
+\newblock {\em In The Eighth Text Retrieval Conference(TREC-8)Special
+  Publication}, Vol. 500-246, pp. 83--106, 1999.
+
+\bibitem{TSC}
+難波英嗣, 奥村学.
+\newblock 第2回 {NTCIR} ワークショップ
+  自動要約タスク（{TSC}）の結果および評価法の分析.
+\newblock 情報処理学会研究報告, pp. 143--150, 2001.
+
+\bibitem{text_autosum}
+奥村学, 難波英嗣.
+\newblock テキスト自動要約に関する研究動向.
+\newblock 自然言語処理学会, Vol. 6, No.6, pp. 1--26, 1999.
+
+\bibitem{okumura_recent}
+奥村学, 難波英嗣.
+\newblock テキスト自動要約に関する最近の話題.
+\newblock 自然言語処理学会, Vol. 9, No.4, pp. 97--116, 2002.
+
+\bibitem{book_yoshimura}
+吉村賢治.
+\newblock 自然言語処理の基礎.
+\newblock サイエンス社, 2000.
+
+\bibitem{book_takagi}
+高木朗, 伊東幸広著.
+\newblock 自然言語の処理.
+\newblock 丸善株式会社, 1987.
+
+\bibitem{juman}
+黒橋禎夫, 河原大輔.
+\newblock 日本語形態素解析システム『juman』version 5.1 使用説明書.
+\newblock Technical report, 2005.
+
+\bibitem{yotsutani}
+四ツ谷雅輝.
+\newblock 共起語を介した文間の相互依存関係に基づく重要文抽出法の提案.
+\newblock Master's thesis, 北海道大学大学院工学研究科, 2003.
+
+\bibitem{kudoh}
+寺島志郎, 武田一哉, 板倉文忠.
+\newblock チャンキングの段階適用による日本語係り受け解析.
+\newblock 情報処理学会論文誌, Vol.~11, No.~6, 2002.
+
+\bibitem{chasen}
+松本祐治, 北内啓, 山下達雄, 平野善隆, 松田寛, 高岡一馬, 浅原正幸.
+\newblock 日本語形態素解析システム『茶筅』version 2.2.3 使用説明書.
+\newblock Technical report, 2003.
+
+\bibitem{nishizawa}
+西沢信一郎, 中川裕志.
+\newblock 名詞の文書内頻度を利用したテキストセグメンテーション.
+\newblock 情報処理学会研究報告, No. NL-117-20, pp. 145--152, 1997.
+
+\bibitem{book_ishizaki}
+石崎俊.
+\newblock 自然言語処理.
+\newblock 照晃堂, 1999.
+
+\bibitem{oishi}
+大石亮, 松本祐治.
+\newblock 格パターン分析に基づく動詞の語彙的知識獲得.
+\newblock 情報処理学会論文誌, Vol.~36, No.~11, 1995.
+
+\bibitem{ohshima}
+大島敦史.
+\newblock
+  判例文の論理展開と文を特徴付ける語の意味的類似性に基づく法律文要約手法の検討.
+\newblock Master's thesis, 北海道大学大学院工学研究科, 2005.
+
+\bibitem{keygraph}
+大澤幸生, ネルスE.ベンソン, 谷内田正彦.
+\newblock {K}ey{G}rpah：語の共起グラフの分割・統合によるキーワード抽出.
+\newblock 電子情報通信学会論文誌, Vol. J82-D-1, No.~2, pp. 391--400, 1999.
+
+\bibitem{namba_02}
+難波秀嗣, 奥村学.
+\newblock 複数の要約率の重要文データを用いた要約評価方法.
+\newblock 言語処理学会第８回年次大会, pp. 559--562, 2002.
+
+\bibitem{xuj}
+平尾努, 北内啓, 木谷強.
+\newblock {Q}uery {E}xpansion {U}sing {L}ocal and {G}lobal {D}ocument
+  {A}nalysis.
+\newblock {\em proseedings of the 19th ACM SIGIR}, pp. 4--11, 1996.
+
+\bibitem{hirao}
+平尾努, 北内啓, 木谷強.
+\newblock 語彙的結束性と単語重要度に基づくテキストセグメンテーション.
+\newblock 情報処理学会論文誌, Vol.~41, No. SIG03, pp. 24--36, 2000.
+
+\bibitem{Posum}
+望月減.
+\newblock テキスト簡易要約器 posum version 1.50.2 マニュアル.
+\newblock {\em JAIST Technical Memorandum}, Vol. IS-TM-2002-002, , January
+  2002.
+
+\bibitem{info_ret_sum}
+望月減, 奥村学.
+\newblock 情報検索タスクに基づいた評価による要約手法の比較.
+\newblock 情報処理学会自然言語処理研究会報告, Vol. 132-6, pp. 41--48, July
+  1997.
+
+\bibitem{term_chain_cal}
+望月減, 奥村学, 岩山真.
+\newblock 語彙結束性に基づく語彙的連鎖の計算.
+\newblock {\em JAIST Technical Memorandum}, Vol. IS-TM-2000-002, , August 2000.
+
+\bibitem{mochiduki}
+望月源, 本田岳夫, 奥村学.
+\newblock 複数の知識の組み合わせを用いたテキストセグメンテーション.
+\newblock 情報処理学会研究報告, No. NL-109-7, pp. 47--54, 1995.
+
+\bibitem{markov}
+北川敏男, 喜安善市.
+\newblock マルコフ過程.
+\newblock 共立出版, 1967.
+
+\bibitem{honda}
+本田岳夫, 奥村学.
+\newblock 語彙的結束性に基づいたテキストセグメンテーション.
+\newblock 情報処理学会研究報告, No. NL-102-4, pp. 25--32, 1994.
+
+\bibitem{book_nomura}
+野村浩郷.
+\newblock 自然言語処理の基礎技術.
+\newblock 電子情報通信学会, 1988.
+
+\bibitem{nomoto}
+野本忠司, 松本祐治.
+\newblock テキスト構造を利用した主題の推定について.
+\newblock 情報処理学会研究報告, No. NL-114, pp. 47--54, 1996.
+
+\bibitem{nomoto_2}
+野本忠司, 松本祐治.
+\newblock 人間の重要度判定に基づいた自動要約の試み.
+\newblock 情報処理学会自然言語処理研究報告会, Vol. 120, No.~11, 1997.
+
+\bibitem{suzuki}
+鈴木斉, 増山繁, 内藤昭三.
+\newblock 語の意味分類の出現傾向を考慮したキーワード抽出の試み.
+\newblock 情報処理学会研究報告, No. NL-98-10, pp. 73--80, 1993.
+
+\end{thebibliography}

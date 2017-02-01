@@ -1,0 +1,29 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces ２単語間の連接規則による形態素解析の結果}}{8}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces 句構造の例}}{10}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces テキストのグラフトポロジー}}{12}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces 照応解析の解決手順}}{13}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Yahooのニュース記事}}{17}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Text Tiling法}}{25}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Text Tiling法によるセグメンテーションの例}}{26}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces PageRankの概念図}}{28}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces ページ相互のリンク関係を表わした推移図}}{29}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces 土台($G_{a}$と$G_{b}$)と屋根ｗ）}}{34}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces 本要約システムの概要図}}{36}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces 文書内での単語共起の例}}{38}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces 共起を考慮したことによる類似度の変化}}{39}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces 話題連結キーワード}}{40}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces 単語の出現状況と中心語彙群（クリーク）}}{41}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces 出現単語による文間相互依存関係}}{42}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces 話題連結キーワードによる話題間リンクも考慮した文間の構造}}{43}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces 共起語しきい値と共起ペア数の関係}}{47}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces 共起語追加重みによる類似度グラフ変化}}{47}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces $\alpha $による平均正解率の変化}}{52}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces $\alpha =0.4$での重要文抽出結果比較}}{53}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

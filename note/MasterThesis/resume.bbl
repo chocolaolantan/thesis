@@ -1,0 +1,24 @@
+\begin{thebibliography}{1}
+
+\bibitem{TSC}
+難波英嗣, 奥村学.
+\newblock 第2回 {NTCIR} ワークショップ
+  自動要約タスク（{TSC}）の結果および評価法の分析.
+\newblock 情報処理学会研究報告, pp. 143--150, 2001.
+
+\bibitem{yotsutani}
+四ツ谷雅輝.
+\newblock 共起語を介した文間の相互依存関係に基づく重要文抽出法の提案.
+\newblock Master's thesis, 北海道大学大学院工学研究科, 2003.
+
+\bibitem{keygraph}
+大澤幸生, ネルスE.ベンソン, 谷内田正彦.
+\newblock {K}ey{G}rpah：語の共起グラフの分割・統合によるキーワード抽出.
+\newblock 電子情報通信学会論文誌, Vol. J82-D-1, No.~2, pp. 391--400, 1999.
+
+\bibitem{hirao}
+平尾努, 北内啓, 木谷強.
+\newblock 語彙的結束性と単語重要度に基づくテキストセグメンテーション.
+\newblock 情報処理学会論文誌, Vol.~41, No. SIG03, pp. 24--36, 2000.
+
+\end{thebibliography}

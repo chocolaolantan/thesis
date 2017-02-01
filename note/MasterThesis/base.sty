@@ -1,0 +1,165 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% base.sty 2006
+% updated by Shunpei Tatebaayshi at 06/02/03
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\typeout{修士論文}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 機能
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 表紙作成の簡略化
+% 関連図書 → 参考文献
+% Figure・Table の caption を変更
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 入力例
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \year{平成18年度　修士学位論文}
+
+% \title{意味的構造と文間の相互依存関係に基づく文書要約手法の提案}
+% \titleE{A Coherent Text Summarization based on Semantic Correlations between Sentences}
+
+% \author{舘林　俊平}
+% \authorE{Shunpei Tatebayashi}
+
+% \lab{北海道大学大学院 情報科学研究科\\コンピュータサイエンス専攻\\知能ソフトウェア科学講座 知識ベース研究室}
+% \labE{Graduate School of Information Science and Technology. \\Hokkaido University}
+
+% \date{2006年2月17日}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% タイトルの変更
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\maketitle{%　原稿用のタイトルを出力する命令
+  \begingroup
+     \@maketitle
+     \thispagestyle{empty}%
+  \endgroup
+}
+
+\def\@maketitle{
+  \newpage
+  \null
+  \vspace{20pt}
+  \@ifundefined{@year}{}{
+    \begin{center}      % 年度は LARGE
+      \LARGE			
+      \@year
+      \gdef\@year{}
+    \end{center}
+  }
+
+  \vspace{40pt} % year と タイトルの間のスペース
+
+  \begin{center}
+    {\LARGE \@title \par}%	タイトルは LARGE で
+  \end{center}%
+
+
+ \@ifundefined{@titleE}{}{%
+   \begin{center}
+      \Large
+      \@titleE
+      \gdef
+      \@titleE{} % 英語タイトルは Large で
+   \end{center}%
+  }
+ 
+ \vspace{90pt} % タイトルと著者名の間のスペース
+ 
+ \begin{center}
+   {\Large          % 著者名は Large で
+    \begin{tabular}[t]{c}\@author 
+    \end{tabular}\par}
+  \end{center}
+  \vspace{-10pt}
+
+  \@ifundefined{@authorE}{}{%
+    \begin{center}
+      \large        % 著者名(英語)は large で	
+      \@authorE
+      \gdef\@authorE{}
+    \end{center}
+  }
+
+    \vspace{20pt}% 著者名と所属研究室の間のスペース
+    
+  \@ifundefined{@lab}{}{%
+    \begin{center}
+      \Large    % 所属研究室は Large で	
+      \@lab
+      \gdef\@lab{}
+    \end{center}
+    \vspace{-5pt}
+  }
+
+  \@ifundefined{@labE}{}{%
+    \begin{center}
+      \large%		所属研究室(英語)は large で
+      \@labE%
+      \gdef\@labE{}
+    \end{center}%
+  }
+
+    \vspace{15pt}% 所属研究室と日付の間のスペース
+
+  \@ifundefined{@date}{}{
+    \begin{center}
+      \large    % 日付は large で
+      \@date
+      \gdef\@date{}
+    \end{center}
+  }
+
+}
+
+\long\def\year#1{\long\gdef\@year{#1}}%
+\long\def\titleE#1{\long\gdef\@titleE{#1}}%
+\long\def\authorE#1{\long\gdef\@authorE{#1}}%
+\long\def\lab#1{\long\gdef\@lab{#1}}%
+\long\def\labE#1{\long\gdef\@labE{#1}}%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% captionの表記の変更
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \def\figurename{Fig.}
+% \def\tablename{Table.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% captionのデザイン変更
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\long\def\@makecaption#1#2{
+	\vskip 8pt
+	\setbox\@tempboxa\hbox{\small#1. #2}
+	\ifdim \wd\@tempboxa >\hsize \unhbox\@tempboxa\par
+	\else \hbox to\hsize{\hfil\box\@tempboxa\hfil}
+\fi}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 文献リストの題名を「参考文献」にする．
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\bibname}{参考文献}  %既存の命令の定義の変更
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ルビを振れるようにする.．
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\ruby}[2]{%
+  \leavevmode
+  \setbox0=\hbox{#1}%
+  \setbox1=\hbox{\tiny #2}%
+  \ifdim\wd0>\wd1 \dimen0=\wd0 \else \dimen0=\wd1 \fi
+  \hbox{%
+    \kanjiskip=0pt plus 2fil
+    \xkanjiskip=0pt plus 2fil
+    \vbox{%
+      \hbox to \dimen0{%
+        \tiny \hfil#2\hfil}%
+      \nointerlineskip
+      \hbox to \dimen0{\mathstrut\hfil#1\hfill}}}}

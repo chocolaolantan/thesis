@@ -43,6 +43,24 @@ public class W2vCmd {
         synonym();
       else if (cmd.equals("ant"))
         antonym();
+      else if (cmd.equals("hype"))
+        hypernym();
+      else if (cmd.equals("hypo"))
+        hyponym();
+      else if (cmd.equals("holo"))
+        holonym();
+      else if (cmd.equals("mero"))
+        meronym();
+      else if (cmd.equals("dom"))
+        domain();
+      else if (cmd.equals("idom"))
+        indomains();
+      else if (cmd.equals("def"))
+        definition();
+      else if (cmd.equals("cau"))
+        causes();
+      else if (cmd.equals("sa"))
+        seealso();
 
       else if (cmd.equals("nw"))
         getNW();
@@ -87,6 +105,15 @@ public class W2vCmd {
     System.out.println();
     System.out.println("syn\t: 類似語を表示します。");
     System.out.println("ant\t: 対義語を表示します。");
+    System.out.println("hype\t: 上位語を表示します。");
+    System.out.println("hypo\t: 下位語を表示します。");
+    System.out.println("holo\t: 同義語を表示します。");
+    System.out.println("mero\t: 同義語を表示します。");
+    System.out.println("dom\t: ドメインを表示します。");
+    System.out.println("idom\t: ドメインに含まれている語を表示します。");
+    System.out.println("def\t: 定義を表示します。");
+    System.out.println("cau\t: 原因を表示します。");
+    System.out.println("sa\t: 関係がありそうな単語を表示します。");
     System.out.println();
     System.out.println("nw\t: 近傍単語を表示します。");
     System.out.println("nwns\t: 類似語を除いた、近傍単語を表示します。");
@@ -125,6 +152,105 @@ public class W2vCmd {
     System.out.print("対義語を調べたい単語を入力してください >");
     cmd = stdIn.nextLine();
     int[] d = dm.gWAi(dm.exw(cmd));
+    if (d == null) {
+      System.out.println("不正な入力値です。");
+      return ;
+    }
+    for(int i: d)
+      System.out.println(i + " : " + dm.gWord(i));
+  }
+  private static void hypernym() {
+    System.out.print("上位語を調べたい単語を入力してください >");
+    cmd = stdIn.nextLine();
+    int[] d = dm.gHpei(dm.exw(cmd));
+    if (d == null) {
+      System.out.println("不正な入力値です。");
+      return ;
+    }
+    for(int i: d)
+      System.out.println(i + " : " + dm.gWord(i));
+  }
+  private static void hyponym() {
+    System.out.print("下位語を調べたい単語を入力してください >");
+    cmd = stdIn.nextLine();
+    int[] d = dm.gHpoi(dm.exw(cmd));
+    if (d == null) {
+      System.out.println("不正な入力値です。");
+      return ;
+    }
+    for(int i: d)
+      System.out.println(i + " : " + dm.gWord(i));
+  }
+  private static void holonym() {
+    System.out.print("同義語を調べたい単語を入力してください >");
+    cmd = stdIn.nextLine();
+    int[] d = dm.gHli(dm.exw(cmd));
+    if (d == null) {
+      System.out.println("不正な入力値です。");
+      return ;
+    }
+    for(int i: d)
+      System.out.println(i + " : " + dm.gWord(i));
+  }
+  private static void meronym() {
+    System.out.print("同義語を調べたい単語を入力してください >");
+    cmd = stdIn.nextLine();
+    int[] d = dm.gMri(dm.exw(cmd));
+    if (d == null) {
+      System.out.println("不正な入力値です。");
+      return ;
+    }
+    for(int i: d)
+      System.out.println(i + " : " + dm.gWord(i));
+  }
+  private static void domain() {
+    System.out.print("ドメインを調べたい単語を入力してください >");
+    cmd = stdIn.nextLine();
+    int[] d = dm.gDoi(dm.exw(cmd));
+    if (d == null) {
+      System.out.println("不正な入力値です。");
+      return ;
+    }
+    for(int i: d)
+      System.out.println(i + " : " + dm.gWord(i));
+  }
+  private static void indomains() {
+    System.out.print("ドメインに含まれている語を調べたい単語を入力してください >");
+    cmd = stdIn.nextLine();
+    int[] d = dm.gIdi(dm.exw(cmd));
+    if (d == null) {
+      System.out.println("不正な入力値です。");
+      return ;
+    }
+    for(int i: d)
+      System.out.println(i + " : " + dm.gWord(i));
+  }
+  private static void definition() {
+    System.out.print("定義を調べたい単語を入力してください >");
+    cmd = stdIn.nextLine();
+    int[] d = dm.gDefi(dm.exw(cmd));
+    if (d == null) {
+      System.out.println("不正な入力値です。");
+      return ;
+    }
+    for(int i: d)
+      System.out.println(i + " : " + dm.gWord(i));
+  }
+  private static void causes() {
+    System.out.print("原因を調べたい単語を入力してください >");
+    cmd = stdIn.nextLine();
+    int[] d = dm.gCai(dm.exw(cmd));
+    if (d == null) {
+      System.out.println("不正な入力値です。");
+      return ;
+    }
+    for(int i: d)
+      System.out.println(i + " : " + dm.gWord(i));
+  }
+  private static void seealso() {
+    System.out.print("関係がありそうな単語を調べたい単語を入力してください >");
+    cmd = stdIn.nextLine();
+    int[] d = dm.gSAi(dm.exw(cmd));
     if (d == null) {
       System.out.println("不正な入力値です。");
       return ;

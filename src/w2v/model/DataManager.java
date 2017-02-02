@@ -94,6 +94,136 @@ public class DataManager {
       res[i] = exw(tmp[i]);
     return res;
   }
+  public String[] gHpe(String word) { return wnm.getWnHypernyms(word, gPs(word)); }
+  public int[] gHpei(int idx) {
+    int[] res;
+    String[] tmp;
+
+    if(idx < 0 || idx > w2vm.getWords()) return null;
+    tmp = gHpe(gWord(idx));
+    if (tmp == null) return null;
+    res = new int[tmp.length];
+    for (int i = 0; i < tmp.length; i++)
+      res[i] = exw(tmp[i]);
+    return res;
+  }
+  public String[] gHpo(String word) { return wnm.getWnHyponyms(word, gPs(word)); }
+  public int[] gHpoi(int idx) {
+    int[] res;
+    String[] tmp;
+
+    if(idx < 0 || idx > w2vm.getWords()) return null;
+    tmp = gHpo(gWord(idx));
+    if (tmp == null) return null;
+    res = new int[tmp.length];
+    for (int i = 0; i < tmp.length; i++)
+      res[i] = exw(tmp[i]);
+    return res;
+  }
+  public String[] gHl(String word) { return wnm.getWnHolonyms(word, gPs(word)); }
+  public int[] gHli(int idx) {
+    int[] res;
+    String[] tmp;
+
+    if(idx < 0 || idx > w2vm.getWords()) return null;
+    tmp = gHl(gWord(idx));
+    if (tmp == null) return null;
+    res = new int[tmp.length];
+    for (int i = 0; i < tmp.length; i++)
+      res[i] = exw(tmp[i]);
+    return res;
+  }
+  public String[] gDo(String word) { return wnm.getWnDomains(word, gPs(word)); }
+  public int[] gDoi(int idx) {
+    int[] res;
+    String[] tmp;
+
+    if(idx < 0 || idx > w2vm.getWords()) return null;
+    tmp = gDo(gWord(idx));
+    if (tmp == null) return null;
+    res = new int[tmp.length];
+    for (int i = 0; i < tmp.length; i++)
+      res[i] = exw(tmp[i]);
+    return res;
+  }
+  public String[] gDef(String word) { return wnm.getWnDefinitions(word, gPs(word)); }
+  public int[] gDefi(int idx) {
+    int[] res;
+    String[] tmp;
+
+    if(idx < 0 || idx > w2vm.getWords()) return null;
+    tmp = gDef(gWord(idx));
+    if (tmp == null) return null;
+    res = new int[tmp.length];
+    for (int i = 0; i < tmp.length; i++)
+      res[i] = exw(tmp[i]);
+    return res;
+  }
+  public String[] gCa(String word) { return wnm.getWnCauses(word, gPs(word)); }
+  public int[] gCai(int idx) {
+    int[] res;
+    String[] tmp;
+
+    if(idx < 0 || idx > w2vm.getWords()) return null;
+    tmp = gCa(gWord(idx));
+    if (tmp == null) return null;
+    res = new int[tmp.length];
+    for (int i = 0; i < tmp.length; i++)
+      res[i] = exw(tmp[i]);
+    return res;
+  }
+  public String[] gTr(String word) { return wnm.getWnTranslations(word, gPs(word)); }
+  public int[] gTri(int idx) {
+    int[] res;
+    String[] tmp;
+
+    if(idx < 0 || idx > w2vm.getWords()) return null;
+    tmp = gTr(gWord(idx));
+    if (tmp == null) return null;
+    res = new int[tmp.length];
+    for (int i = 0; i < tmp.length; i++)
+      res[i] = exw(tmp[i]);
+    return res;
+  }
+  public String[] gId(String word) { return wnm.getWnInDomains(word, gPs(word)); }
+  public int[] gIdi(int idx) {
+    int[] res;
+    String[] tmp;
+
+    if(idx < 0 || idx > w2vm.getWords()) return null;
+    tmp = gId(gWord(idx));
+    if (tmp == null) return null;
+    res = new int[tmp.length];
+    for (int i = 0; i < tmp.length; i++)
+      res[i] = exw(tmp[i]);
+    return res;
+  }
+  public String[] gMr(String word) { return wnm.getWnMeronyms(word, gPs(word)); }
+  public int[] gMri(int idx) {
+    int[] res;
+    String[] tmp;
+
+    if(idx < 0 || idx > w2vm.getWords()) return null;
+    tmp = gMr(gWord(idx));
+    if (tmp == null) return null;
+    res = new int[tmp.length];
+    for (int i = 0; i < tmp.length; i++)
+      res[i] = exw(tmp[i]);
+    return res;
+  }
+  public String[] gSA(String word) { return wnm.getWnSeeAlso(word, gPs(word)); }
+  public int[] gSAi(int idx) {
+    int[] res;
+    String[] tmp;
+
+    if(idx < 0 || idx > w2vm.getWords()) return null;
+    tmp = gSA(gWord(idx));
+    if (tmp == null) return null;
+    res = new int[tmp.length];
+    for (int i = 0; i < tmp.length; i++)
+      res[i] = exw(tmp[i]);
+    return res;
+  }
 
   public int[] gSg(int i, int n) { return w2vm.getVectorNearWords(Calc.centroid(w2vm.getVectors(gWSi(i))), n, null); }
 

@@ -1,0 +1,102 @@
+
+\documentclass[11pt,a4j,titlepage,oneside]{jsbook}
+
+
+\usepackage[dvips]{graphicx}
+\usepackage{fancyhdr}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{base}
+\usepackage{times,mathptmx}
+\usepackage{dcolumn,multirow,ccaption}
+
+
+\newcolumntype{.}{D{.}{.}{-1}}
+
+
+
+\usepackage{tabularx}
+\usepackage{ascmac}
+
+    % \usepackage{ascmac}???????????????A
+    % \begin{screen}?E?E?E\end{screen}???
+    % \begin{itembox}[]{?^?C?g??}?E?E?E\end{itembox}???????g?????????B
+    % ref.http://www.spa.sys.eng.shizuoka.ac.jp/~tanaka/tex/tech/screen.html
+
+\setcounter{tocdepth}{2}
+\setlength{\textwidth}{45zw}
+
+\renewcommand{\arraystretch}{0.8}
+
+
+
+\year{平成28年度　学士論文}
+\title{ハンガリアン法による語の相似関係抽出}
+\titleE{Analogous word association and its detection by the Hungarian method.}
+\author{平田　泰樹}
+\date{2017年2月10日}
+\authorE{Taiki Hirata}
+\lab{北海道大学 工学部 情報エレクトロニクス学科 コンピュータサイエンス専攻 知識ベース研究室}
+\labE{Department of Electronics and Information Engineering. \\Hokkaido University}
+
+
+
+\begin{document}
+
+
+\maketitle
+
+\pagestyle{plain}
+\cleardoublepage
+\pagenumbering{roman}
+
+
+
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\cleardoublepage
+\pagenumbering{arabic}
+\pagestyle{headings}
+
+
+
+\input{chapter1}
+
+
+
+\input{chapter2}
+
+
+
+\input{chapter3}
+
+
+
+\input{chapter4}
+
+
+
+\input{chapter5}
+
+
+
+\input{chapter6}
+
+
+\input{thanks}
+
+\cleardoublepage
+
+
+
+\appendix
+\input{app_a}
+\input{app_b}
+
+
+\bibliographystyle{jplain}
+\bibliography{skb}
+
+\end{document}

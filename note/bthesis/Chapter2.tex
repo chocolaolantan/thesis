@@ -1,0 +1,128 @@
+\chapter{意味表現}
+計算機が単語の意味を獲得すれば、文や文章など、より複雑な構造の意味を理解し、それに応じた処理ができるようになることが期待されている。\\
+単語の意味表現方法について、単語の意味に関する考え方に着目して述べていく。
+
+\section{分布的意味表現}
+まず一つに\textbf{分布的意味表現}というものがある。\\
+これは、\textbf{分布仮説}
+\begin{quote}
+  The Distributional Hypothesis is that words that occur in the same contexts tend to have similar meanings(Harris, 1954). (ACL wiki)
+\end{quote}
+”同じ文脈に出現する単語は、似た意味を持つ。”
+という考え方によって構築されるものである。[1]
+
+例えば、
+\begin{itemize}
+  \item 今日の晩御飯は、ジャガイモの入ったカレーライスだ。
+  \item 今日の晩御飯はハヤシライスだ。
+\end{itemize}
+という二本の文章を例にして、”カレーライス”と”ハヤシライス”の意味表現を考える。
+まず、それぞれの文章を形態素解析すると、
+\begin{itemize}
+  \item 今日\backslashの\backslash晩御飯\backslashは\backslash、\backslashジャガイモ\backslashの\backslash入っ\backslashた\backslashカレーライス\backslashだ\backslash。
+  \item 今日\backslashの\backslash晩御飯\backslashは\backslashハヤシライス\backslashだ\backslash。
+\end{itemize}
+となる（上では\backslashによって形態素を区切っている）。これをもとに、”カレーライス”と”ハヤシライス”に関して、同じ文脈に着目した意味表現ベクトルを作成する。\\
+同じ文脈に出現する形態素（これ以降文脈語と呼ぶ）をベクトルの各次元とし、注目する単語と同じ文脈にその次元の文脈語が出現している場合（共起しているという）は１を、出現しない場合は０を値とすると、
+\begin{equation}
+  \label{weight_equation}
+  カレーライス = [(今日：1),(の：1),(晩御飯：1),(は：1),(、：1),(ジャガイモ：1),(入っ：1),(た：1),(だ：1),(。：1)]
+  ハヤシライス = [(今日：1),(の：1),(晩御飯：1),(は：1),(、：0),(ジャガイモ：0),(入っ：0),(た：0),(だ：1),(。：1)]
+\end{equation}
+と表すことができる。
+
+\subsection{}
+
+\begin{description}
+  \item
+\end{description}
+\subsubsection{}
+\begin{enumerate}
+  \item
+\end{enumerate}
+
+\begin{figure}[tb]
+  \begin{center}
+    \includegraphics[keepaspectratio=true,height=40mm]{clip001.eps}
+  \end{center}
+  \caption{�Q�P���Ԃ̘A�ڋK���ɂ����`�ԑf���͂̌���}
+  \label{fig:clip001.eps}
+\end{figure}
+
+\begin{figure}[tb]
+  \begin{center}
+    \includegraphics[keepaspectratio=true,height=60mm]{clip002.eps}
+  \end{center}
+  \caption{���\���̗�}
+  \label{fig:clip002.eps}
+\end{figure}
+
+
+\begin{figure}[htb]
+  \begin{center}
+    \includegraphics[keepaspectratio=true,height=30mm]{clip003.eps}
+  \end{center}
+  \caption{�Ɖ����͂̉����菇}
+  \label{fig:clip003.eps}
+\end{figure}
+\footnote{}
+\newpage
+
+\begin{itemize}
+  \item
+\end{itemize}
+
+\begin{equation}
+\label{weight_equation}
+S_j=\sum_{i}w_i
+\end{equation}
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[keepaspectratio=true,height=100mm]{clip017.eps}
+  \end{center}
+  \caption{Yahoo�̃j���[�X�L��}%{}���Ƀ^�C�g�����L�����Ă�������
+  \label{fig:clip017.eps}
+\end{figure}
+
+
+\begin{equation}
+\label{trem_matrix}
+S=\left[
+  \begin{array}{c}
+    d_{1}   \\ d_{2}   \\ \vdots   \\ d_{m}   \\
+  \end{array}
+\right]
+=
+\left[
+  \begin{array}{cccc}
+    d_{11}   & d_{12}   & \ldots  & d_{1n}   \\
+    d_{21}   & d_{12}   & \ldots  & d_{1n}   \\
+    \vdots   & \vdots   & \ddots  & \vdots   \\
+    d_{m1}   & d_{m2}   & \ldots   & d_{mn}   \\
+  \end{array}
+\right]
+\end{equation}
+
+\begin{equation}
+\label{min_dis}
+sim\left( C_i, C_j\right)
+=\displaystyle\max_{X\in C_i,Y\in C_l}coscr\left( X,Y\right)
+\end{equation}
+
+\begin{equation}
+\label{term_chain}
+w_i=\left| i\right|\times\log\frac{N}{df_i}
+\end{equation}
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|c|c|c|} \hline
+\hline
+\hline
+\hline
+\end{tabular}
+\end{center}
+\caption{�����s��}
+\label{kousa}
+\end{table}

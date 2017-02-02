@@ -1,0 +1,25 @@
+#!/bin/bash
+
+javac -encoding utf-8 -d ../bin/ -cp ./:/lib/java/jawjaw-1.0.2.jar:/lib/java/MeCab.jar w2v/W2vCmd.java
+
+javac -encoding utf-8 -d ../bin/ -cp ./:/lib/java/jawjaw-1.0.2.jar:/lib/java/MeCab.jar w2v/model/DataManager.java
+
+
+java -cp ./:/lib/java/jawjaw-1.0.2.jar:/lib/java/MeCab.jar w2v/W2vCmd
+
+
+../../data/vector/vctJwiki_lemmalf.ssv
+
+sudo alternatives --config java
+
+export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
+
+jar cvfm W2vCmd.jar MANIFEST.MF *
+
+export LD_LIBRARY_PATH=/usr/local/lib/mecab/dic:/usr/local/lib:$LD_LIBRARY_PATH
+
+wget http://pkgs.fedoraproject.org/repo/pkgs/mecab-java/mecab-java-0.996.tar.gz
+tar vzxf mecab-java-0.996.tar.gz
+mv mecab-java-0.996 mecab-java
+cd mecab-java
+

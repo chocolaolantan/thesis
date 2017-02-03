@@ -129,7 +129,7 @@ public class W2vModel {
             res[k] = res[k-1];
           }
           len[j] = d;
-          res[j] = i;
+          res[j] = list[i];
           break;
         }
       }
@@ -152,7 +152,7 @@ public class W2vModel {
             res[k] = res[k-1];
           }
           len[j] = d;
-          res[j] = i;
+          res[j] = list[i];
           break;
         }
       }

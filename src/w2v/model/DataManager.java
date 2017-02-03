@@ -47,6 +47,7 @@ public class DataManager {
     int[] d = gWSi(i);
     return w2vm.getNearWords(i, n, d);
   }
+  public int[] gNWiL(int idx, int n, int[] list) { return w2vm.getNearWordsInList(idx, n, list); }
 
   public float[][] gSM(int[] x, int[] y) { return Calc.sminpMatrix(w2vm.getVectors(x), w2vm.getVectors(y)); }
   public float[][] gNSM(int[] x, int[] y) { return Calc.sminpMatrix(Calc.centNormaliz(w2vm.getVectors(x)), Calc.centNormaliz(w2vm.getVectors(y))); }
@@ -234,9 +235,7 @@ public class DataManager {
       File f = new File(file_path);
 
         BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-        bw.write(gWords());
-        bw.write(" ");
-        bw.write(km.allClust() + "\n");
+        bw.write(String.valueOf(gWords()) + " " + String.valueOf(km.allClust() + "\n"));
         for (int i = 0; i < gWords(); i++)
           bw.write(gWord(i) + ' ' + km.wordClust(i) + '\n');
         bw.close();

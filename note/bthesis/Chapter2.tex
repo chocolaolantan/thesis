@@ -1,8 +1,15 @@
-\chapter{意味表現}
-計算機が単語の意味を獲得すれば、文や文章など、より複雑な構造の意味を理解し、それに応じた処理ができるようになることが期待されている。\\
-単語の意味表現方法について、単語の意味に関する考え方に着目して述べていく。
+\chapter{意味表現の学習}
+本研究では、word2vecで学習した分散表現ベクトルから語の相似関係を抽出することを目的としている。本章では、単語の分散表現ベクトルの学習を説明するにあたって必要とする用語の説明をする。
 
-\section{分布的意味表現}
+\section{形態素}
+自然言語とは、人と人とのコミュニケーションに用いられる道具であり、文字、あるいは音の並びによって構成されている。しかし、一般に文字、或いは音そのものは意味を持たないため、自然言語の最小単位としては\textbf{形態素}を用いることが多い。\\
+形態素とは、文字列が意味、或いは役割を持つ最小のまとまりである。本研究ではこの形態素に着目していく。
+
+\section{意味表現}
+自然言語を計算機で処理するにあたって、計算機が単語の意味を獲得すれば、文や文章など、より複雑な構造の意味を理解し、それに応じた処理ができるようになることが期待されている。この、計算機で認識するために単語の意味を何らかの数値で表現したもの、或いは表現することを意味表現という。\\
+では、意味表現をどのように与えるかということが問題になる。
+
+\subsection{分布的意味表現}
 まず一つに\textbf{分布的意味表現}というものがある。\\
 これは、\textbf{分布仮説}
 \begin{quote}
@@ -12,117 +19,34 @@
 という考え方によって構築されるものである。[1]
 
 例えば、
+
 \begin{itemize}
   \item 今日の晩御飯は、ジャガイモの入ったカレーライスだ。
   \item 今日の晩御飯はハヤシライスだ。
 \end{itemize}
+
 という二本の文章を例にして、”カレーライス”と”ハヤシライス”の意味表現を考える。
 まず、それぞれの文章を形態素解析すると、
+
 \begin{itemize}
-  \item 今日\backslashの\backslash晩御飯\backslashは\backslash、\backslashジャガイモ\backslashの\backslash入っ\backslashた\backslashカレーライス\backslashだ\backslash。
-  \item 今日\backslashの\backslash晩御飯\backslashは\backslashハヤシライス\backslashだ\backslash。
+  \item $今日 \backslash の \backslash 晩御飯 \backslash は \backslash 、 \backslash ジャガイモ \backslash の \backslash 入っ \backslash た \backslash カレーライス \backslash だ \backslash 。$
+
+  \item $今日 \backslash の \backslash 晩御飯 \backslash は \backslash ハヤシライス \backslash だ \backslash 。$
 \end{itemize}
-となる（上では\backslashによって形態素を区切っている）。これをもとに、”カレーライス”と”ハヤシライス”に関して、同じ文脈に着目した意味表現ベクトルを作成する。\\
-同じ文脈に出現する形態素（これ以降文脈語と呼ぶ）をベクトルの各次元とし、注目する単語と同じ文脈にその次元の文脈語が出現している場合（共起しているという）は１を、出現しない場合は０を値とすると、
-\begin{equation}
+
+となる（上では $\backslash$ によって形態素を区切っている）。これをもとに、”カレーライス”と”ハヤシライス”に関して、同じ文脈に着目した意味表現ベクトルを作成する。\\
+同じ文脈に出現する形態素（これ以降文脈語と呼ぶ）をベクトルの各次元とし、注目する単語と何個の同じ文脈でその次元の文脈語が出現しているかを値としてとると、
+
+\begin{itemize}
   \label{weight_equation}
-  カレーライス = [(今日：1),(の：1),(晩御飯：1),(は：1),(、：1),(ジャガイモ：1),(入っ：1),(た：1),(だ：1),(。：1)]
-  ハヤシライス = [(今日：1),(の：1),(晩御飯：1),(は：1),(、：0),(ジャガイモ：0),(入っ：0),(た：0),(だ：1),(。：1)]
-\end{equation}
-と表すことができる。
-
-\subsection{}
-
-\begin{description}
-  \item
-\end{description}
-\subsubsection{}
-\begin{enumerate}
-  \item
-\end{enumerate}
-
-\begin{figure}[tb]
-  \begin{center}
-    \includegraphics[keepaspectratio=true,height=40mm]{clip001.eps}
-  \end{center}
-  \caption{�Q�P���Ԃ̘A�ڋK���ɂ����`�ԑf���͂̌���}
-  \label{fig:clip001.eps}
-\end{figure}
-
-\begin{figure}[tb]
-  \begin{center}
-    \includegraphics[keepaspectratio=true,height=60mm]{clip002.eps}
-  \end{center}
-  \caption{���\���̗�}
-  \label{fig:clip002.eps}
-\end{figure}
-
-
-\begin{figure}[htb]
-  \begin{center}
-    \includegraphics[keepaspectratio=true,height=30mm]{clip003.eps}
-  \end{center}
-  \caption{�Ɖ����͂̉����菇}
-  \label{fig:clip003.eps}
-\end{figure}
-\footnote{}
-\newpage
-
-\begin{itemize}
-  \item
+  \item $カレーライス = [(今日：1),(の：1),(晩御飯：1),(は：1),(、：1),(ジャガイモ：1),(入っ：1),(た：1),(だ：1),(。：1)]$
+  \item $ハヤシライス = [(今日：1),(の：1),(晩御飯：1),(は：1),(、：0),(ジャガイモ：0),(入っ：0),(た：0),(だ：1),(。：1)]$
 \end{itemize}
 
-\begin{equation}
-\label{weight_equation}
-S_j=\sum_{i}w_i
-\end{equation}
+と表すことができる。
+ここで、ある単語x_iと別な単語x_jが何らかの文脈で同時に出現していることを\textbf{共起}していると言い、何度共起しているかの回数を\textbf{共起頻度}と言う。つまり、上記の例で作成したベクトルは、共起頻度を値として持つ\textbf{共起ベクトル}である。この方法でベクトルを作成する場合は、学習に用いられるテキストの集まり\textbf{コーパス}すべてから学習するため、一般に高次元で疎なベクトルが生成される。これは、コーパスに含まれる単語数が数万程度であったり、単語数に対し、語が共起することは多くないためである。\\
 
-\begin{figure}[h]
-  \begin{center}
-    \includegraphics[keepaspectratio=true,height=100mm]{clip017.eps}
-  \end{center}
-  \caption{Yahoo�̃j���[�X�L��}%{}���Ƀ^�C�g�����L�����Ă�������
-  \label{fig:clip017.eps}
-\end{figure}
+こうして作成される意味表現ベクトルを用いて別な自然言語処理のタスクを行う際、元々のベクトルが高密度で疎なものであるために、学習事例を正しく表現できなくなってしまうなどの問題が発生してしまう。
 
-
-\begin{equation}
-\label{trem_matrix}
-S=\left[
-  \begin{array}{c}
-    d_{1}   \\ d_{2}   \\ \vdots   \\ d_{m}   \\
-  \end{array}
-\right]
-=
-\left[
-  \begin{array}{cccc}
-    d_{11}   & d_{12}   & \ldots  & d_{1n}   \\
-    d_{21}   & d_{12}   & \ldots  & d_{1n}   \\
-    \vdots   & \vdots   & \ddots  & \vdots   \\
-    d_{m1}   & d_{m2}   & \ldots   & d_{mn}   \\
-  \end{array}
-\right]
-\end{equation}
-
-\begin{equation}
-\label{min_dis}
-sim\left( C_i, C_j\right)
-=\displaystyle\max_{X\in C_i,Y\in C_l}coscr\left( X,Y\right)
-\end{equation}
-
-\begin{equation}
-\label{term_chain}
-w_i=\left| i\right|\times\log\frac{N}{df_i}
-\end{equation}
-
-\begin{table}[htbp]
-\begin{center}
-\begin{tabular}{|c|c|c|} \hline
-\hline
-\hline
-\hline
-\end{tabular}
-\end{center}
-\caption{�����s��}
-\label{kousa}
-\end{table}
+\subsection{分散的意味表現}
+分布的意味表現ベクトルの

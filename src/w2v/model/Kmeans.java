@@ -8,6 +8,7 @@ import java.util.Arrays;
 import w2v.calc.Calc;
 
 public class Kmeans {
+  int i;
   private int[] cNum;
   private int[] clust;
   private boolean f = false;
@@ -42,18 +43,20 @@ public class Kmeans {
       BufferedReader br =  new BufferedReader(new FileReader(fi));
       String[] st = br.readLine().split(" ");
       clust = new int[Integer.parseInt(st[0])];
-      cNum = new int[Integer.parseInt(st[1])];
+      cNum = new int[Integer.parseInt(st[1])+1];
       Arrays.fill(cNum, 0);
 
-      for (int i = 0; i < clust.length; i++) {
+      for (i = 0; i < clust.length; i++) {
         st = br.readLine().split(" ");
         clust[i] = Integer.parseInt(st[1]);
+        if (clust[i] < 0) continue;
         cNum[clust[i]]++;
       }
       br.close();
       f = true;
     } catch (Exception e) {
       e.printStackTrace();
+      System.out.println("i : " + i + "\tclust[i] : " + clust[i] + "\tCnum length" + cNum.length);
       f = false;
       return f;
     }

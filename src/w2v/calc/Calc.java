@@ -21,6 +21,22 @@ public class Calc {
     return xy;
   }
 
+  public static int[] noneN(int[] l, int n) {
+    if (l == null) return null;
+    int i, j = 0, count = 0;
+    int[] res;
+    for (int k: l)
+      if (k != n) count++;
+    res = new int[count];
+    for (i = 0; i < l.length; i++) {
+      if (l[i] != n) {
+        res[j] = l[i];
+        j++;
+      }
+    }
+    return res;
+  }
+
   public static float max(float a, float b) {
     return (a > b) ? a: b;
   }

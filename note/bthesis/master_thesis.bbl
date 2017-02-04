@@ -1,207 +1,43 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{9}
 
-\bibitem{NTCIRhp}
-{{NTCIR} î•ñŒŸõƒVƒXƒeƒ€•]‰¿—pƒeƒXƒgƒRƒŒƒNƒVƒ‡ƒ“\’zƒvƒƒWƒFƒNƒg}.
-\newblock \\http://research.nii.ac.jp/ntcir/index-ja.html.
+\bibitem{JRFirth}
+J.R.Firth.
+\newblock A synopsis of linguistic theory 1930-55.
+\newblock Studies in Linguistic Analysis, pp.1-32, 1957.
 
-\bibitem{TSChp}
-{ƒeƒLƒXƒg©“®—v–ñƒ^ƒXƒN {TSC}({T}ext {S}ummarization {C}hallenge)}.
-\newblock \\http://www.lr.pi.titech.ac.jp/tsc/.
+\bibitem{j_WordNet}
+{æ—¥æœ¬èª {WordNet}}
+\newblock \\http://nlpwww.nict.go.jp/wn-ja/
 
-\bibitem{info_extra}
-D.E. Appelt.
-\newblock {I}ntroduction to {I}nfomation {E}xtrantion {T}echnology.
-\newblock Technical report, IJCAI'99., 1999.
-
-\bibitem{text_comp}
-T.C Bell.
-\newblock {T}ext {C}ompression.
-\newblock Mcgraw-hill, New York, 1990.
-
-\bibitem{church}
-K.W. Church and P.~Hanks.
-\newblock Word association norms, mutual information, and lexicography.
-\newblock {\em Computational Linguistics}, Vol.~17, No.~1, pp. 21--48, 1997.
-
-\bibitem{mining_data}
-R.~Feldman.
-\newblock {M}ining {U}nsrtructured {D}ata.
-\newblock {\em In Tutorial for ACM SIGKDD 1999 International Conference on
-  Knowledge Discovery and Data Mining}, pp. 182--236, 1999.
-
-\bibitem{hearst}
-M~Hearst.
-\newblock Multi-paragraph segmentation of expasitory text.
-\newblock {\em Proc. Annual Meeting of the Association for Computational
-  Linguistics}, pp. 9--16, 1994.
-
-\bibitem{tt}
-M~Hearst.
-\newblock Texttiling:segmenting text into multi-paragraph subtopic passages.
-\newblock {\em Association for Conceputational Linguistics}, Vol.~23, No.~1,
-  pp. 111--112, 1997.
-
-\bibitem{cohen}
-J.Cohen.
-\newblock Highlights:languages and domain independent automatic indexing terms
-  for abstracting.
-\newblock {\em American Society for Information Science}, No.~46, pp. 162--174,
-  1995.
-
-\bibitem{info_ret}
-G.~Salton and M.J. McGill.
-\newblock {I}ntroduction to {M}odern {I}nfomation {R}etrival.
-\newblock Prentice hall, Upper Saddle River, N.J., 1983.
-
-\bibitem{vec_space}
-G.~Salton, A.~Wong, and C.~S. Yang.
-\newblock {A} vector space model for automatic indexing.
-\newblock {\em Communications of the ACM}, Vol.~18, No.~11, pp. 613--620, 1975.
-
-\bibitem{trec_8}
-E.M. Voorhees and D.~Tice.
-\newblock {T}he {TREC}-8 {Q}uestion {A}nsering {T}rack {E}valuation.
-\newblock {\em In The Eighth Text Retrieval Conference(TREC-8)Special
-  Publication}, Vol. 500-246, pp. 83--106, 1999.
-
-\bibitem{TSC}
-“ï”g‰pk, ‰œ‘ºŠw.
-\newblock ‘æ2‰ñ {NTCIR} ƒ[ƒNƒVƒ‡ƒbƒv
-  ©“®—v–ñƒ^ƒXƒNi{TSC}j‚ÌŒ‹‰Ê‚¨‚æ‚Ñ•]‰¿–@‚Ì•ªÍ.
-\newblock î•ñˆ—Šw‰ïŒ¤‹†•ñ, pp. 143--150, 2001.
-
-\bibitem{text_autosum}
-‰œ‘ºŠw, “ï”g‰pk.
-\newblock ƒeƒLƒXƒg©“®—v–ñ‚ÉŠÖ‚·‚éŒ¤‹†“®Œü.
-\newblock ©‘RŒ¾Œêˆ—Šw‰ï, Vol. 6, No.6, pp. 1--26, 1999.
-
-\bibitem{okumura_recent}
-‰œ‘ºŠw, “ï”g‰pk.
-\newblock ƒeƒLƒXƒg©“®—v–ñ‚ÉŠÖ‚·‚éÅ‹ß‚Ì˜b‘è.
-\newblock ©‘RŒ¾Œêˆ—Šw‰ï, Vol. 9, No.4, pp. 97--116, 2002.
-
-\bibitem{book_yoshimura}
-‹g‘ºŒ«¡.
-\newblock ©‘RŒ¾Œêˆ—‚ÌŠî‘b.
-\newblock ƒTƒCƒGƒ“ƒXĞ, 2000.
-
-\bibitem{book_takagi}
-‚–Ø˜N, ˆÉ“ŒKL’˜.
-\newblock ©‘RŒ¾Œê‚Ìˆ—.
-\newblock ŠÛ‘PŠ”®‰ïĞ, 1987.
+\bibitem{book_wm}
+ãƒ€ãƒŒã‚·ã‚« ãƒœãƒ¬ã‚¬ãƒ©, å²¡ï¨‘ç›´è¦³, å‰åŸè²´æ†²
+\newblock æ©Ÿæ¢°å­¦ç¿’ãƒ—ãƒ­ãƒ•ã‚§ãƒƒã‚·ãƒ§ãƒŠãƒ«ã‚·ãƒªãƒ¼ã‚º ã‚¦ã‚§ãƒ–ãƒ‡ãƒ¼ã‚¿ã®æ©Ÿæ¢°å­¦ç¿’.
+\newblock æ ªå¼ä¼šç¤¾ è¬›è«‡ç¤¾, 2016.
 
 \bibitem{juman}
-•‹´’õ•v, ‰ÍŒ´‘å•ã.
-\newblock “ú–{ŒêŒ`‘Ô‘f‰ğÍƒVƒXƒeƒ€wjumanxversion 5.1 g—pà–¾‘.
+é»’æ©‹ç¦å¤«, æ²³åŸå¤§è¼”.
+\newblock æ—¥æœ¬èªå½¢æ…‹ç´ è§£æã‚·ã‚¹ãƒ†ãƒ ã€jumanã€version 5.1 ä½¿ç”¨èª¬æ˜æ›¸.
 \newblock Technical report, 2005.
 
 \bibitem{yotsutani}
-lƒc’J‰ë‹P.
-\newblock ‹¤‹NŒê‚ğ‰î‚µ‚½•¶ŠÔ‚Ì‘ŠŒİˆË‘¶ŠÖŒW‚ÉŠî‚Ã‚­d—v•¶’Šo–@‚Ì’ñˆÄ.
-\newblock Master's thesis, –kŠC“¹‘åŠw‘åŠw‰@HŠwŒ¤‹†‰È, 2003.
-
-\bibitem{kudoh}
-›“‡u˜Y, •“cˆêÆ, ”Â‘q•¶’‰.
-\newblock ƒ`ƒƒƒ“ƒLƒ“ƒO‚Ì’iŠK“K—p‚É‚æ‚é“ú–{ŒêŒW‚èó‚¯‰ğÍ.
-\newblock î•ñˆ—Šw‰ï˜_•¶, Vol.~11, No.~6, 2002.
+å››ãƒ„è°·é›…è¼.
+\newblock å…±èµ·èªã‚’ä»‹ã—ãŸæ–‡é–“ã®ç›¸äº’ä¾å­˜é–¢ä¿‚ã«åŸºã¥ãé‡è¦æ–‡æŠ½å‡ºæ³•ã®ææ¡ˆ.
+\newblock Master's thesis, åŒ—æµ·é“å¤§å­¦å¤§å­¦é™¢å·¥å­¦ç ”ç©¶ç§‘, 2003.
 
 \bibitem{chasen}
-¼–{—S¡, –k“àŒ[, R‰º’B—Y, •½–ì‘P—², ¼“cŠ°, ‚‰ªˆê”n, óŒ´³K.
-\newblock “ú–{ŒêŒ`‘Ô‘f‰ğÍƒVƒXƒeƒ€w’ƒâ¤xversion 2.2.3 g—pà–¾‘.
+æ¾æœ¬ç¥æ²», åŒ—å†…å•“, å±±ä¸‹é”é›„, å¹³é‡å–„éš†, æ¾ç”°å¯›, é«˜å²¡ä¸€é¦¬, æµ…åŸæ­£å¹¸.
+\newblock æ—¥æœ¬èªå½¢æ…‹ç´ è§£æã‚·ã‚¹ãƒ†ãƒ ã€èŒ¶ç­…ã€version 2.2.3 ä½¿ç”¨èª¬æ˜æ›¸.
 \newblock Technical report, 2003.
 
-\bibitem{nishizawa}
-¼‘òMˆê˜Y, ’†ì—Tu.
-\newblock –¼Œ‚Ì•¶‘“à•p“x‚ğ—˜—p‚µ‚½ƒeƒLƒXƒgƒZƒOƒƒ“ƒe[ƒVƒ‡ƒ“.
-\newblock î•ñˆ—Šw‰ïŒ¤‹†•ñ, No. NL-117-20, pp. 145--152, 1997.
-
 \bibitem{book_ishizaki}
-Îèr.
-\newblock ©‘RŒ¾Œêˆ—.
-\newblock ÆW“°, 1999.
-
-\bibitem{oishi}
-‘åÎ—º, ¼–{—S¡.
-\newblock Šiƒpƒ^[ƒ“•ªÍ‚ÉŠî‚Ã‚­“®Œ‚ÌŒêœb“I’m¯Šl“¾.
-\newblock î•ñˆ—Šw‰ï˜_•¶, Vol.~36, No.~11, 1995.
+çŸ³å´ä¿Š.
+\newblock è‡ªç„¶è¨€èªå‡¦ç†.
+\newblock ç…§æ™ƒå ‚, 1999.
 
 \bibitem{ohshima}
-‘å“‡“Öj.
+å¤§å³¶æ•¦å².
 \newblock
-  ”»—á•¶‚Ì˜_—“WŠJ‚Æ•¶‚ğ“Á’¥•t‚¯‚éŒê‚ÌˆÓ–¡“I—Ş—«‚ÉŠî‚Ã‚­–@—¥•¶—v–ñè–@‚ÌŒŸ“¢.
-\newblock Master's thesis, –kŠC“¹‘åŠw‘åŠw‰@HŠwŒ¤‹†‰È, 2005.
-
-\bibitem{keygraph}
-‘åàVK¶, ƒlƒ‹ƒXE.ƒxƒ“ƒ\ƒ“, ’J“à“c³•F.
-\newblock {K}ey{G}rpahFŒê‚Ì‹¤‹NƒOƒ‰ƒt‚Ì•ªŠ„E“‡‚É‚æ‚éƒL[ƒ[ƒh’Šo.
-\newblock “dqî•ñ’ÊMŠw‰ï˜_•¶, Vol. J82-D-1, No.~2, pp. 391--400, 1999.
-
-\bibitem{namba_02}
-“ï”gGk, ‰œ‘ºŠw.
-\newblock •¡”‚Ì—v–ñ—¦‚Ìd—v•¶ƒf[ƒ^‚ğ—p‚¢‚½—v–ñ•]‰¿•û–@.
-\newblock Œ¾Œêˆ—Šw‰ï‘æ‚W‰ñ”NŸ‘å‰ï, pp. 559--562, 2002.
-
-\bibitem{xuj}
-•½”ö“w, –k“àŒ[, –Ø’J‹­.
-\newblock {Q}uery {E}xpansion {U}sing {L}ocal and {G}lobal {D}ocument
-  {A}nalysis.
-\newblock {\em proseedings of the 19th ACM SIGIR}, pp. 4--11, 1996.
-
-\bibitem{hirao}
-•½”ö“w, –k“àŒ[, –Ø’J‹­.
-\newblock Œêœb“IŒ‹‘©«‚Æ’PŒêd—v“x‚ÉŠî‚Ã‚­ƒeƒLƒXƒgƒZƒOƒƒ“ƒe[ƒVƒ‡ƒ“.
-\newblock î•ñˆ—Šw‰ï˜_•¶, Vol.~41, No. SIG03, pp. 24--36, 2000.
-
-\bibitem{Posum}
-–]ŒŒ¸.
-\newblock ƒeƒLƒXƒgŠÈˆÕ—v–ñŠí posum version 1.50.2 ƒ}ƒjƒ…ƒAƒ‹.
-\newblock {\em JAIST Technical Memorandum}, Vol. IS-TM-2002-002, , January
-  2002.
-
-\bibitem{info_ret_sum}
-–]ŒŒ¸, ‰œ‘ºŠw.
-\newblock î•ñŒŸõƒ^ƒXƒN‚ÉŠî‚Ã‚¢‚½•]‰¿‚É‚æ‚é—v–ñè–@‚Ì”äŠr.
-\newblock î•ñˆ—Šw‰ï©‘RŒ¾Œêˆ—Œ¤‹†‰ï•ñ, Vol. 132-6, pp. 41--48, July
-  1997.
-
-\bibitem{term_chain_cal}
-–]ŒŒ¸, ‰œ‘ºŠw, ŠâR^.
-\newblock ŒêœbŒ‹‘©«‚ÉŠî‚Ã‚­Œêœb“I˜A½‚ÌŒvZ.
-\newblock {\em JAIST Technical Memorandum}, Vol. IS-TM-2000-002, , August 2000.
-
-\bibitem{mochiduki}
-–]ŒŒ¹, –{“cŠx•v, ‰œ‘ºŠw.
-\newblock •¡”‚Ì’m¯‚Ì‘g‚İ‡‚í‚¹‚ğ—p‚¢‚½ƒeƒLƒXƒgƒZƒOƒƒ“ƒe[ƒVƒ‡ƒ“.
-\newblock î•ñˆ—Šw‰ïŒ¤‹†•ñ, No. NL-109-7, pp. 47--54, 1995.
-
-\bibitem{markov}
-–kì•q’j, ŠìˆÀ‘Ps.
-\newblock ƒ}ƒ‹ƒRƒt‰ß’ö.
-\newblock ‹¤—§o”Å, 1967.
-
-\bibitem{honda}
-–{“cŠx•v, ‰œ‘ºŠw.
-\newblock Œêœb“IŒ‹‘©«‚ÉŠî‚Ã‚¢‚½ƒeƒLƒXƒgƒZƒOƒƒ“ƒe[ƒVƒ‡ƒ“.
-\newblock î•ñˆ—Šw‰ïŒ¤‹†•ñ, No. NL-102-4, pp. 25--32, 1994.
-
-\bibitem{book_nomura}
-–ì‘º_‹½.
-\newblock ©‘RŒ¾Œêˆ—‚ÌŠî‘b‹Zp.
-\newblock “dqî•ñ’ÊMŠw‰ï, 1988.
-
-\bibitem{nomoto}
-–ì–{’‰i, ¼–{—S¡.
-\newblock ƒeƒLƒXƒg\‘¢‚ğ—˜—p‚µ‚½å‘è‚Ì„’è‚É‚Â‚¢‚Ä.
-\newblock î•ñˆ—Šw‰ïŒ¤‹†•ñ, No. NL-114, pp. 47--54, 1996.
-
-\bibitem{nomoto_2}
-–ì–{’‰i, ¼–{—S¡.
-\newblock lŠÔ‚Ìd—v“x”»’è‚ÉŠî‚Ã‚¢‚½©“®—v–ñ‚Ì‚İ.
-\newblock î•ñˆ—Šw‰ï©‘RŒ¾Œêˆ—Œ¤‹†•ñ‰ï, Vol. 120, No.~11, 1997.
-
-\bibitem{suzuki}
-—é–ØÄ, ‘R”É, “à“¡ºO.
-\newblock Œê‚ÌˆÓ–¡•ª—Ş‚ÌoŒ»ŒXŒü‚ğl—¶‚µ‚½ƒL[ƒ[ƒh’Šo‚Ì‚İ.
-\newblock î•ñˆ—Šw‰ïŒ¤‹†•ñ, No. NL-98-10, pp. 73--80, 1993.
+  åˆ¤ä¾‹æ–‡ã®è«–ç†å±•é–‹ã¨æ–‡ã‚’ç‰¹å¾´ä»˜ã‘ã‚‹èªã®æ„å‘³çš„é¡ä¼¼æ€§ã«åŸºã¥ãæ³•å¾‹æ–‡è¦ç´„æ‰‹æ³•ã®æ¤œè¨.
+\newblock Master's thesis, åŒ—æµ·é“å¤§å­¦å¤§å­¦é™¢å·¥å­¦ç ”ç©¶ç§‘, 2005.
 
 \end{thebibliography}

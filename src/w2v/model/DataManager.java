@@ -353,6 +353,71 @@ public class DataManager {
     }
     return label;
   }
+  public int[] loadMorephemeList(String file_path) {
+    int n;
+    int[] res;
+    try {
+      File f = new File(file_path);
+      BufferedReader br = new BufferedReader(new FileReader(f));
+
+      n = Integer.parseInt(br.readLine());
+      res = new int[n];
+      Arrays.fill(res, -1);
+
+      String str;
+      int i = 0;
+      while ((str = br.readLine()) != null) {
+        res[i] = exw(str);
+        i++;
+      }
+      return res;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  public int[] hang(int[] l1, int[] l2, int n, String w, String s, String m) {
+    int[] res;
+    if (w.equals("c")) {
+      if (s.equals("y")) {
+        if (m.equals("y"))
+          res = Calc.hangarian(gNRCM(l1, l2), n);
+        else
+          res = Calc.hangarian(gNCM(l1, l2), n);
+      } else {
+        if (m.equals("y"))
+          res = Calc.hangarian(gRCM(l1, l2), n);
+        else
+          res = Calc.hangarian(gCM(l1, l2), n);
+      }
+    } else if (w.equals("d")) {
+      if (s.equals("y")) {
+        if (m.equals("y"))
+          res = Calc.hangarian(gNRDM(l1, l2), n);
+        else
+          res = Calc.hangarian(gNDM(l1, l2), n);
+      } else {
+        if (m.equals("y"))
+          res = Calc.hangarian(gRDM(l1, l2), n);
+        else
+          res = Calc.hangarian(gDM(l1, l2), n);
+      }
+    } else {
+      if (s.equals("y")) {
+        if (m.equals("y"))
+          res = Calc.hangarian(gNRSM(l1, l2), n);
+        else
+          res = Calc.hangarian(gNSM(l1, l2), n);
+      } else {
+        if (m.equals("y"))
+          res = Calc.hangarian(gRSM(l1, l2), n);
+        else
+          res = Calc.hangarian(gSM(l1, l2), n);
+      }
+    }
+    return res;
+  }
 
   private int max(int[] l) {
     if (l == null) return 0;

@@ -31,7 +31,7 @@ public class Kmeans {
           vec[j] = grv[i][j] - g[i][j];
       }
       len = Calc.len(vec);
-    } while(len == 0.0f);
+    } while(len == 0.00001f);
     f = true;
     if(f) System.out.println("学習完了。");
     else System.out.println("学習失敗。");

@@ -36,13 +36,46 @@ public class Calc {
     }
     return res;
   }
+  public static int[] sort(float[] l, String m) {
+    if (l == null || l.length <= 0) return null;
+    int i, j, t;
+    int[] res = new int[l.length];
+    float s;
 
-  public static float max(float a, float b) {
-    return (a > b) ? a: b;
+    for (i = 0; i < l.length; i++)
+      res[i] = i;
+    if (m.equals("y")) {
+      for (i = 0; i < l.length-2; i++) {
+        for (j = l.length-1; j > i+1; j--) {
+          if (l[j] < l[j-1]) {
+            s = l[j];
+            l[j] = l[j-1];
+            l[j-1] = s;
+            t = res[j];
+            res[j] = res[j-1];
+            res[j-1] = t;
+          }
+        }
+      }
+    } else {
+      for (i = 0; i < l.length-2; i++) {
+        for (j = l.length-1; j > i+1; j--) {
+          if (l[j] > l[j-1]) {
+            s = l[j];
+            l[j] = l[j-1];
+            l[j-1] = s;
+            t = res[j];
+            res[j] = res[j-1];
+            res[j-1] = t;
+          }
+        }
+      }
+    }
+    return res;
   }
-  public static float min(float a, float b) {
-    return (a < b) ? a: b;
-  }
+
+  public static float max(float a, float b) { return (a > b) ? a: b; }
+  public static float min(float a, float b) { return (a < b) ? a: b; }
   public static float sminp(float[] v1, float[] v2) {
     if (v1 == null || v2 == null || v1.length <= 0 || v2.length <= 0) return 0.0f;
     float[] v = new float[v1.length];
@@ -52,19 +85,6 @@ public class Calc {
       len += v1[i] * v2[i];
     return len;
   }
-  public static float len(float[] v) {
-    if (v == null || v.length <= 0) return 0.0f;
-    float len = sminp(v, v);
-    return (float)Math.sqrt(len);
-  }
-  public static float[] toOne(float[] v) {
-    if (v == null || v.length <= 0) return null;
-    float len = len(v);
-    for (int i = 0; i < v.length; i++)
-      v[i] /= len;
-    return v;
-  }
-
   public static float dist(float[] v1, float[] v2) {
     if (v1 == null || v2 == null || v1.length <= 0 || v2.length <= 0) return 0.0f;
     float[] v = new float[v1.length];
@@ -78,6 +98,18 @@ public class Calc {
     if (v1 == null || v2 == null || v1.length <= 0 || v2.length <= 0) return 0.0f;
     float len = sminp(v1, v2) / (len(v1) * len(v2));
     return len;
+  }
+  public static float len(float[] v) {
+    if (v == null || v.length <= 0) return 0.0f;
+    float len = sminp(v, v);
+    return (float)Math.sqrt(len);
+  }
+  public static float[] toOne(float[] v) {
+    if (v == null || v.length <= 0) return null;
+    float len = len(v);
+    for (int i = 0; i < v.length; i++)
+      v[i] /= len;
+    return v;
   }
 
   public static float[] centroid(float[][] v) {

@@ -81,8 +81,13 @@ public class W2vModel {
   protected float[][] getVectors(int[] list) {
     if (list == null || list.length <= 0) return null;
     float[][] res = new float[list.length][];
-    for (int i = 0; i < list.length; i++)
-      res[i] = m[list[i]];
+    for (int i = 0; i < list.length; i++) {
+      if (list[i] < 0) {
+        res[i] = null;
+      } else {
+        res[i] = m[list[i]];
+      }
+    }
     return res;
   }
   protected float[][] getAllVector() { return m; }

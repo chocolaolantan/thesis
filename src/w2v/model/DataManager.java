@@ -15,13 +15,15 @@ public class DataManager {
   private W2vModel w2vm;
   private MCModel mcm;
   private WNModel wnm;
-  private Kmeans km;
+  private Kmeans km, km2;
+  private boolean c = false;
 
   public DataManager(File f) throws Exception{
     try {
       this.w2vm = new W2vModel(f);
       this.mcm = new MCModel();
       this.km = new Kmeans();
+      this.km2 = new Kmeans();
     } catch (UnsatisfiedLinkError e) {
       e.printStackTrace();
     }
@@ -48,6 +50,8 @@ public class DataManager {
     return w2vm.getNearWords(i, n, d);
   }
   public int[] gNWiL(int idx, int n, int[] list) { return w2vm.getNearWordsInList(idx, n, list); }
+  public float[][] gWVs(int[] list) { return w2vm.getVectors(list); }
+  public float[][] gAV() { return w2vm.getAllVector(); }
 
   public float[][] gSM(int[] x, int[] y) { return Calc.sminpMatrix(w2vm.getVectors(x), w2vm.getVectors(y)); }
   public float[][] gNSM(int[] x, int[] y) { return Calc.sminpMatrix(Calc.centNormaliz(w2vm.getVectors(x)), Calc.centNormaliz(w2vm.getVectors(y))); }
@@ -228,30 +232,9 @@ public class DataManager {
 
   public int[] gSg(int i, int n) { return w2vm.getVectorNearWords(Calc.centroid(w2vm.getVectors(gWSi(i))), n, null); }
 
-  public boolean saveC(String file_path) {
-    if (!km.ld()) return false;
-    System.out.println("書込み開始");
-    try {
-      File f = new File(file_path);
-
-        BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-        bw.write(String.valueOf(gWords()) + " " + String.valueOf(km.allClust() + "\n"));
-        for (int i = 0; i < gWords(); i++)
-          bw.write(gWord(i) + ' ' + km.wordClust(i) + '\n');
-        bw.close();
-        System.out.println("書込み成功");
-      return true;
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.out.println("書込み失敗");
-      return false;
-    }
-  }
-  public boolean loadC(String file_path) {
-    return km.loadClust(file_path);
-  }
-  public boolean learnC() {
+  public boolean kmLearnAllW2V() {
     boolean flag = false;
+    c = false;
     try {
       flag = km.learn(w2vm.getCentroidVectors(km.getClust(), km.getCNum()), w2vm.getAllVector());
     } catch (Exception e) {
@@ -261,22 +244,32 @@ public class DataManager {
   }
   public boolean kMeans(int n, String save_file) {
     boolean flag = false;
-    if (km.ld()) return true;
     try {
       flag = km.learn(w2vm.getVectors(w2vm.getRandomWords(n, null)), w2vm.getAllVector());
-      if (flag) flag = saveC(save_file);
+      if (flag) flag = km.saveClust(save_file);
     } catch (Exception e) {
       e.printStackTrace();
       return false;
     }
     return flag;
   }
+  public Kmeans kmLearn(int n, float[][] v, int[] list) {
+    Kmeans kms = new Kmeans();
+    try {
+      kms.learn(w2vm.getVectors(w2vm.getRandomWords(n, list)), v);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
+    return kms;
+  }
+
   public boolean createC(String s_path, String file_path) {
     boolean flag = false;
     if (km.ld()) return true;
     try {
       flag = km.learn(grvS(synListCreate(s_path)), w2vm.getAllVector());
-      if (flag) flag = saveC(file_path);
+      if (flag) flag = km.saveClust(file_path);
     } catch (Exception e) {
       e.printStackTrace();
       return false;
@@ -286,10 +279,10 @@ public class DataManager {
   public boolean createCl(String l_path, String file_path) {
     if (km.ld()) return true;
     km.learn(grvS(lSWf(l_path)), w2vm.getAllVector());
-    saveC(file_path);
+    km.saveClust(file_path);
     return true;
   }
-  public int wsInc(int i) { return km.clustSize(i); }
+  public int wsInc(int i) { return km.ClustSize(i); }
   public int wc(int i) { return km.wordClust(i); }
   public int[] wIc(int i) { return km.wordsInClust(i); }
   public int[] gCw(int idx, int n) {
@@ -414,6 +407,47 @@ public class DataManager {
           res = Calc.hangarian(gRSM(l1, l2), n);
         else
           res = Calc.hangarian(gSM(l1, l2), n);
+      }
+    }
+    return res;
+  }
+  public int[] hangf(float[][] x, float[][] y, int n, String w, String s, String m) {
+    int[] res;
+    if (w.equals("c")) {
+      if (s.equals("y")) {
+        if (m.equals("y"))
+          res = Calc.hangarian(Calc.reverseMatrix(Calc.cosrMatrix(Calc.centNormaliz(x), Calc.centNormaliz(y))), n);
+        else
+          res = Calc.hangarian(Calc.cosrMatrix(Calc.centNormaliz(x), Calc.centNormaliz(y)), n);
+      } else {
+        if (m.equals("y"))
+          res = Calc.hangarian(Calc.reverseMatrix(Calc.cosrMatrix(x, y)), n);
+        else
+          res = Calc.hangarian(Calc.cosrMatrix(x, y), n);
+      }
+    } else if (w.equals("d")) {
+      if (s.equals("y")) {
+        if (m.equals("y"))
+          res = Calc.hangarian(Calc.reverseMatrix(Calc.distMatrix(Calc.centNormaliz(x), Calc.centNormaliz(y))), n);
+        else
+          res = Calc.hangarian(Calc.distMatrix(Calc.centNormaliz(x), Calc.centNormaliz(y)), n);
+      } else {
+        if (m.equals("y"))
+          res = Calc.hangarian(Calc.reverseMatrix(Calc.distMatrix(x, y)), n);
+        else
+          res = Calc.hangarian(Calc.distMatrix(x, y), n);
+      }
+    } else {
+      if (s.equals("y")) {
+        if (m.equals("y"))
+          res = Calc.hangarian(Calc.reverseMatrix(Calc.sminpMatrix(Calc.centNormaliz(x), Calc.centNormaliz(y))), n);
+        else
+          res = Calc.hangarian(Calc.sminpMatrix(Calc.centNormaliz(x), Calc.centNormaliz(y)), n);
+      } else {
+        if (m.equals("y"))
+          res = Calc.hangarian(Calc.reverseMatrix(Calc.sminpMatrix(x, y)), n);
+        else
+          res = Calc.hangarian(Calc.sminpMatrix(x, y), n);
       }
     }
     return res;

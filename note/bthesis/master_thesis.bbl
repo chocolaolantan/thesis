@@ -1,9 +1,13 @@
-\begin{thebibliography}{9}
+\begin{thebibliography}{5}
 
 \bibitem{JRFirth}
 J.R.Firth.
 \newblock A synopsis of linguistic theory 1930-55.
 \newblock Studies in Linguistic Analysis, pp.1-32, 1957.
+
+\bibitem{mecab}
+\newblock MeCab: Yet Another Part-of-Speech and Morphological Analyzer.
+\newblock \\http://taku910.github.io/mecab/, 2013.
 
 \bibitem{j_WordNet}
 {日本語 {WordNet}}
@@ -14,30 +18,14 @@ J.R.Firth.
 \newblock 機械学習プロフェッショナルシリーズ ウェブデータの機械学習.
 \newblock 株式会社 講談社, 2016.
 
-\bibitem{juman}
-黒橋禎夫, 河原大輔.
-\newblock 日本語形態素解析システム『juman』version 5.1 使用説明書.
-\newblock Technical report, 2005.
+\bibitem{kitaryo}
+喜多陵.
+\newblock 記述の構造類似性に基づく法的観点と判例のマッチング.
+\newblock Master's thesis, 北海道大学大学院情報科学研究科, 2014.
 
-\bibitem{yotsutani}
-四ツ谷雅輝.
-\newblock 共起語を介した文間の相互依存関係に基づく重要文抽出法の提案.
-\newblock Master's thesis, 北海道大学大学院工学研究科, 2003.
-
-\bibitem{chasen}
-松本祐治, 北内啓, 山下達雄, 平野善隆, 松田寛, 高岡一馬, 浅原正幸.
-\newblock 日本語形態素解析システム『茶筅』version 2.2.3 使用説明書.
-\newblock Technical report, 2003.
-
-\bibitem{book_ishizaki}
-石崎俊.
-\newblock 自然言語処理.
-\newblock 照晃堂, 1999.
-
-\bibitem{ohshima}
-大島敦史.
-\newblock
-  判例文の論理展開と文を特徴付ける語の意味的類似性に基づく法律文要約手法の検討.
-\newblock Master's thesis, 北海道大学大学院工学研究科, 2005.
+\bibitem{s_umeyama}
+梅山伸二
+\newblock An eigendecomposition approach to weighted graph matching problems.
+\newblock IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE, pp.695-703, Sep, 1988.
 
 \end{thebibliography}

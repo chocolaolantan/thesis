@@ -17,6 +17,13 @@
 \contentsline {section}{\numberline {3.1}実装アルゴリズム}{8}
 \contentsline {subsection}{\numberline {3.1.1}連続単語袋詰モデル}{8}
 \contentsline {subsection}{\numberline {3.1.2}連続スキップグラムモデル}{9}
-\contentsline {subsection}{\numberline {3.1.3}二つのアルゴリズムの違い}{10}
-\contentsline {section}{\numberline {3.2}確率の学習過程}{10}
-\contentsline {chapter}{参考文献}{12}
+\contentsline {subsection}{\numberline {3.1.3}二つの学習モデルの違い}{10}
+\contentsline {section}{\numberline {3.2}モデルの最適化}{10}
+\contentsline {subsection}{\numberline {3.2.1}ソフトマックス関数}{10}
+\contentsline {subsection}{\numberline {3.2.2}}{10}
+\contentsline {subsection}{\numberline {3.2.3}負例サンプリング}{10}
+\contentsline {subsection}{\numberline {3.2.4}階層型ソフトマックス}{10}
+\contentsline {chapter}{\numberline {第4章}ハンガリアン法}{11}
+\contentsline {chapter}{\numberline {第5章}実験と考察}{12}
+\contentsline {chapter}{\numberline {第6章}結び}{13}
+\contentsline {chapter}{参考文献}{15}

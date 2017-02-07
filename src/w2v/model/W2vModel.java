@@ -92,18 +92,28 @@ public class W2vModel {
   }
   protected float[][] getAllVector() { return m; }
   protected int[] getRandomWords(int n, int[] list) {
-    int num = words;
-    if (list != null && list.length > 0) num = list.length;
+    int num;
     int[] a = new int[n];
     Random rnd = new Random();
 
-    for(int i = 0; i < n; i++){
-      a[i] = list[rnd.nextInt(num)];
-
-      int x = a[i];
-      for( i = 0; i < n ; i++)
-        if(a[i] ==x)
-          break;
+    if (list != null && list.length > 0) {
+      num = list.length;
+      for(int i = 0; i < n; i++){
+        a[i] = list[rnd.nextInt(num)];
+        int x = a[i];
+        for( i = 0; i < n ; i++)
+          if(a[i] ==x)
+            break;
+      }
+    } else {
+      num = words;
+      for(int i = 0; i < n; i++){
+        a[i] = rnd.nextInt(num);
+        int x = a[i];
+        for( i = 0; i < n ; i++)
+          if(a[i] ==x)
+            break;
+      }
     }
     return a;
   }

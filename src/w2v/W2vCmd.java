@@ -1,6 +1,7 @@
 package w2v;
 
 import w2v.model.DataManager;
+import w2v.model.Kmeans;
 import w2v.calc.Calc;
 
 import java.io.File;
@@ -38,6 +39,8 @@ public class W2vCmd {
       cmd = stdIn.nextLine();
       if (cmd.equals("help"))
         help();
+      else if (cmd.equals("exper"))
+        exper();
 
       else if (cmd.equals("syn"))
         synonym();
@@ -122,6 +125,7 @@ public class W2vCmd {
 
   private static void help() {
     System.out.println("help\t: コマンドリストを表示します。");
+    System.out.println("exper\t: 実験用コマンド。");
     System.out.println();
     System.out.println("syn\t: 類似語を表示します。");
     System.out.println("ant\t: 対義語を表示します。");
@@ -165,6 +169,72 @@ public class W2vCmd {
     System.out.println("mrhglt\t: Meronymに基づいて単語を持って来て、ハンガリアン法を適用する。(テストモード)");
     System.out.println("hlhglt\t: Holonymに基づいて単語を持って来て、ハンガリアン法を適用する。(テストモード)");
 
+  }
+  private static void exper() {
+    int i1, i2, n, c, i, j;
+    int[] res;
+    int[] l1;
+    int[] l2;
+    int[] l;
+    String w, s, m;
+    Kmeans km1, km2;
+
+    System.out.println("調べたい単語を２つ入力してください。");
+    System.out.print("単語１　：");
+    i1 = dm.exw(stdIn.nextLine());
+    System.out.print("単語２　：");
+    i2 = dm.exw(stdIn.nextLine());
+    System.out.print("近傍何個を調べますか？");
+    n = Integer.parseInt(stdIn.nextLine());
+    System.out.print("クラスター数はいくつにしますか？");
+    c = Integer.parseInt(stdIn.nextLine());
+
+    l1 = dm.gNW(i1, n);
+    l2 = dm.gNW(i2, n);
+    if (l1 == null || l2 == null) {
+      System.out.println("ベクトルを取得できません。");
+      return ;
+    }
+
+    km1 = dm.kmLearn(c, dm.gWVs(l1), l1);
+    km2 = dm.kmLearn(c, dm.gWVs(l2), l2);
+
+    System.out.print("コスト行列の作成にはどの指標を使いますか？(c/d/s) >");
+    w = stdIn.nextLine();
+
+    System.out.print("各グループを、その中心で正規化しますか？(y/n) >");
+    s = stdIn.nextLine();
+
+    System.out.print("最小の組み合わせを求めますか？(y/n) >");
+    m = stdIn.nextLine();
+    System.out.println("クラスター数");
+    System.out.println("k1\tk2");
+    for (i = 0; i < c; i++)
+      System.out.println(i + " : " + km1.ClustSize(i) + "\t" + km2.ClustSize(i));
+    System.out.println("Hungarian Start!!");
+    res = dm.hangf(km1.getG(), km2.getG(), c, w, s, m);
+
+    System.out.println(dm.gWord(i1) + " から");
+    for (i = 0; i < c; i++) {
+      l = km1.wordsInClust(i);
+      System.out.println("クラスター：" + i + " ---------------------------------");
+      for (j = 0; j < l.length; j++)
+        System.out.println(dm.gWord(l1[l[j]]));
+      System.out.println("--------------------------------------------------");
+      System.out.println();
+    }
+    System.out.println(dm.gWord(i2) + " から");
+    for (i = 0; i < c; i++) {
+      l = km1.wordsInClust(i);
+      System.out.println("クラスター：" + i + " ---------------------------------");
+      for (j = 0; j < l.length; j++)
+        System.out.println(dm.gWord(l2[l[j]]));
+      System.out.println("--------------------------------------------------");
+      System.out.println();
+    }
+    System.out.println("クラスター割当結果");
+    for (i = 0; i < res.length; i++)
+      System.out.println(i + "\t-\t" + res[i]);
   }
 
   private static void synonym() {
@@ -421,20 +491,21 @@ public class W2vCmd {
       System.out.println("失敗しました。");
   }
   private static void clsl() {
+    Kmeans km = new Kmeans();
     System.out.print("クラスタデータを読み込むパスを入力してください >");
     cmd = stdIn.nextLine();
-    if(!dm.loadC(cmd)) {
+    if(!km.loadClust(cmd)) {
       System.out.println("読み込みに失敗しました。");
       return ;
     }
 
     System.out.println("学習を開始しますか？(y/n) >");
     if (stdIn.nextLine().equals("y"))
-      if (dm.learnC()) {
+      if (km.lear(dm.gAV())) {
         System.out.print("学習データをセーブしますか？(y/n) >");
         if (stdIn.nextLine().equals("y")) {
           System.out.print("保存パスを入力してください >");
-          if (dm.saveC(stdIn.nextLine())) {
+          if (km.saveClust(stdIn.nextLine())) {
             System.out.println("保存完了しました。");
             return ;
           } else {

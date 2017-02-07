@@ -21,19 +21,22 @@ public class Kmeans {
   public boolean learn(float[][] grv, float[][] m) {
     float[] vec = new float[grv[0].length];
     float len;
+    float[][] gr;
     System.out.println("学習開始。");
     if (grv == null) {
       System.out.println("grv null.");
       return false;
     }
+    gr = grv;
     do {
-      g = l(grv, m);
+      g = l(gr, m);
       for (int i = 0; i < grv.length; i++) {
         for (int j = 0; j < grv[i].length; j++)
-          vec[j] = grv[i][j] - g[i][j];
+          vec[j] = gr[i][j] - g[i][j];
       }
+      gr = g;
       len = Calc.len(vec);
-    } while(len > 0.0001f);
+    } while(len != 0.0f);
     f = true;
     if(f) System.out.println("学習完了。");
     else System.out.println("学習失敗。");

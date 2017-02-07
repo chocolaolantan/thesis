@@ -219,7 +219,7 @@ public class W2vCmd {
       l = km1.wordsInClust(i);
       System.out.println("クラスター：" + i + " ---------------------------------");
       for (j = 0; j < l.length; j++)
-        System.out.println(dm.gWord(l[j]));
+        System.out.println(dm.gWord(l1[l[j]]));
       System.out.println("--------------------------------------------------");
       System.out.println();
     }
@@ -228,7 +228,7 @@ public class W2vCmd {
       l = km1.wordsInClust(i);
       System.out.println("クラスター：" + i + " ---------------------------------");
       for (j = 0; j < l.length; j++)
-        System.out.println(dm.gWord(l[j]));
+        System.out.println(dm.gWord(l2[l[j]]));
       System.out.println("--------------------------------------------------");
       System.out.println();
     }

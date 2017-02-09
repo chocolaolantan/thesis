@@ -25,15 +25,14 @@
 \contentsline {subsection}{\numberline {3.2.4}階層型ソフトマックス}{12}
 \contentsline {chapter}{\numberline {第4章}梅山氏の提案手法}{13}
 \contentsline {section}{\numberline {4.1}グラフの同型性問題}{13}
-\contentsline {subsection}{\numberline {4.1.1}グラフ変換}{14}
+\contentsline {subsection}{\numberline {4.1.1}スペクトル分解}{14}
 \contentsline {subsection}{\numberline {4.1.2}ハンガリアン法}{16}
 \contentsline {subsection}{\numberline {4.1.3}まとめ}{17}
 \contentsline {chapter}{\numberline {第5章}実験と考察}{18}
 \contentsline {section}{\numberline {5.1}目的}{18}
 \contentsline {section}{\numberline {5.2}実験データ}{18}
-\contentsline {section}{\numberline {5.3}予備実験}{19}
-\contentsline {subsection}{\numberline {5.3.1}梅山氏の手法の有効性確認}{19}
-\contentsline {subsubsection}{用いた単語群}{19}
-\contentsline {subsection}{\numberline {5.3.2}着目形態素の近傍形態素の様子}{20}
-\contentsline {chapter}{\numberline {第6章}結び}{22}
-\contentsline {chapter}{参考文献}{24}
+\contentsline {section}{\numberline {5.3}梅山氏の手法の有効性確認}{19}
+\contentsline {section}{\numberline {5.4}実験１：着目形態素の近傍形態素でノードマッチング}{21}
+\contentsline {section}{\numberline {5.5}実験２：近傍単語をクラスタリングし、クラスター同士のマッチングを見る}{23}
+\contentsline {chapter}{\numberline {第6章}結び}{28}
+\contentsline {chapter}{参考文献}{30}

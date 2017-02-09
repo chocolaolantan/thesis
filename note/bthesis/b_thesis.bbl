@@ -5,6 +5,11 @@ J.R.Firth.
 \newblock A synopsis of linguistic theory 1930-55.
 \newblock Studies in Linguistic Analysis, pp.1-32, 1957.
 
+\bibitem{drwpc}
+Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado, Jeffrey Dean
+\newblock Distributed Representations of Words and Phrases and their Compositionality.
+\newblock \\https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf, NIPS 2013.
+
 \bibitem{mecab}
 \newblock MeCab: Yet Another Part-of-Speech and Morphological Analyzer.
 \newblock \\http://taku910.github.io/mecab/, 2013.

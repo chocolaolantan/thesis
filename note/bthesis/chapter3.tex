@@ -71,8 +71,14 @@
 \end{itemize}
 というものがあり、これによって出力値を確率値として解釈可能にする。
 
-\subsection{}
+\subsection{学習の流れ}
+式(\ref{cbow_p}),(\ref{cskip_p})はどちらも$\exp$内に内積を含んでいるため、対数をとれば双線形になる、対数双線形な関数である。両式は一方の変数を固定させるともう一方に関して凸になる関数であるため、交互に最適化を行うことができる。
 
-\subsection{負例サンプリング}
+対数を取った確率を、それぞれの変数に関して偏微分し、学習率をかけたものを足すことで、ベクトルを更新していく。
 
-\subsection{階層型ソフトマックス}
+\begin{eqnarray}
+  x^{(t+1)}&=x^{(t)}+\eta^{(t)}(\frac{\partial}{\partial x}\log(p(z_i|x_i))) \notag \\
+    &=x^{(t)}+\eta^{(t)}(z^{(t)}-\textstyle\sum\limits_{z'\in\nu(x)}z'p(z'|x)) \\
+  z^{(t+1)}&=z^{(t)}+\eta^{(t)}(\frac{\partial}{\partial z}\log(p(z|x))) \notag \\
+    &=z^{(t)}+\eta^{(t)}x(1-p(z|x)) \\
+\end{eqnarray}

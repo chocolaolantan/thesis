@@ -41,6 +41,8 @@ public class W2vCmd {
         help();
       else if (cmd.equals("exper"))
         exper();
+      else if (cmd.equals("exper2"))
+        exper2();
 
       else if (cmd.equals("syn"))
         synonym();
@@ -126,6 +128,7 @@ public class W2vCmd {
   private static void help() {
     System.out.println("help\t: コマンドリストを表示します。");
     System.out.println("exper\t: 実験用コマンド。");
+    System.out.println("exper2\t: 実験用コマンド。");
     System.out.println();
     System.out.println("syn\t: 類似語を表示します。");
     System.out.println("ant\t: 対義語を表示します。");
@@ -235,6 +238,64 @@ public class W2vCmd {
     System.out.println("クラスター割当結果");
     for (i = 0; i < res.length; i++)
       System.out.println(i + "\t-\t" + res[i]);
+  }
+  private static void exper2() {
+    int i1, i2, n;
+    int[] res;
+    int[] l1;
+    int[] l2;
+    float[][] x;
+    float[][] y;
+    float[] v1;
+    float[] v2;
+    String w, s, m;
+
+    System.out.println("調べたい単語を２つ入力してください。");
+    System.out.print("単語１　：");
+    i1 = dm.exw(stdIn.nextLine());
+    System.out.print("単語２　：");
+    i2 = dm.exw(stdIn.nextLine());
+    System.out.print("近傍何個を調べますか？");
+    n = Integer.parseInt(stdIn.nextLine());
+
+    System.out.print("類似語は除外しますか？(y/n) >");
+    if (stdIn.nextLine().equals("y")) {
+      l1 = dm.gNWnS(i1, n);
+      l2 = dm.gNWnS(i2, n);
+    } else {
+      l1 = dm.gNW(i1, n);
+      l2 = dm.gNW(i2, n);
+    }
+    if (l1 == null || l2 == null) {
+      System.out.println("コスト行列を作成できません。");
+      return ;
+    }
+
+    System.out.print("コスト行列の作成にはどの指標を使いますか？(c/d/s) >");
+    w = stdIn.nextLine();
+
+    System.out.print("各グループを、その中心で正規化しますか？(y/n) >");
+    s = stdIn.nextLine();
+
+    System.out.print("最小の組み合わせを求めますか？(y/n) >");
+    m = stdIn.nextLine();
+
+    v1 = dm.gWV(i1);
+    v2 = dm.gWV(i2);
+    x = dm.gWVs(l1);
+    y = dm.gWVs(l2);
+
+    for (int i = 0; i < x.length; i++) {
+      for (int j = 0; j < x[0].length; j++) {
+        x[i][j] -= v1[j];
+        y[i][j] -= v2[j];
+      }
+    }
+
+    res = dm.hangf(x, y, n, w, s, m);
+
+    hglprt(l1, l2, res, w, s, m);
+
   }
 
   private static void synonym() {

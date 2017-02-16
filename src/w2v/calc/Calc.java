@@ -223,8 +223,7 @@ public class Calc {
 	        slackx[y] = x;
 	    }
   }
-  private static void augment() {
-    if (max_match == n) return;
+     if (max_match == n) return;
     int x, y, root = 0, cx, cy, ty;
     int[] q = new int[n];
     int wr = 0, rd = 0;

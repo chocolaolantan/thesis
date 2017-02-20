@@ -1,6 +1,7 @@
 package w2v.calc;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Calc {
   private static float[][] cost;
@@ -72,6 +73,27 @@ public class Calc {
       }
     }
     return res;
+  }
+  public static int[] randlist(int n, int mx) {
+    if (n <= 0) return null;
+    if (mx < n) {
+      int[] tm = new int[n];
+      Arrays.fill(tm, 0);
+    }
+    int t, i, j;
+    int[] a = new int[n];
+    Random rnd = new Random();
+
+    for(i = 0; i < n; i++){
+      t = rnd.nextInt(mx);
+      for(j = 0; j < n ; j++) {
+        if (a[j] == t)
+          break;
+      }
+      if (j >= n)
+        a[i] =t;
+    }
+    return a;
   }
 
   public static float max(float a, float b) { return (a > b) ? a: b; }
@@ -223,7 +245,8 @@ public class Calc {
 	        slackx[y] = x;
 	    }
   }
-     if (max_match == n) return;
+  private static void augment() {
+    if (max_match == n) return;
     int x, y, root = 0, cx, cy, ty;
     int[] q = new int[n];
     int wr = 0, rd = 0;

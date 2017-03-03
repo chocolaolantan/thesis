@@ -1,11 +1,12 @@
-\addvspace {10\jsc@mpt }
-\addvspace {10\jsc@mpt }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces 分布仮設による意味の類推例}}{6}
-\addvspace {10\jsc@mpt }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces CBoWによるベクトル構築イメージ}}{10}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Sgによるベクトル構築イメージ}}{10}
-\addvspace {10\jsc@mpt }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces グラフＧ、グラフＨ}}{14}
-\addvspace {10\jsc@mpt }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces 蛻�蟶�莉ｮ險ｭ縺ｫ繧医ｋ諢丞袖縺ｮ鬘樊耳萓急}{6}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces CBoW縺ｫ繧医ｋ繝吶け繝医Ν讒狗ｯ峨う繝｡繝ｼ繧ｸ}}{10}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Sg縺ｫ繧医ｋ繝吶け繝医Ν讒狗ｯ峨う繝｡繝ｼ繧ｸ}}{10}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces 繧ｰ繝ｩ繝包ｼｧ縲√げ繝ｩ繝包ｼｨ}}{14}
+\addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Country and Capital Vectors Projected by PCA(\cite {drwpc})}}{20}
-\addvspace {10\jsc@mpt }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

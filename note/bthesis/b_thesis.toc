@@ -37,4 +37,6 @@
 \contentsline {section}{\numberline {6.2}期待する展望}{25}
 \contentsline {chapter}{\numberline {付録A}大域ベクトル予測モデル}{28}
 \contentsline {section}{\numberline {A.1}大域ベクトル予測モデル(Global Vector prediction, \textbf {GloVe})}{28}
-\contentsline {chapter}{参考文献}{29}
+\contentsline {chapter}{\numberline {付録B}クラスタリング結果：例}{29}
+\contentsline {section}{\numberline {B.1}（北海道,札幌）周辺１００単語、５クラスターずつのふりわけ}{29}
+\contentsline {chapter}{参考文献}{32}

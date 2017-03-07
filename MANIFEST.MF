@@ -1,3 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: w2v.W2vCmd
-Class-Path: . lib/jawjaw-1.0.2.jar lib/MeCab.jar

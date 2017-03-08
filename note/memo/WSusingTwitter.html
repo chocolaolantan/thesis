@@ -1,0 +1,87 @@
+<h1>Twitterアカウントを利用したWebサービス開発</h1>
+
+<h1>Twitterを利用することでできること</h1>
+
+<ul>
+<li><strong>Read Only</strong> TLやプロフィールなどのデータ取得ができる読み取り権限</li>
+<li><strong>Read and Write</strong> 読み取り権限に加え、ツイートの投稿など、DMに関すること<em>以外</em>の操作ができる書き込み権限</li>
+<li><strong>Write and Access direct messages</strong> 読み取り権限、書き込み権限に加え、DMに関する機能が利用可能</li>
+</ul>
+
+<h2>Twitter Rest API -2015/08-</h2>
+
+<table>
+  <caption><h3>statuses</h3></caption>
+  <tr><th>メソッド</th><th>項目</th><th>説明</th></tr>
+  <tr><td>GET</td><td>statuses/user<em>timeline</td><td>ユーザのツイートを取得する</td></tr>
+  <tr><td>GET</td><td>statuses/home</em>timeline</td><td>ホーム画面のTLを取得する</td></tr>
+  <tr><td>GET</td><td>statuses/mentions<em>timeline</td><td>ユーザ宛のメンションを取得する</td></tr>
+  <tr><td>GET</td><td>statuses/retweets</em>of<em>me</td><td>RTされたツイートを取得する</td></tr>
+  <tr><td>GET</td><td>statuses/show/:id</td><td>IDを１つ指定して、ツイートを取得する</td></tr>
+  <tr><td>GET</td><td>statuses/lookup</td><td>複数のIDを指定して、ツイートを取得する</td></tr>
+  <tr><td>GET</td><td>statuses/retweets/:id</td><td>指定ツイートの、RTツイート一覧をオブジェクトで取得する</td></tr>
+  <tr><td>GET</td><td>statuses/retweeters/ids</td><td>指定ツイートをRTしたユーザ一覧を、IDで取得する</td></tr>
+  <tr><td>GET</td><td>statuses/oembed</td><td>ツイートIDを指定して、埋め込み用HTMLを取得する</td></tr>
+  <tr><td>POST</td><td>statuses/destroy/:id</td><td>ツイートを削除または、RTを取り消す</td></tr>
+  <tr><td>POST</td><td>statuses/update</td><td>ツイートを投稿する</td></tr>
+  <tr><td>POST</td><td>statuses/retweet/:id</td><td>ツイートIDを指定して、そのIDをRTする</td></tr>
+  <tr><td>POST</td><td>statuses/unretweet/:id</td><td>RTを取り消す</td></tr>
+  <tr><td>POST</td><td>statuses/update</em>with_media</td><td>画像付きのツイートを投稿</td></tr>
+</table>
+
+<table>
+  <caption><h3>direct_messages</h3></caption>
+  <tr><th>メソッド項目</th><th>説明</th></tr>
+  <tr><td>GET</td><td>direct<em>messages/sent</td><td>送信したDMを取得する</td></tr>
+  <tr><td>GET</td><td>direct</em>messages/show</td><td>個別のDMを取得する</td></tr>
+  <tr><td>GET</td><td>direct<em>messages</td><td>受信したDMを取得する</td></tr>
+  <tr><td>POST</td><td>direct</em>messages/new</td><td>DMを送信する</td></tr>
+  <tr><td>POST</td><td>direct_messages/destroy</td><td>DMを削除する</td></tr>
+</table>
+
+<table>
+  <caption><h3>search</h3></caption>
+  <tr><th>メソッド</th><th>項目</th><th>説明</th></tr>
+  <tr><td>GET</td><td>search/tweets</td><td>ツイートを検索する</td></tr>
+</table>
+
+<table>
+  <caption><h3>friendships</h3></caption>
+  <tr><th>メソッド</th><th>項目</th><th>説明</th></tr>
+  <tr><td>GET</td><td>friendships/show</td><td>指定ユーザ同士のフォロー関係を取得する</td></tr>
+  <tr><td>GET</td><td>friendships/lookup</td><td>自分と指定ユーザのフォロー関係を取得する</td></tr>
+  <tr><td>GET</td><td>friendships/incoming</td><td>自分にフォローリクエストしているユーザID一覧を取得する</td></tr>
+  <tr><td>GET</td><td>friendships/outgoing</td><td>自分が送ったフォローリクエストで、保留中のユーザID一覧を取得する</td></tr>
+  <tr><td>GET</td><td>friendships/no_retweets/ids</td><td>RT非表示設定のユーザID一覧を取得する</td></tr>
+  <tr><td>POST</td><td>friendships/create</td><td>指定したユーザをフォローする</td></tr>
+  <tr><td>POST</td><td>friendships/update</td><td>指定ユーザのデバイス通知、リツイート通知の有効/無効を変更</td></tr>
+  <tr><td>POST</td><td>friendships/destroy</td><td>指定ユーザのリフォロー</td></tr>
+</table>
+
+<table>
+  <caption><h3>friends</h3></caption>
+  <tr><th>メソッド</th><th>項目</th><th>説明</th></tr>
+  <tr><td>GET</td><td>friends/ids</td><td>指定ユーザがフォローしているユーザの一覧を、ユーザIDで取得する</td></tr>
+  <tr><td>GET</td><td>friends/list</td><td>指定ユーザがフォローしているユーザの一覧を、ユーザオブジェクトで取得する</td></tr>
+</table>
+
+<table>
+  <caption><h3>followers</h3></caption>
+  <tr><th>メソッド</th><th>項目</th><th>説明</th></tr>
+  <tr><td>GET</td><td>followers/ids</td><td>指定ユーザのフォロワーの一覧を、ユーザIDで取得する</td></tr>
+  <tr><td>GET</td><td>followers/list</td><td>指定ユーザのフォロワーの一覧を、ユーザオブジェクトで取得する</td></tr>
+</table>
+
+<table>
+  <caption><h3>account</h3></caption>
+  <tr><th>メソッド</th><th>項目</th><th>説明</th></tr>
+  <tr><td>GET</td><td>account/settings</td><td>アカウントの設定情報を取得する</td></tr>
+  <tr><td>GET</td><td>account/verify<em>credentials</td><td>アカウントが有効か否かを確認する</td></tr>
+  <tr><td>POST</td><td>account/settings</td><td>アカウントの設定情報を変更する</td></tr>
+<s><tr><td>POST</td><td>account/update</em>delivery<em>device</td><td>更新通知の設定を変更する</td></tr></s>
+  <tr><td>POST</td><td>account/update</em>profile</td><td>プロフィールの設定を変更する</td></tr>
+<s><tr><td>POST</td><td>account/update<em>profile</em>image</td><td>アイコン画像を変更する</td></tr></s>
+<s><tr><td>POST</td><td>account/update<em>profile</em>background<em>image</td><td>背景画像を変更する</td></tr></s>
+  <tr><td>POST</td><td>account/remove</em>profile<em>banner</td><td>バナー画像を削除する</td></tr>
+  <tr><td>POST</td><td>account/update</em>profile_banner</td><td>バナー画像を変更する</td></tr>
+</table>

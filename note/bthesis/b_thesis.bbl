@@ -38,4 +38,9 @@ Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado, Jeffrey Dean
 \newblock An eigendecomposition approach to weighted graph matching problems.
 \newblock IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE, pp.695-703, Sep, 1988.
 
+\bibitem{glove}
+Jeffrey Pennington, Richard Socher, Christopher D. Manning
+\newblock GloVe: Global Vectors for Word Representation.
+\newblock \\http://nlp.stanford.edu/pubs/glove.pdf , 2014
+
 \end{thebibliography}

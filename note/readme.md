@@ -14,6 +14,18 @@
   - **src** ソースコード格納
   - **README.md** メモ
 
+## word2vecの利用
+gitからLinux用コードのダウンロード可能。[git page](https://github.com/svn2github/word2vec)\\
+Windows用のコードも探すとあります。
+
+実行に関しては上記リンク先ファイル郡内の、demo-word.shの中身を参照。
+
+$ ./word2vec -train text8 -output vectors.bin -cbow 1 -size 200 -window 8 -negative 25 -hs 0 -sample 1e-4 -threads 20 -binary 1 -iter 15\\
+これで生成されるvectors.binはバイナリファイルなので、".bin"→".txt" -binaryオプションの値を0に設定して実行することで、学習データのテキストファイルを生成可能。
+
+学習に使用するコーパス（学習に用いるテキストデータ）は上記コマンド例ではtext8という名前のファイル名になっている。\\
+このデータは形態素毎に分かち書きされていれば何語でも構わない。
+
 ## プログラム 利用方法
 
   1. WordNet利用のためのライブラリJAWJAW.jarを導入する。
